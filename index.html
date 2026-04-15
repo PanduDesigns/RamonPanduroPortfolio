@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramón Panduro Sánchez — Ingeniero Industrial</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080b10;
+    --bg2: #0d1117;
+    --bg3: #111820;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #00ff88;
+    --text: #e8edf5;
+    --text-dim: #7a8a9a;
+    --border: rgba(0,212,255,0.15);
+    --card: rgba(13,17,23,0.95);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── GRID BACKGROUND ── */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 60px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(8,11,16,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 100px 60px 60px;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .hero-glow-2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%);
+    bottom: 50px; left: -100px;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 8vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-name span { color: var(--accent); }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    color: var(--text-dim);
+    letter-spacing: 4px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #a0aab5;
+    max-width: 500px;
+    margin-bottom: 40px;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .btn-primary {
+    padding: 14px 32px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: all 0.3s;
+  }
+
+  .btn-primary:hover {
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0,212,255,0.5);
+  }
+
+  .btn-secondary {
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(0,212,255,0.1);
+  }
+
+  /* HERO STATS */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+
+  .stat-card {
+    background: rgba(0,212,255,0.04);
+    border: 1px solid var(--border);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+    transition: all 0.3s;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+  }
+
+  .stat-card:hover {
+    background: rgba(0,212,255,0.08);
+    border-color: var(--accent);
+    box-shadow: 0 0 30px rgba(0,212,255,0.1);
+  }
+
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+
+  .section-line {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    margin: 20px auto 0;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 120px 60px;
+    background: var(--bg2);
+  }
+
+  .about-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: #a0aab5;
+    margin-bottom: 20px;
+  }
+
+  .about-highlight {
+    color: var(--accent) !important;
+    font-weight: 600;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    background: rgba(0,212,255,0.03);
+    border: 1px solid var(--border);
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  }
+
+  .skill-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .skill-bar-wrap {
+    height: 3px;
+    background: rgba(255,255,255,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0;
+    transition: width 1.5s ease;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience {
+    padding: 120px 60px;
+  }
+
+  .timeline {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 140px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .timeline-date {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    padding-top: 4px;
+    letter-spacing: 1px;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: 133px;
+    width: 15px; height: 15px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    margin-top: 4px;
+    box-shadow: 0 0 12px rgba(0,212,255,0.4);
+  }
+
+  .timeline-content {
+    padding: 24px;
+    background: rgba(13,17,23,0.8);
+    border: 1px solid var(--border);
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+    transition: all 0.3s;
+  }
+
+  .timeline-content:hover {
+    border-color: rgba(0,212,255,0.4);
+    background: rgba(0,212,255,0.04);
+  }
+
+  .timeline-role {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .timeline-company {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .timeline-desc {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+  }
+
+  .timeline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 4px 10px;
+    border: 1px solid rgba(0,212,255,0.3);
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── PROJECTS ── */
+  #projects {
+    padding: 120px 60px;
+    background: var(--bg2);
+  }
+
+  .projects-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+    position: relative;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 2;
+  }
+
+  .project-card:hover {
+    border-color: rgba(0,212,255,0.5);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,212,255,0.1);
+  }
+
+  .project-card:hover::before { opacity: 1; }
+
+  .project-img {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, #0d1117, #1a2332);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-img-icon {
+    font-size: 3rem;
+    opacity: 0.4;
+  }
+
+  .project-sector {
+    position: absolute;
+    top: 12px; right: 12px;
+    font-size: 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 4px 10px;
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .project-body {
+    padding: 24px;
+  }
+
+  .project-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .project-location {
+    font-size: 0.75rem;
+    color: var(--accent2);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .project-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+
+  .project-cta {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s;
+  }
+
+  .project-card:hover .project-cta { gap: 14px; }
+
+  /* PROJECT MODAL */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    padding: 20px;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--bg2);
+    border: 1px solid rgba(0,212,255,0.3);
+    max-width: 700px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+    transform: scale(0.95);
+    transition: transform 0.3s;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+  }
+
+  .modal-overlay.active .modal { transform: scale(1); }
+
+  .modal-header {
+    padding: 32px 32px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .modal-sector-tag {
+    font-size: 0.65rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 5px 12px;
+    background: rgba(0,212,255,0.1);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+
+  .modal-close {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+
+  .modal-body { padding: 24px 32px 32px; }
+
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+
+  .modal-location {
+    color: var(--accent2);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .modal-section-title {
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    margin-top: 24px;
+  }
+
+  .modal-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #a0aab5;
+  }
+
+  .modal-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .modal-spec {
+    padding: 12px 16px;
+    background: rgba(0,212,255,0.04);
+    border-left: 2px solid var(--accent);
+    font-size: 0.85rem;
+  }
+
+  .modal-spec strong {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  /* ── AUTOMATION ── */
+  #automation {
+    padding: 120px 60px;
+  }
+
+  .automation-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .auto-card {
+    padding: 32px;
+    background: rgba(13,17,23,0.8);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .auto-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .auto-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(0,212,255,0.06), transparent);
+    pointer-events: none;
+  }
+
+  .auto-card:hover {
+    border-color: rgba(0,212,255,0.4);
+    background: rgba(0,212,255,0.04);
+    box-shadow: 0 10px 40px rgba(0,212,255,0.08);
+  }
+
+  .auto-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .auto-category {
+    font-size: 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent2);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .auto-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .auto-desc {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+
+  .auto-saving {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(0,255,136,0.06);
+    border: 1px solid rgba(0,255,136,0.2);
+    font-size: 0.75rem;
+    color: var(--accent3);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* ── TOOLS ── */
+  #tools {
+    padding: 120px 60px;
+    background: var(--bg2);
+  }
+
+  .tools-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .tools-category {
+    margin-bottom: 48px;
+  }
+
+  .tools-cat-title {
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tools-cat-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tool-badge {
+    padding: 8px 20px;
+    border: 1px solid var(--border);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background: rgba(0,212,255,0.02);
+    transition: all 0.25s;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  }
+
+  .tool-badge:hover {
+    background: rgba(0,212,255,0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* ── EDUCATION ── */
+  #education {
+    padding: 120px 60px;
+  }
+
+  .edu-grid {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .edu-card {
+    padding: 32px;
+    border: 1px solid var(--border);
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+    background: rgba(13,17,23,0.5);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: start;
+    transition: all 0.3s;
+  }
+
+  .edu-card:hover {
+    border-color: rgba(0,212,255,0.4);
+    background: rgba(0,212,255,0.03);
+  }
+
+  .edu-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--accent);
+    opacity: 0.6;
+    white-space: nowrap;
+    padding-right: 24px;
+    border-right: 1px solid var(--border);
+  }
+
+  .edu-degree {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .edu-school {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 120px 60px;
+    background: var(--bg2);
+    text-align: center;
+  }
+
+  .contact-grid {
+    max-width: 800px;
+    margin: 48px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .contact-item {
+    padding: 32px 20px;
+    border: 1px solid var(--border);
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .contact-item:hover {
+    border-color: var(--accent);
+    background: rgba(0,212,255,0.05);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0,212,255,0.1);
+  }
+
+  .contact-icon { font-size: 2rem; }
+
+  .contact-label {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .contact-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    word-break: break-all;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 60px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    color: var(--accent);
+    opacity: 0.6;
+  }
+
+  .footer-text {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); opacity: 0.5; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 0 30px; }
+    #hero { padding: 100px 30px 60px; }
+    .hero-content { grid-template-columns: 1fr; gap: 48px; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    .automation-grid { grid-template-columns: 1fr 1fr; }
+    section { padding-left: 30px; padding-right: 30px; }
+    #about, #experience, #projects, #automation, #tools, #education, #contact { padding-left: 30px; padding-right: 30px; }
+    .timeline::before { left: 100px; }
+    .timeline-item { grid-template-columns: 100px 1fr; }
+    .timeline-dot { left: 93px; }
+    footer { padding: 30px; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .automation-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .modal-specs { grid-template-columns: 1fr; }
+  }
+
+  /* TYPEWRITER */
+  .typewriter {
+    border-right: 2px solid var(--accent);
+    animation: blink 1s infinite;
+  }
+  @keyframes blink {
+    0%, 100% { border-color: var(--accent); }
+    50% { border-color: transparent; }
+  }
+
+  /* COUNTER ANIMATION */
+  .counter { display: inline-block; }
+
+  /* PROJECT VISUAL PATTERNS */
+  .proj-pattern-1 { background: linear-gradient(135deg, #0d1520 0%, #1a2535 50%, #0d2040 100%); }
+  .proj-pattern-2 { background: linear-gradient(135deg, #1a0d20 0%, #2a1535 50%, #1a1040 100%); }
+  .proj-pattern-3 { background: linear-gradient(135deg, #0d1a15 0%, #1a3525 50%, #0d2015 100%); }
+  .proj-pattern-4 { background: linear-gradient(135deg, #1a150d 0%, #352510 50%, #401a0d 100%); }
+  .proj-pattern-5 { background: linear-gradient(135deg, #0d1520 0%, #0d2535 50%, #0d1540 100%); }
+  .proj-pattern-6 { background: linear-gradient(135deg, #1a0d15 0%, #351520 50%, #400d1a 100%); }
+
+  .proj-lines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent, transparent 10px,
+      rgba(0,212,255,0.03) 10px, rgba(0,212,255,0.03) 11px
+    );
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">RPanduro</div>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#experience">Experiencia</a></li>
+    <li><a href="#projects">Proyectos</a></li>
+    <li><a href="#automation">Automatización</a></li>
+    <li><a href="#tools">Herramientas</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-tag">// Ingeniero Industrial · Diseñador · Automatizador</div>
+      <h1 class="hero-name">Ramón<br><span>Panduro</span></h1>
+      <div class="hero-title">Sánchez</div>
+      <p class="hero-desc">
+        Ingeniero Industrial con <strong>+7 años</strong> en automoción e industria de superficie. 
+        Especialista en diseño 3D, proyectos llave en mano y <span style="color:var(--accent)">automatización de procesos de ingeniería</span> 
+        mediante macros, iLogics y scripting avanzado.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">Ver Proyectos</a>
+        <a href="#automation" class="btn-secondary">Automatización</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number"><span class="counter" data-target="7">0</span>+</div>
+        <div class="stat-label">Años de Experiencia</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><span class="counter" data-target="15">0</span>+</div>
+        <div class="stat-label">Proyectos Internacionales</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><span class="counter" data-target="20">0</span>+</div>
+        <div class="stat-label">Automatizaciones Creadas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><span class="counter" data-target="4">0</span></div>
+        <div class="stat-label">Días Ahorrados / Cabina</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-tag">// 01 — Sobre mí</span>
+      <h2 class="section-title">Ingeniería con <span style="color:var(--accent)">visión</span></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Ingeniero Industrial graduado en la UCLM, con Máster Oficial de Ingeniería Industrial. 
+          <span class="about-highlight">+7 años de experiencia</span> en los sectores de automoción e industria de acabado superficial, 
+          trabajando en proyectos de gran envergadura por <span class="about-highlight">América, Arabia Saudí y Europa</span>.
+        </p>
+        <p>
+          Actualmente Ingeniero Superior en <span class="about-highlight">Martech Corporation</span>, donde he diseñado y gestionado 
+          proyectos completos de líneas de tratamiento superficial para sectores aeronáutico, ferroviario, mueble y bicicleta.
+          Como logro destacado, diseñé e implant&eacute; el sistema de referenciación y los <span class="about-highlight">sistemas de automatización</span> 
+          actualmente en uso en la empresa.
+        </p>
+        <p>
+          Apasionado del diseño 3D, gráfico y la tecnología. Amante de los proyectos grandes donde seguir creciendo.
+          La creatividad, la iniciativa, la resolución de problemas y el espíritu de liderazgo son mis señas de identidad.
+        </p>
+        <div style="margin-top:28px; display:flex; gap:20px; align-items:center;">
+          <a href="https://www.linkedin.com/in/ramon-ps/" target="_blank" class="btn-secondary" style="font-size:0.75rem; padding:10px 24px;">LinkedIn</a>
+          <span style="font-size:0.75rem; color:var(--text-dim); font-family:'JetBrains Mono',monospace;">Albacete, España · B2 Cambridge</span>
+        </div>
+      </div>
+      <div>
+        <div class="skills-grid" id="skillsGrid">
+          <div class="skill-item">
+            <span class="skill-name">Diseño 3D</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="95"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Automatización</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Gestión de Proyectos</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Diseño Gráfico</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="82"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Cálculo Estructural</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="80"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">LLMs / Vibe Coding</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Macro Excel / VBA</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">iLogics / Inventor</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-tag">// 02 — Trayectoria</span>
+      <h2 class="section-title">Experiencia <span style="color:var(--accent)">Profesional</span></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-date">2021 — HOY</div>
+          <div class="timeline-dot" style="top:4px"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-role">Ingeniero Superior</div>
+          <div class="timeline-company">Martech Corporation · Industria</div>
+          <div class="timeline-desc">
+            Diseño y gestión de líneas de tratamiento superficial para sectores automoción, aeronáutico, ferroviario y mueble. 
+            Contacto y gestión de proyecto con clientes internacionales, elaboración de layouts y planos, presupuestos y documentación técnica. 
+            Cálculos térmicos, estructurales y ensayos lumínicos. Coordinación de equipos multidisciplinares entre diferentes empresas. 
+            <strong style="color:var(--text)">Logro clave:</strong> Diseñé e implanté el sistema de referenciación y la suite completa de automatizaciones actualmente en producción.
+          </div>
+          <div class="timeline-tags">
+            <span class="tag">Inventor 3D</span>
+            <span class="tag">Macros VBA</span>
+            <span class="tag">iLogics</span>
+            <span class="tag">Proyectos Llave en Mano</span>
+            <span class="tag">América / Arabia / Europa</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-date">2019 — 2021</div>
+          <div class="timeline-dot" style="top:4px"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-role">Diseñador Técnico</div>
+          <div class="timeline-company">Martech Corporation</div>
+          <div class="timeline-desc">
+            Diseño de fabricación de piezas (chapa, estructuras, componentes eléctricos). Supervisión de fabricación y gestión con proveedores. 
+            Parametrización de diseños, preparación de plantillas y primeras automatizaciones mediante macros y Scripts.
+          </div>
+          <div class="timeline-tags">
+            <span class="tag">Diseño de Chapa</span>
+            <span class="tag">AutoCAD</span>
+            <span class="tag">SolidWorks</span>
+            <span class="tag">Proveedores</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-date">2018 — 2019</div>
+          <div class="timeline-dot" style="top:4px"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-role">Ingeniero Oficina Técnica</div>
+          <div class="timeline-company">AJUSA · Automoción Multinacional</div>
+          <div class="timeline-desc">
+            Homologación e introducción de nuevas referencias de catálogo. Estudio y desarrollo de nuevos productos para motores multimarca. 
+            Análisis técnico funcional, dimensional y de materiales de piezas OEM. Verificaciones en laboratorio dimensional y elaboración de informes.
+          </div>
+          <div class="timeline-tags">
+            <span class="tag">OEM Analysis</span>
+            <span class="tag">Catálogo Técnico</span>
+            <span class="tag">Laboratorio</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-date">2016 — 2018</div>
+          <div class="timeline-dot" style="top:4px"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-role">Diseñador / Técnico Deportivo</div>
+          <div class="timeline-company">DECU Deportes · UCLM</div>
+          <div class="timeline-desc">
+            Árbitro, organizador de eventos deportivos y diseño de artes visuales y vídeo en el servicio de Extensión Universitaria.
+          </div>
+          <div class="timeline-tags">
+            <span class="tag">Diseño Gráfico</span>
+            <span class="tag">Vídeo</span>
+            <span class="tag">Organización de Eventos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-tag">// 03 — Portfolio</span>
+      <h2 class="section-title">Proyectos <span style="color:var(--accent)">Destacados</span></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card" onclick="openModal('p1')">
+        <div class="project-img proj-pattern-1">
+          <div class="proj-lines"></div>
+          <div class="project-img-icon">✈️</div>
+          <div class="project-sector">Aeronáutico</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Línea de Tratamiento Superficial Aeronáutica</div>
+          <div class="project-location">📍 Oriente Medio / Arabia Saudí</div>
+          <div class="project-desc">Diseño completo de línea de acabado superficial para industria aeronáutica. Cabinas de grandes dimensiones con control de temperatura, humedad y caudal de alta precisión.</div>
+          <div class="project-cta">Ver más detalles →</div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="openModal('p2')">
+        <div class="project-img proj-pattern-2">
+          <div class="proj-lines"></div>
+          <div class="project-img-icon">🚆</div>
+          <div class="project-sector">Ferroviario</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Línea de Pintura Ferroviaria</div>
+          <div class="project-location">📍 Europa</div>
+          <div class="project-desc">Proyecto llave en mano de instalación completa para el acabado superficial de material ferroviario. Cabinas de grandes dimensiones con sistemas de ventilación y filtración industrial.</div>
+          <div class="project-cta">Ver más detalles →</div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="openModal('p3')">
+        <div class="project-img proj-pattern-3">
+          <div class="proj-lines"></div>
+          <div class="project-img-icon">🪑</div>
+          <div class="project-sector">Mueble</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Planta de Lacado Industrial — Mueble</div>
+          <div class="project-location">📍 América Latina</div>
+          <div class="project-desc">Diseño de línea de lacado para fabricante de mueble de alta gama. Cabinas de flujo laminar vertical con sistema de calefacción eficiente y zona de preparación.</div>
+          <div class="project-cta">Ver más detalles →</div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="openModal('p4')">
+        <div class="project-img proj-pattern-4">
+          <div class="proj-lines"></div>
+          <div class="project-img-icon">🚲</div>
+          <div class="project-sector">Bicicleta</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Línea de Pintura para Fabricante de Bicicletas</div>
+          <div class="project-location">📍 Europa</div>
+          <div class="project-desc">Instalación completa de línea de tratamiento superficial para fabricante de bicicletas de alto rendimiento. Diseño de cabina industrial paramétrica y sistema de transporte.</div>
+          <div class="project-cta">Ver más detalles →</div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="openModal('p5')">
+        <div class="project-img proj-pattern-5">
+          <div class="proj-lines"></div>
+          <div class="project-img-icon">🏭</div>
+          <div class="project-sector">Automoción</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Centro de Carrocería y Pintura Llave en Mano</div>
+          <div class="project-location">📍 España / Europa</div>
+          <div class="project-desc">Diseño e instalación integral de centros de reparación de carrocería. Desde el layout hasta la puesta en marcha, incluyendo cabinas, bancadas y sistemas de aspiración.</div>
+          <div class="project-cta">Ver más detalles →</div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="openModal('p6')">
+        <div class="project-img proj-pattern-6">
+          <div class="proj-lines"></div>
+          <div class="project-img-icon">⚙️</div>
+          <div class="project-sector">Metalmecánica</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Cabina Industrial Paramétrica</div>
+          <div class="project-location">📍 Internacional</div>
+          <div class="project-desc">Sistema de cabina industrial estándar completamente paramétrica. A partir de datos en Excel se genera automáticamente el ensamblaje 3D completo. 3-4 días ahorrados por proyecto.</div>
+          <div class="project-cta">Ver más detalles →</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AUTOMATION -->
+<section id="automation">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-tag">// 04 — Innovación</span>
+      <h2 class="section-title">Sistemas de <span style="color:var(--accent)">Automatización</span></h2>
+      <div class="section-line"></div>
+      <p style="max-width:600px; margin:24px auto 0; color:var(--text-dim); font-size:1rem; line-height:1.7;">
+        Suite de automatizaciones desarrolladas para eliminar trabajo repetitivo, minimizar errores y multiplicar la productividad del equipo de ingeniería.
+      </p>
+    </div>
+    <div class="automation-grid">
+
+      <div class="auto-card">
+        <div class="auto-icon">📄</div>
+        <div class="auto-category">Excel · Macros VBA</div>
+        <div class="auto-title">Autocreador de Dossieres</div>
+        <div class="auto-desc">Genera automáticamente el dossier técnico completo del proyecto (hasta 100 páginas) desde cero, con un solo botón, partiendo del Excel de cálculos. Sin tocar plantillas.</div>
+        <div class="auto-saving">⚡ Ahorro: 30 min — 2 horas por oferta</div>
+      </div>
+
+      <div class="auto-card">
+        <div class="auto-icon">🧮</div>
+        <div class="auto-category">Excel · Cálculo Paramétrico</div>
+        <div class="auto-title">Calculador de Cabinas</div>
+        <div class="auto-desc">Motor de cálculo paramétrico que determina automáticamente iluminación, velocidad, caudal y potencia de la cabina. Sincronizado con Navision para precios en tiempo real.</div>
+        <div class="auto-saving">⚡ Ahorro: 20 min — 4 horas por oferta</div>
+      </div>
+
+      <div class="auto-card">
+        <div class="auto-icon">📧</div>
+        <div class="auto-category">Excel · Outlook Automation</div>
+        <div class="auto-title">Gestor de Correos de Proyecto</div>
+        <div class="auto-desc">Redacta y prepara automáticamente el correo para el comercial, adjuntando planos, dossier y fotos del proyecto. El comercial recibe todo listo con un solo click.</div>
+        <div class="auto-saving">⚡ Ahorro: 2-3 min por oferta + cero errores</div>
+      </div>
+
+      <div class="auto-card">
+        <div class="auto-icon">🗺️</div>
+        <div class="auto-category">Excel · Bing / Google Maps API</div>
+        <div class="auto-title">Calculador de Distancias</div>
+        <div class="auto-desc">Calcula automáticamente la distancia del proyecto para el cálculo de portes. Integración con Bing y Google para consultar rutas alternativas directamente desde el Excel.</div>
+        <div class="auto-saving">⚡ Ahorro: 2-3 min por oferta</div>
+      </div>
+
+      <div class="auto-card">
+        <div class="auto-icon">🔩</div>
+        <div class="auto-category">Excel · Inventor · Outlook</div>
+        <div class="auto-title">Sistema de Pedido de Piezas</div>
+        <div class="auto-desc">Suite completa: recopila archivos de Inventor, redacta el correo de pedido, prepara los Excel para laser, punzonadora o proveedor específico, y multiplica cantidades automáticamente.</div>
+        <div class="auto-saving">⚡ Ahorro: 20-50 min por pedido</div>
+      </div>
+
+      <div class="auto-card">
+        <div class="auto-icon">📁</div>
+        <div class="auto-category">Windows Shell · PowerShell</div>
+        <div class="auto-title">Creador de Carpetas de Proyecto</div>
+        <div class="auto-desc">Menú contextual personalizado que despliega la estructura completa de carpetas de proyecto en el directorio deseado. Disponible desde el botón derecho en cualquier ventana.</div>
+        <div class="auto-saving">⚡ Ahorro: 2-3 min por proyecto</div>
+      </div>
+
+      <div class="auto-card">
+        <div class="auto-icon">🔍</div>
+        <div class="auto-category">Autodesk Inventor · iLogics</div>
+        <div class="auto-title">Verificador de Errores de Chapa</div>
+        <div class="auto-desc">Verifica agujeros de punzonadora y tamaño de chapa al guardar. Resalta en rojo los errores antes de que lleguen a producción, ahorrando tiempo a diseño, taller y laser.</div>
+        <div class="auto-saving">⚡ Ahorro: 30 min — 2 horas por chapa errónea</div>
+      </div>
+
+      <div class="auto-card">
+        <div class="auto-icon">🏗️</div>
+        <div class="auto-category">Inventor · iLogics · Excel</div>
+        <div class="auto-title">Cabina Industrial Paramétrica</div>
+        <div class="auto-desc">El proyecto estrella. Escribiendo datos en Excel se genera automáticamente el ensamblaje 3D completo de una cabina industrial estándar. En producción desde hace 2 años.</div>
+        <div class="auto-saving">⚡ Ahorro: 3-4 DÍAS por cabina estándar</div>
+      </div>
+
+      <div class="auto-card">
+        <div class="auto-icon">🎨</div>
+        <div class="auto-category">Inventor · Renders</div>
+        <div class="auto-title">Renders Avanzados con 3 Clicks</div>
+        <div class="auto-desc">Suite de 3 macros que automatiza el proceso de renders avanzados. Lo que antes requería configuración manual paso a paso ahora se ejecuta en 3 clicks.</div>
+        <div class="auto-saving">⚡ Ahorro: 4 min por oferta</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="tools-container">
+    <div class="section-header">
+      <span class="section-tag">// 05 — Stack Técnico</span>
+      <h2 class="section-title">Herramientas y <span style="color:var(--accent)">Tecnologías</span></h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="tools-category">
+      <div class="tools-cat-title">Diseño 3D y CAD</div>
+      <div class="tools-list">
+        <span class="tool-badge">Autodesk Inventor</span>
+        <span class="tool-badge">AutoCAD</span>
+        <span class="tool-badge">SolidWorks</span>
+        <span class="tool-badge">Pro/Engineer</span>
+        <span class="tool-badge">ANSYS</span>
+      </div>
+    </div>
+
+    <div class="tools-category">
+      <div class="tools-cat-title">Automatización y Scripting</div>
+      <div class="tools-list">
+        <span class="tool-badge">Macros Excel / VBA</span>
+        <span class="tool-badge">iLogics Inventor</span>
+        <span class="tool-badge">PowerShell Scripts</span>
+        <span class="tool-badge">Power Query</span>
+        <span class="tool-badge">Claude AI / Gemini Pro</span>
+        <span class="tool-badge">Vibe Coding</span>
+        <span class="tool-badge">Prompt Engineering</span>
+      </div>
+    </div>
+
+    <div class="tools-category">
+      <div class="tools-cat-title">Diseño Gráfico y Vídeo</div>
+      <div class="tools-list">
+        <span class="tool-badge">Adobe Photoshop</span>
+        <span class="tool-badge">Adobe Illustrator</span>
+        <span class="tool-badge">Adobe Premiere</span>
+        <span class="tool-badge">After Effects</span>
+        <span class="tool-badge">Audacity</span>
+        <span class="tool-badge">CapCut</span>
+        <span class="tool-badge">VEO3</span>
+        <span class="tool-badge">NanoBanana</span>
+      </div>
+    </div>
+
+    <div class="tools-category">
+      <div class="tools-cat-title">Ofimática y ERP</div>
+      <div class="tools-list">
+        <span class="tool-badge">Excel Avanzado</span>
+        <span class="tool-badge">Microsoft Project</span>
+        <span class="tool-badge">Navision</span>
+        <span class="tool-badge">SAP</span>
+        <span class="tool-badge">Access</span>
+        <span class="tool-badge">Power Query</span>
+      </div>
+    </div>
+
+    <div class="tools-category">
+      <div class="tools-cat-title">Cálculo e Ingeniería</div>
+      <div class="tools-list">
+        <span class="tool-badge">MATLAB / Simulink</span>
+        <span class="tool-badge">LabVIEW</span>
+        <span class="tool-badge">Dialux</span>
+        <span class="tool-badge">Cype 3D</span>
+        <span class="tool-badge">Cespla</span>
+        <span class="tool-badge">EES</span>
+        <span class="tool-badge">Power Factory</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-tag">// 06 — Formación</span>
+      <h2 class="section-title">Educación <span style="color:var(--accent)">Académica</span></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-year">16—18</div>
+        <div>
+          <div class="edu-degree">Máster Oficial de Ingeniería Industrial</div>
+          <div class="edu-school">Escuela de Ingenieros Industriales · UCLM · Albacete</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">11—16</div>
+        <div>
+          <div class="edu-degree">Grado en Ingeniería Mecánica</div>
+          <div class="edu-school">Escuela de Ingenieros Industriales · UCLM · Albacete</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">B2</div>
+        <div>
+          <div class="edu-degree">Inglés Nivel B2 — Cambridge</div>
+          <div class="edu-school">Certificado Internacional · Cambridge Assessment English</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-tag">// 07 — Contacto</span>
+      <h2 class="section-title">¿Hablamos de tu <span style="color:var(--accent)">Proyecto?</span></h2>
+      <div class="section-line"></div>
+      <p style="max-width:480px; margin:24px auto 0; color:var(--text-dim); font-size:1rem; line-height:1.7;">
+        Abierto a nuevos proyectos desafiantes, colaboraciones técnicas e innovación en ingeniería.
+      </p>
+    </div>
+    <div class="contact-grid">
+      <a href="mailto:ramon_ps_93@hotmail.com" class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">ramon_ps_93@hotmail.com</div>
+      </a>
+      <a href="tel:+34636627301" class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div class="contact-label">Teléfono</div>
+        <div class="contact-value">636 627 301</div>
+      </a>
+      <a href="https://www.linkedin.com/in/ramon-ps/" target="_blank" class="contact-item">
+        <div class="contact-icon">💼</div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">linkedin.com/in/ramon-ps</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ramón Panduro Sánchez</div>
+  <div class="footer-text">// Ingeniero Industrial · Albacete, España · 2025</div>
+</footer>
+
+<!-- PROJECT MODALS DATA -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <!-- Filled by JS -->
+  </div>
+</div>
+
+<script>
+  // ── PROJECT DATA ──
+  const projects = {
+    p1: {
+      sector: 'Sector Aeronáutico',
+      title: 'Línea de Tratamiento Superficial Aeronáutica',
+      location: '📍 Oriente Medio / Arabia Saudí',
+      desc: `Proyecto de diseño y ejecución llave en mano de una línea completa de tratamiento superficial y acabado para la industria aeronáutica. 
+      Este tipo de instalaciones requiere un control exhaustivo de temperatura, humedad y caudal de aire, así como sistemas de filtración de alta eficiencia 
+      para cumplir con las exigentes normativas del sector. La instalación incluye cabinas de grandes dimensiones adaptadas a las piezas y componentes 
+      de aeronaves, con sistemas de iluminación LED de alta CRI para garantizar la correcta inspección visual del acabado.`,
+      specs: [
+        { label: 'Sector', value: 'Aeronáutico' },
+        { label: 'Ubicación', value: 'Arabia Saudí / Oriente Medio' },
+        { label: 'Tipo', value: 'Llave en Mano' },
+        { label: 'Fase', value: 'Diseño + Ejecución' },
+        { label: 'Rol', value: 'Ingeniero Principal / Responsable Técnico' },
+        { label: 'Herramientas', value: 'Inventor 3D, AutoCAD, Cype 3D, Dialux' },
+      ],
+      tags: ['Cabinas Industriales', 'Control Ambiental', 'Filtración HEPA', 'Diseño 3D', 'Gestión Internacional']
+    },
+    p2: {
+      sector: 'Sector Ferroviario',
+      title: 'Línea de Pintura Ferroviaria',
+      location: '📍 Europa',
+      desc: `Instalación completa llave en mano para el acabado superficial de material ferroviario. Las cabinas ferroviarias son de las mayores que se pueden diseñar, 
+      con longitudes que superan los 30 metros y altura suficiente para locomotoras y vagones completos. El proyecto incluyó el diseño de la estructura metálica 
+      de la cabina, el sistema de ventilación y filtración industrial, los equipos de calefacción, la instalación eléctrica y la puesta en marcha. 
+      Todo coordinado con equipos de obra civiles y empresas locales.`,
+      specs: [
+        { label: 'Sector', value: 'Ferroviario' },
+        { label: 'Ubicación', value: 'Europa' },
+        { label: 'Tipo', value: 'Llave en Mano' },
+        { label: 'Dimensiones', value: 'Grandes dimensiones (>30m)' },
+        { label: 'Rol', value: 'Ingeniero de Proyecto / Diseñador' },
+        { label: 'Herramientas', value: 'Inventor 3D, Cype, AutoCAD' },
+      ],
+      tags: ['Cabinas Ferroviarias', 'Grandes Dimensiones', 'Ventilación Industrial', 'Obra Civil', 'Coordinación Multidisciplinar']
+    },
+    p3: {
+      sector: 'Sector Mueble',
+      title: 'Planta de Lacado Industrial — Mueble',
+      location: '📍 América Latina',
+      desc: `Diseño y ejecución de línea de lacado para fabricante de mueble de alta gama en América Latina. El proyecto incluyó el diseño de cabinas con 
+      flujo laminar vertical para garantizar un acabado perfecto libre de polvo, zona de preparación, sistemas de calefacción eficiente y todas las instalaciones 
+      auxiliares. Se gestionó íntegramente desde España: desde los primeros planos y presupuesto hasta la supervisión de la instalación y la formación al personal.`,
+      specs: [
+        { label: 'Sector', value: 'Industria del Mueble' },
+        { label: 'Ubicación', value: 'América Latina' },
+        { label: 'Tipo', value: 'Llave en Mano' },
+        { label: 'Sistema', value: 'Flujo Laminar Vertical' },
+        { label: 'Rol', value: 'Ingeniero Principal' },
+        { label: 'Gestión', value: 'Remota + Visitas de Supervisión' },
+      ],
+      tags: ['Lacado Industrial', 'Flujo Laminar', 'Alta Gama', 'Gestión Internacional', 'Formación']
+    },
+    p4: {
+      sector: 'Industria Bicicleta',
+      title: 'Línea de Pintura para Fabricante de Bicicletas',
+      location: '📍 Europa',
+      desc: `Instalación completa de línea de tratamiento superficial para un reconocido fabricante de bicicletas de alto rendimiento. 
+      El proyecto incluyó el diseño de una cabina industrial basada en el sistema paramétrico desarrollado internamente, adaptada a las 
+      características específicas del sector: manipulación de pequeñas piezas, colores múltiples y alta productividad. 
+      Se diseñaron también sistemas de transporte y carga para optimizar el flujo de producción.`,
+      specs: [
+        { label: 'Sector', value: 'Bicicleta / Deportivo' },
+        { label: 'Ubicación', value: 'Europa' },
+        { label: 'Tipo', value: 'Llave en Mano' },
+        { label: 'Sistema', value: 'Cabina Paramétrica + Transporte' },
+        { label: 'Rol', value: 'Diseñador + Gestor de Proyecto' },
+        { label: 'Innovación', value: 'Cabina Paramétrica Propia' },
+      ],
+      tags: ['Alta Producción', 'Transporte Automatizado', 'Diseño Paramétrico', 'Sector Deportivo']
+    },
+    p5: {
+      sector: 'Automoción',
+      title: 'Centro de Carrocería y Pintura Llave en Mano',
+      location: '📍 España / Europa',
+      desc: `Diseño e instalación integral de centros de reparación de carrocería y pintura para clientes del sector automoción. 
+      Desde el primer layout hasta la puesta en marcha: cabinas de pintura para automoción, bancadas de enderezado, sistemas de aspiración, 
+      zonas de preparación, línea de aire comprimido y todas las instalaciones eléctricas y mecánicas. 
+      Asesoramiento técnico al cliente sobre el proceso más eficiente para su volumen de trabajo.`,
+      specs: [
+        { label: 'Sector', value: 'Automoción' },
+        { label: 'Ubicación', value: 'España y Europa' },
+        { label: 'Tipo', value: 'Llave en Mano' },
+        { label: 'Equipos', value: 'Cabinas, Bancadas, Aspiración' },
+        { label: 'Rol', value: 'Responsable Técnico' },
+        { label: 'Herramientas', value: 'AutoCAD, Inventor, Dialux' },
+      ],
+      tags: ['Cabinas de Pintura', 'Bancadas', 'Layout', 'Instalación Integral', 'Asesoramiento Técnico']
+    },
+    p6: {
+      sector: 'I+D · Innovación',
+      title: 'Cabina Industrial Paramétrica',
+      location: '📍 Uso Internacional',
+      desc: `El proyecto de I+D más ambicioso: una cabina industrial completamente paramétrica. Introduciendo los datos de dimensiones, capacidad y 
+      características técnicas en un Excel, el sistema genera automáticamente el ensamblaje 3D completo en Autodesk Inventor. 
+      Incluye estructura metálica, chapa, componentes eléctricos y todos los elementos estándar. 
+      En producción desde hace 2 años, ha permitido ahorrar entre 3 y 4 días de trabajo por cada cabina estándar proyectada. 
+      Se continúa perfeccionando con cada nuevo proyecto.`,
+      specs: [
+        { label: 'Tipo', value: 'Proyecto I+D Interno' },
+        { label: 'Tecnología', value: 'Inventor + iLogics + Excel VBA' },
+        { label: 'Ahorro', value: '3-4 días por cabina estándar' },
+        { label: 'En Producción', value: '+2 años' },
+        { label: 'Estado', value: 'Activo · En continua mejora' },
+        { label: 'Impacto', value: 'Adoptado por toda la empresa' },
+      ],
+      tags: ['I+D', 'Automatización 3D', 'Paramétrico', 'iLogics', 'VBA', 'Innovación']
+    }
+  };
+
+  function openModal(id) {
+    const p = projects[id];
+    const modal = document.getElementById('modalContent');
+    modal.innerHTML = `
+      <div class="modal-header">
+        <span class="modal-sector-tag">${p.sector}</span>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-title">${p.title}</div>
+        <div class="modal-location">${p.location}</div>
+        <div class="modal-section-title">// Descripción del Proyecto</div>
+        <div class="modal-desc">${p.desc}</div>
+        <div class="modal-section-title">// Ficha Técnica</div>
+        <div class="modal-specs">
+          ${p.specs.map(s => `<div class="modal-spec"><strong>${s.label}</strong>${s.value}</div>`).join('')}
+        </div>
+        <div class="modal-section-title">// Tecnologías Aplicadas</div>
+        <div class="modal-tags">
+          ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+        </div>
+      </div>
+    `;
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (!e || e.target === document.getElementById('modalOverlay')) {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // ESC to close
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ── INTERSECTION OBSERVER ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Animate skill bars
+        if (entry.target.id === 'skillsGrid' || entry.target.closest('#skillsGrid')) {
+          document.querySelectorAll('.skill-bar').forEach(bar => {
+            bar.style.width = bar.dataset.width + '%';
+          });
+        }
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.timeline-item, .auto-card').forEach(el => observer.observe(el));
+  
+  // Skill bars observer
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.skill-bar').forEach(bar => {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  const skillsSection = document.getElementById('skillsGrid');
+  if (skillsSection) skillObserver.observe(skillsSection);
+
+  // ── COUNTER ANIMATION ──
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const duration = 1500;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = Math.floor(current);
+    }, 16);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.counter').forEach(animateCounter);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const heroStats = document.querySelector('.hero-stats');
+  if (heroStats) counterObserver.observe(heroStats);
+
+  // Stagger auto cards
+  document.querySelectorAll('.auto-card').forEach((card, i) => {
+    card.style.transitionDelay = `${i * 0.08}s`;
+  });
+</script>
+</body>
+</html>

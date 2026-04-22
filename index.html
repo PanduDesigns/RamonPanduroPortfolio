@@ -1106,6 +1106,24 @@
   .door-panel-left.open  { transform: translateX(-100%); }
   .door-panel-right.open { transform: translateX(100%); }
 
+  /* Glowing inner edge on each panel — becomes visible when line disappears */
+  .door-panel-left::after,
+  .door-panel-right::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, transparent 0%, var(--accent) 40%, var(--accent) 60%, transparent 100%);
+    box-shadow: 0 0 10px rgba(0,212,255,1), 0 0 30px rgba(0,212,255,0.5);
+    opacity: 0;
+    transition: opacity 0.05s;
+  }
+  .door-panel-left::after  { right: 0; }
+  .door-panel-right::after { left: 0; }
+
+  .door-panel-left.open::after,
+  .door-panel-right.open::after { opacity: 1; }
+
   /* Words sit ABOVE the panels */
   .intro-words {
     position: absolute;
@@ -1165,6 +1183,7 @@
   }
 
   .door-line.grow { transform: scaleY(1); }
+  .door-line.hide { opacity: 0; transition: opacity 0.15s, transform 1.0s cubic-bezier(0.25, 1, 0.5, 1); }
 
   /* ── ANIMATIONS ── */
 
@@ -1833,6 +1852,7 @@
     setTimeout(function(){ words.classList.add('fade-out'); },    1900);
     setTimeout(function(){ doorLine.classList.add('grow'); },     2500);
     setTimeout(function(){
+      doorLine.classList.add('hide');
       doorLeft.classList.add('open');
       doorRight.classList.add('open');
     }, 3650);

@@ -66,6 +66,26 @@
     background: rgba(8,11,16,0.85);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  /* Slow shimmer sweep across the nav bottom edge */
+  nav::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: -40%;
+    width: 30%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.9), transparent);
+    animation: navShimmer 5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes navShimmer {
+    0%   { left: -30%; opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { left: 110%; opacity: 0; }
   }
 
   .nav-logo {
@@ -1272,7 +1292,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">RPanduro</div>
+  <div class="nav-logo">Ramón Panduro</div>
   <ul class="nav-links">
     <li><a href="#about">Sobre mí</a></li>
     <li><a href="#experience">Experiencia</a></li>
@@ -1289,7 +1309,7 @@
   <div class="hero-glow-2"></div>
   <div class="hero-content">
     <div>
-      <div class="hero-tag">// Ingeniero Industrial · Diseñador · Automatizador</div>
+      <div class="hero-tag">// Ingeniero Industrial: Diseño, Fabricación y Automatización</div>
       <h1 class="hero-name">Ramón<br><span>Panduro</span><br><span>Sánchez</span></h1>
       <p class="hero-desc">
         Ingeniero Industrial con <strong>+7 años</strong> en automoción e industria de superficie. 
@@ -1316,16 +1336,16 @@
         <div class="stat-label">Años de Experiencia</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number"><span class="counter" data-target="15">0</span>+</div>
-        <div class="stat-label">Proyectos Internacionales</div>
+        <div class="stat-number"><span class="counter" data-target="30">0</span>+</div>
+        <div class="stat-label">Proyectos Completados</div>
       </div>
       <div class="stat-card">
         <div class="stat-number"><span class="counter" data-target="20">0</span>+</div>
         <div class="stat-label">Automatizaciones Creadas</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number"><span class="counter" data-target="4">0</span></div>
-        <div class="stat-label">Días Ahorrados / Cabina</div>
+        <div class="stat-number"><span class="counter" data-target="10">0</span>+</div>
+        <div class="stat-label">Países con Proyectos Instalados</div>
       </div>
     </div>
     </div><!-- /hero-right-col -->

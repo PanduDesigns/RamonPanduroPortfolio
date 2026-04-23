@@ -165,29 +165,36 @@
   @media (max-width: 768px) {
     nav {
       padding: 0 20px;
-      overflow: visible;
     }
 
     .nav-hamburger { display: flex; }
 
     .nav-links {
       position: fixed;
-      top: 64px; left: 0; right: 0;
+      top: 64px;
+      left: 0;
+      right: 0;
       flex-direction: column;
       gap: 0;
-      background: rgba(8,11,16,0.98);
+      background: rgba(8, 11, 16, 0.98);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
-      padding: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.25,1,0.5,1), padding 0.3s;
       z-index: 1001;
+      /* Hidden state */
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+      /* Reset any inherited styles */
+      overflow: visible;
+      max-height: none;
+      padding: 8px 0;
     }
 
     .nav-links.open {
-      max-height: 400px;
-      padding: 12px 0;
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .nav-links li {
@@ -196,10 +203,12 @@
 
     .nav-links a {
       display: block;
-      padding: 14px 28px;
+      padding: 16px 28px;
       font-size: 0.9rem;
       letter-spacing: 2px;
       border-bottom: 1px solid rgba(255,255,255,0.05);
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .nav-links li:last-child a { border-bottom: none; }

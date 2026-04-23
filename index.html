@@ -124,6 +124,87 @@
   .nav-links a:hover { color: var(--accent); }
   .nav-links a:hover::after { width: 100%; }
 
+  /* ── HAMBURGER (mobile) ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    z-index: 1100;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s, width 0.3s;
+    transform-origin: center;
+  }
+
+  .nav-hamburger span:nth-child(1) { width: 24px; }
+  .nav-hamburger span:nth-child(2) { width: 18px; }
+  .nav-hamburger span:nth-child(3) { width: 24px; }
+
+  .nav-hamburger.open span:nth-child(1) {
+    width: 24px;
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+  .nav-hamburger.open span:nth-child(3) {
+    width: 24px;
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      padding: 0 20px;
+      overflow: visible;
+    }
+
+    .nav-hamburger { display: flex; }
+
+    .nav-links {
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(8,11,16,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.25,1,0.5,1), padding 0.3s;
+      z-index: 999;
+    }
+
+    .nav-links.open {
+      max-height: 400px;
+      padding: 12px 0;
+    }
+
+    .nav-links li {
+      width: 100%;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 14px 28px;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav-links li:last-child a { border-bottom: none; }
+  }
+
   /* ── SECTIONS ── */
   section { position: relative; z-index: 1; }
 
@@ -1293,7 +1374,10 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Ramón Panduro</div>
-  <ul class="nav-links">
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#about">Sobre mí</a></li>
     <li><a href="#experience">Experiencia</a></li>
     <li><a href="#projects">Proyectos</a></li>
@@ -2091,6 +2175,23 @@
   // Stagger auto cards
   document.querySelectorAll('.auto-card').forEach((card, i) => {
     card.style.transitionDelay = `${i * 0.08}s`;
+  });
+
+  // ── HAMBURGER MENU ──
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks  = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  // Close menu when a link is tapped
+  navLinks.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
   });
 </script>
 </body>

@@ -66,19 +66,19 @@
     background: rgba(8,11,16,0.85);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    overflow: hidden;
   }
 
-  /* Slow shimmer sweep across the nav bottom edge */
+  /* Shimmer confined to nav height via clip */
   nav::after {
     content: '';
     position: absolute;
-    bottom: 0; left: -40%;
+    bottom: 0; left: -30%;
     width: 30%;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(0,212,255,0.9), transparent);
     animation: navShimmer 5s ease-in-out infinite;
     pointer-events: none;
+    clip-path: inset(0);
   }
 
   @keyframes navShimmer {
@@ -175,14 +175,14 @@
       top: 64px; left: 0; right: 0;
       flex-direction: column;
       gap: 0;
-      background: rgba(8,11,16,0.97);
+      background: rgba(8,11,16,0.98);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       padding: 0;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.4s cubic-bezier(0.25,1,0.5,1), padding 0.3s;
-      z-index: 999;
+      z-index: 1001;
     }
 
     .nav-links.open {

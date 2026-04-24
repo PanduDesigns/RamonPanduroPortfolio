@@ -124,6 +124,28 @@
   .nav-links a:hover { color: var(--accent); }
   .nav-links a:hover::after { width: 100%; }
 
+  /* ── LANG TOGGLE ── */
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.3);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .lang-toggle:hover {
+    background: rgba(0,212,255,0.18);
+    border-color: var(--accent);
+  }
+
   /* ── HAMBURGER (mobile) ── */
   .nav-hamburger {
     display: none;
@@ -1382,16 +1404,21 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Ramón Panduro</div>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
-    <span></span><span></span><span></span>
-  </button>
+  <div style="display:flex;align-items:center;gap:12px;margin-left:auto;">
+    <button id="langToggle" class="lang-toggle" aria-label="Cambiar idioma">
+      <span id="langFlag">🇬🇧</span><span id="langLabel">EN</span>
+    </button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#about">Sobre mí</a></li>
-    <li><a href="#experience">Experiencia</a></li>
-    <li><a href="#projects">Proyectos</a></li>
-    <li><a href="#automation">Automatización</a></li>
-    <li><a href="#tools">Herramientas</a></li>
-    <li><a href="#contact">Contacto</a></li>
+    <li><a href="#about" id="nav-about">Sobre mí</a></li>
+    <li><a href="#experience" id="nav-experience">Experiencia</a></li>
+    <li><a href="#projects" id="nav-projects">Proyectos</a></li>
+    <li><a href="#automation" id="nav-automation">Automatización</a></li>
+    <li><a href="#tools" id="nav-tools">Herramientas</a></li>
+    <li><a href="#contact" id="nav-contact">Contacto</a></li>
   </ul>
 </nav>
 
@@ -1401,16 +1428,16 @@
   <div class="hero-glow-2"></div>
   <div class="hero-content">
     <div>
-      <div class="hero-tag">// Ingeniero Industrial: Diseño, Fabricación y Automatización</div>
+      <div class="hero-tag" id="hero-tag">// Ingeniero Industrial: Diseño, Fabricación y Automatización</div>
       <h1 class="hero-name">Ramón<br><span>Panduro</span><br><span>Sánchez</span></h1>
-      <p class="hero-desc">
+      <p class="hero-desc" id="hero-desc">
         Ingeniero Industrial con <strong>+7 años</strong> en automoción e industria de superficie. 
         Especialista en diseño 3D, proyectos llave en mano y <span style="color:var(--accent)">automatización de procesos de ingeniería</span> 
         mediante macros, iLogics y scripting avanzado.
       </p>
       <div class="hero-btns">
-        <a href="#projects" class="btn-primary">Ver Proyectos</a>
-        <a href="#automation" class="btn-secondary">Automatización</a>
+        <a href="#projects" class="btn-primary" id="hero-btn1">Ver Proyectos</a>
+        <a href="#automation" class="btn-secondary" id="hero-btn2">Automatización</a>
       </div>
     </div>
     <div class="hero-right-col">
@@ -1425,19 +1452,19 @@
     <div class="hero-stats">
       <div class="stat-card">
         <div class="stat-number"><span class="counter" data-target="7">0</span>+</div>
-        <div class="stat-label">Años de Experiencia</div>
+        <div class="stat-label" id="stat-1">Años de Experiencia</div>
       </div>
       <div class="stat-card">
         <div class="stat-number"><span class="counter" data-target="30">0</span>+</div>
-        <div class="stat-label">Proyectos Completados</div>
+        <div class="stat-label" id="stat-2">Proyectos Completados</div>
       </div>
       <div class="stat-card">
         <div class="stat-number"><span class="counter" data-target="20">0</span>+</div>
-        <div class="stat-label">Automatizaciones Creadas</div>
+        <div class="stat-label" id="stat-3">Automatizaciones Creadas</div>
       </div>
       <div class="stat-card">
         <div class="stat-number"><span class="counter" data-target="10">0</span>+</div>
-        <div class="stat-label">Países con Proyectos Instalados</div>
+        <div class="stat-label" id="stat-4">Países con Proyectos Instalados</div>
       </div>
     </div>
     </div><!-- /hero-right-col -->
@@ -1448,30 +1475,30 @@
 <section id="about">
   <div style="max-width:1200px; margin:0 auto;">
     <div class="section-header">
-      <span class="section-tag">// 01 — Sobre mí</span>
-      <h2 class="section-title">Ingeniería con <span style="color:var(--accent)">visión</span></h2>
+      <span class="section-tag" id="about-tag">// 01 — Sobre mí</span>
+      <h2 class="section-title" id="about-title">Ingeniería con <span style="color:var(--accent)">visión</span></h2>
       <div class="section-line"></div>
     </div>
     <div class="about-grid">
       <div class="about-text">
-        <p>
+        <p id="about-p1">
           Ingeniero Industrial graduado en la UCLM, con Máster Oficial de Ingeniería Industrial. 
           <span class="about-highlight">+7 años de experiencia</span> en los sectores de automoción e industria de acabado superficial, 
           trabajando en proyectos de gran envergadura por <span class="about-highlight">América, Arabia Saudí y Europa</span>.
         </p>
-        <p>
+        <p id="about-p2">
           Actualmente Ingeniero Superior en <span class="about-highlight">Martech Corporation</span>, donde he diseñado y gestionado 
           proyectos completos de líneas de tratamiento superficial para sectores aeronáutico, ferroviario, mueble y bicicleta.
           Como logro destacado, diseñé e implant&eacute; el sistema de referenciación y los <span class="about-highlight">sistemas de automatización</span> 
           actualmente en uso en la empresa.
         </p>
-        <p>
+        <p id="about-p3">
           Apasionado del diseño 3D, gráfico y la tecnología. Amante de los proyectos grandes donde seguir creciendo.
           La creatividad, la iniciativa, la resolución de problemas y el espíritu de liderazgo son mis señas de identidad.
         </p>
         <div style="margin-top:28px; display:flex; gap:20px; align-items:center;">
           <a href="https://www.linkedin.com/in/ramon-ps/" target="_blank" class="btn-secondary" style="font-size:0.75rem; padding:10px 24px;">LinkedIn</a>
-          <span style="font-size:0.75rem; color:var(--text-dim); font-family:'JetBrains Mono',monospace;">Albacete, España · B2 Cambridge</span>
+          <span id="about-location" style="font-size:0.75rem; color:var(--text-dim); font-family:'JetBrains Mono',monospace;">Albacete, España · B2 Cambridge</span>
         </div>
       </div>
       <div>
@@ -1518,8 +1545,8 @@
 <section id="experience">
   <div style="max-width:1200px; margin:0 auto;">
     <div class="section-header">
-      <span class="section-tag">// 02 — Trayectoria</span>
-      <h2 class="section-title">Experiencia <span style="color:var(--accent)">Profesional</span></h2>
+      <span class="section-tag" id="exp-tag">// 02 — Trayectoria</span>
+      <h2 class="section-title" id="exp-title">Experiencia <span style="color:var(--accent)">Profesional</span></h2>
       <div class="section-line"></div>
     </div>
     <div class="timeline">
@@ -1529,9 +1556,9 @@
           <div class="timeline-dot" style="top:4px"></div>
         </div>
         <div class="timeline-content">
-          <div class="timeline-role">Ingeniero Superior</div>
-          <div class="timeline-company">Martech Corporation · Industria</div>
-          <div class="timeline-desc">
+          <div class="timeline-role" id="exp1-role">Ingeniero Superior</div>
+          <div class="timeline-company" id="exp1-company">Martech Corporation · Industria</div>
+          <div class="timeline-desc" id="exp1-desc">
             Diseño y gestión de líneas de tratamiento superficial para sectores automoción, aeronáutico, ferroviario y mueble. 
             Contacto y gestión de proyecto con clientes internacionales, elaboración de layouts y planos, presupuestos y documentación técnica. 
             Cálculos térmicos, estructurales y ensayos lumínicos. Coordinación de equipos multidisciplinares entre diferentes empresas. 
@@ -1552,9 +1579,9 @@
           <div class="timeline-dot" style="top:4px"></div>
         </div>
         <div class="timeline-content">
-          <div class="timeline-role">Diseñador Técnico</div>
-          <div class="timeline-company">Martech Corporation</div>
-          <div class="timeline-desc">
+          <div class="timeline-role" id="exp2-role">Diseñador Técnico</div>
+          <div class="timeline-company" id="exp2-company">Martech Corporation</div>
+          <div class="timeline-desc" id="exp2-desc">
             Diseño de fabricación de piezas (chapa, estructuras, componentes eléctricos). Supervisión de fabricación y gestión con proveedores. 
             Parametrización de diseños, preparación de plantillas y primeras automatizaciones mediante macros y Scripts.
           </div>
@@ -1572,9 +1599,9 @@
           <div class="timeline-dot" style="top:4px"></div>
         </div>
         <div class="timeline-content">
-          <div class="timeline-role">Ingeniero Oficina Técnica</div>
-          <div class="timeline-company">AJUSA · Automoción Multinacional</div>
-          <div class="timeline-desc">
+          <div class="timeline-role" id="exp3-role">Ingeniero Oficina Técnica</div>
+          <div class="timeline-company" id="exp3-company">AJUSA · Automoción Multinacional</div>
+          <div class="timeline-desc" id="exp3-desc">
             Homologación e introducción de nuevas referencias de catálogo. Estudio y desarrollo de nuevos productos para motores multimarca. 
             Análisis técnico funcional, dimensional y de materiales de piezas OEM. Verificaciones en laboratorio dimensional y elaboración de informes.
           </div>
@@ -1591,9 +1618,9 @@
           <div class="timeline-dot" style="top:4px"></div>
         </div>
         <div class="timeline-content">
-          <div class="timeline-role">Diseñador / Técnico Deportivo</div>
-          <div class="timeline-company">DECU Deportes · UCLM</div>
-          <div class="timeline-desc">
+          <div class="timeline-role" id="exp4-role">Diseñador / Técnico Deportivo</div>
+          <div class="timeline-company" id="exp4-company">DECU Deportes · UCLM</div>
+          <div class="timeline-desc" id="exp4-desc">
             Árbitro, organizador de eventos deportivos y diseño de artes visuales y vídeo en el servicio de Extensión Universitaria.
           </div>
           <div class="timeline-tags">
@@ -1611,8 +1638,8 @@
 <section id="projects">
   <div style="max-width:1200px; margin:0 auto;">
     <div class="section-header">
-      <span class="section-tag">// 03 — Portfolio</span>
-      <h2 class="section-title">Proyectos <span style="color:var(--accent)">Destacados</span></h2>
+      <span class="section-tag" id="proj-tag">// 03 — Portfolio</span>
+      <h2 class="section-title" id="proj-title">Proyectos <span style="color:var(--accent)">Destacados</span></h2>
       <div class="section-line"></div>
     </div>
     <div class="projects-grid">
@@ -1624,9 +1651,9 @@
           <div class="project-sector">Aeronáutico</div>
         </div>
         <div class="project-body">
-          <div class="project-title">Línea de Tratamiento Superficial Aeronáutica</div>
+          <div class="project-title" id="p1-title">Línea de Tratamiento Superficial Aeronáutica</div>
           <div class="project-location">📍 Oriente Medio / Arabia Saudí</div>
-          <div class="project-desc">Diseño completo de línea de acabado superficial para industria aeronáutica. Cabinas de grandes dimensiones con control de temperatura, humedad y caudal de alta precisión.</div>
+          <div class="project-desc" id="p1-desc">Diseño completo de línea de acabado superficial para industria aeronáutica. Cabinas de grandes dimensiones con control de temperatura, humedad y caudal de alta precisión.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
@@ -1638,9 +1665,9 @@
           <div class="project-sector">Ferroviario</div>
         </div>
         <div class="project-body">
-          <div class="project-title">Línea de Pintura Ferroviaria</div>
+          <div class="project-title" id="p2-title">Línea de Pintura Ferroviaria</div>
           <div class="project-location">📍 Europa</div>
-          <div class="project-desc">Proyecto llave en mano de instalación completa para el acabado superficial de material ferroviario. Cabinas de grandes dimensiones con sistemas de ventilación y filtración industrial.</div>
+          <div class="project-desc" id="p2-desc">Proyecto llave en mano de instalación completa para el acabado superficial de material ferroviario. Cabinas de grandes dimensiones con sistemas de ventilación y filtración industrial.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
@@ -1652,9 +1679,9 @@
           <div class="project-sector">Mueble</div>
         </div>
         <div class="project-body">
-          <div class="project-title">Planta de Lacado Industrial — Mueble</div>
+          <div class="project-title" id="p3-title">Planta de Lacado Industrial — Mueble</div>
           <div class="project-location">📍 América Latina</div>
-          <div class="project-desc">Diseño de línea de lacado para fabricante de mueble de alta gama. Cabinas de flujo laminar vertical con sistema de calefacción eficiente y zona de preparación.</div>
+          <div class="project-desc" id="p3-desc">Diseño de línea de lacado para fabricante de mueble de alta gama. Cabinas de flujo laminar vertical con sistema de calefacción eficiente y zona de preparación.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
@@ -1666,9 +1693,9 @@
           <div class="project-sector">Bicicleta</div>
         </div>
         <div class="project-body">
-          <div class="project-title">Línea de Pintura para Fabricante de Bicicletas</div>
+          <div class="project-title" id="p4-title">Línea de Pintura para Fabricante de Bicicletas</div>
           <div class="project-location">📍 Europa</div>
-          <div class="project-desc">Instalación completa de línea de tratamiento superficial para fabricante de bicicletas de alto rendimiento. Diseño de cabina industrial paramétrica y sistema de transporte.</div>
+          <div class="project-desc" id="p4-desc">Instalación completa de línea de tratamiento superficial para fabricante de bicicletas de alto rendimiento. Diseño de cabina industrial paramétrica y sistema de transporte.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
@@ -1680,9 +1707,9 @@
           <div class="project-sector">Automoción</div>
         </div>
         <div class="project-body">
-          <div class="project-title">Centro de Carrocería y Pintura Llave en Mano</div>
+          <div class="project-title" id="p5-title">Centro de Carrocería y Pintura Llave en Mano</div>
           <div class="project-location">📍 España / Europa</div>
-          <div class="project-desc">Diseño e instalación integral de centros de reparación de carrocería. Desde el layout hasta la puesta en marcha, incluyendo cabinas, bancadas y sistemas de aspiración.</div>
+          <div class="project-desc" id="p5-desc">Diseño e instalación integral de centros de reparación de carrocería. Desde el layout hasta la puesta en marcha, incluyendo cabinas, bancadas y sistemas de aspiración.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
@@ -1694,9 +1721,9 @@
           <div class="project-sector">Metalmecánica</div>
         </div>
         <div class="project-body">
-          <div class="project-title">Cabina Industrial Paramétrica</div>
+          <div class="project-title" id="p6-title">Cabina Industrial Paramétrica</div>
           <div class="project-location">📍 Internacional</div>
-          <div class="project-desc">Sistema de cabina industrial estándar completamente paramétrica. A partir de datos en Excel se genera automáticamente el ensamblaje 3D completo. 3-4 días ahorrados por proyecto.</div>
+          <div class="project-desc" id="p6-desc">Sistema de cabina industrial estándar completamente paramétrica. A partir de datos en Excel se genera automáticamente el ensamblaje 3D completo. 3-4 días ahorrados por proyecto.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
@@ -1709,10 +1736,10 @@
 <section id="automation">
   <div style="max-width:1200px; margin:0 auto;">
     <div class="section-header">
-      <span class="section-tag">// 04 — Innovación</span>
-      <h2 class="section-title">Sistemas de <span style="color:var(--accent)">Automatización</span></h2>
+      <span class="section-tag" id="auto-tag">// 04 — Innovación</span>
+      <h2 class="section-title" id="auto-title">Sistemas de <span style="color:var(--accent)">Automatización</span></h2>
       <div class="section-line"></div>
-      <p style="max-width:600px; margin:24px auto 0; color:var(--text-dim); font-size:1rem; line-height:1.7;">
+      <p id="auto-intro" style="max-width:600px; margin:24px auto 0; color:var(--text-dim); font-size:1rem; line-height:1.7;">
         Suite de automatizaciones desarrolladas para eliminar trabajo repetitivo, minimizar errores y multiplicar la productividad del equipo de ingeniería.
       </p>
     </div>
@@ -1721,73 +1748,73 @@
       <div class="auto-card">
         <div class="auto-icon">📄</div>
         <div class="auto-category">Excel · Macros VBA</div>
-        <div class="auto-title">Autocreador de Dossieres</div>
-        <div class="auto-desc">Genera automáticamente el dossier técnico completo del proyecto (hasta 100 páginas) desde cero, con un solo botón, partiendo del Excel de cálculos. Sin tocar plantillas.</div>
-        <div class="auto-saving">⚡ Ahorro: 30 min — 2 horas por oferta</div>
+        <div class="auto-title" id="a1-title">Autocreador de Dossieres</div>
+        <div class="auto-desc" id="a1-desc">Genera automáticamente el dossier técnico completo del proyecto (hasta 100 páginas) desde cero, con un solo botón, partiendo del Excel de cálculos. Sin tocar plantillas.</div>
+        <div class="auto-saving" id="a1-saving">⚡ Ahorro: 30 min — 2 horas por oferta</div>
       </div>
 
       <div class="auto-card">
         <div class="auto-icon">🧮</div>
         <div class="auto-category">Excel · Cálculo Paramétrico</div>
-        <div class="auto-title">Calculador de Cabinas</div>
-        <div class="auto-desc">Motor de cálculo paramétrico que determina automáticamente iluminación, velocidad, caudal y potencia de la cabina. Sincronizado con Navision para precios en tiempo real.</div>
-        <div class="auto-saving">⚡ Ahorro: 20 min — 4 horas por oferta</div>
+        <div class="auto-title" id="a2-title">Calculador de Cabinas</div>
+        <div class="auto-desc" id="a2-desc">Motor de cálculo paramétrico que determina automáticamente iluminación, velocidad, caudal y potencia de la cabina. Sincronizado con Navision para precios en tiempo real.</div>
+        <div class="auto-saving" id="a2-saving">⚡ Ahorro: 20 min — 4 horas por oferta</div>
       </div>
 
       <div class="auto-card">
         <div class="auto-icon">📧</div>
         <div class="auto-category">Excel · Outlook Automation</div>
-        <div class="auto-title">Gestor de Correos de Proyecto</div>
-        <div class="auto-desc">Redacta y prepara automáticamente el correo para el comercial, adjuntando planos, dossier y fotos del proyecto. El comercial recibe todo listo con un solo click.</div>
-        <div class="auto-saving">⚡ Ahorro: 2-3 min por oferta + cero errores</div>
+        <div class="auto-title" id="a3-title">Gestor de Correos de Proyecto</div>
+        <div class="auto-desc" id="a3-desc">Redacta y prepara automáticamente el correo para el comercial, adjuntando planos, dossier y fotos del proyecto. El comercial recibe todo listo con un solo click.</div>
+        <div class="auto-saving" id="a3-saving">⚡ Ahorro: 2-3 min por oferta + cero errores</div>
       </div>
 
       <div class="auto-card">
         <div class="auto-icon">🗺️</div>
         <div class="auto-category">Excel · Bing / Google Maps API</div>
-        <div class="auto-title">Calculador de Distancias</div>
-        <div class="auto-desc">Calcula automáticamente la distancia del proyecto para el cálculo de portes. Integración con Bing y Google para consultar rutas alternativas directamente desde el Excel.</div>
-        <div class="auto-saving">⚡ Ahorro: 2-3 min por oferta</div>
+        <div class="auto-title" id="a4-title">Calculador de Distancias</div>
+        <div class="auto-desc" id="a4-desc">Calcula automáticamente la distancia del proyecto para el cálculo de portes. Integración con Bing y Google para consultar rutas alternativas directamente desde el Excel.</div>
+        <div class="auto-saving" id="a4-saving">⚡ Ahorro: 2-3 min por oferta</div>
       </div>
 
       <div class="auto-card">
         <div class="auto-icon">🔩</div>
         <div class="auto-category">Excel · Inventor · Outlook</div>
-        <div class="auto-title">Sistema de Pedido de Piezas</div>
-        <div class="auto-desc">Suite completa: recopila archivos de Inventor, redacta el correo de pedido, prepara los Excel para laser, punzonadora o proveedor específico, y multiplica cantidades automáticamente.</div>
-        <div class="auto-saving">⚡ Ahorro: 20-50 min por pedido</div>
+        <div class="auto-title" id="a5-title">Sistema de Pedido de Piezas</div>
+        <div class="auto-desc" id="a5-desc">Suite completa: recopila archivos de Inventor, redacta el correo de pedido, prepara los Excel para laser, punzonadora o proveedor específico, y multiplica cantidades automáticamente.</div>
+        <div class="auto-saving" id="a5-saving">⚡ Ahorro: 20-50 min por pedido</div>
       </div>
 
       <div class="auto-card">
         <div class="auto-icon">📁</div>
         <div class="auto-category">Windows Shell · PowerShell</div>
-        <div class="auto-title">Creador de Carpetas de Proyecto</div>
-        <div class="auto-desc">Menú contextual personalizado que despliega la estructura completa de carpetas de proyecto en el directorio deseado. Disponible desde el botón derecho en cualquier ventana.</div>
-        <div class="auto-saving">⚡ Ahorro: 2-3 min por proyecto</div>
+        <div class="auto-title" id="a6-title">Creador de Carpetas de Proyecto</div>
+        <div class="auto-desc" id="a6-desc">Menú contextual personalizado que despliega la estructura completa de carpetas de proyecto en el directorio deseado. Disponible desde el botón derecho en cualquier ventana.</div>
+        <div class="auto-saving" id="a6-saving">⚡ Ahorro: 2-3 min por proyecto</div>
       </div>
 
       <div class="auto-card">
         <div class="auto-icon">🔍</div>
         <div class="auto-category">Autodesk Inventor · iLogics</div>
-        <div class="auto-title">Verificador de Errores de Chapa</div>
-        <div class="auto-desc">Verifica agujeros de punzonadora y tamaño de chapa al guardar. Resalta en rojo los errores antes de que lleguen a producción, ahorrando tiempo a diseño, taller y laser.</div>
-        <div class="auto-saving">⚡ Ahorro: 30 min — 2 horas por chapa errónea</div>
+        <div class="auto-title" id="a7-title">Verificador de Errores de Chapa</div>
+        <div class="auto-desc" id="a7-desc">Verifica agujeros de punzonadora y tamaño de chapa al guardar. Resalta en rojo los errores antes de que lleguen a producción, ahorrando tiempo a diseño, taller y laser.</div>
+        <div class="auto-saving" id="a7-saving">⚡ Ahorro: 30 min — 2 horas por chapa errónea</div>
       </div>
 
       <div class="auto-card">
         <div class="auto-icon">🏗️</div>
         <div class="auto-category">Inventor · iLogics · Excel</div>
-        <div class="auto-title">Cabina Industrial Paramétrica</div>
-        <div class="auto-desc">El proyecto estrella. Escribiendo datos en Excel se genera automáticamente el ensamblaje 3D completo de una cabina industrial estándar. En producción desde hace 2 años.</div>
-        <div class="auto-saving">⚡ Ahorro: 3-4 DÍAS por cabina estándar</div>
+        <div class="auto-title" id="a8-title">Cabina Industrial Paramétrica</div>
+        <div class="auto-desc" id="a8-desc">El proyecto estrella. Escribiendo datos en Excel se genera automáticamente el ensamblaje 3D completo de una cabina industrial estándar. En producción desde hace 2 años.</div>
+        <div class="auto-saving" id="a8-saving">⚡ Ahorro: 3-4 DÍAS por cabina estándar</div>
       </div>
 
       <div class="auto-card">
         <div class="auto-icon">🎨</div>
         <div class="auto-category">Inventor · Renders</div>
-        <div class="auto-title">Renders Avanzados con 3 Clicks</div>
-        <div class="auto-desc">Suite de 3 macros que automatiza el proceso de renders avanzados. Lo que antes requería configuración manual paso a paso ahora se ejecuta en 3 clicks.</div>
-        <div class="auto-saving">⚡ Ahorro: 4 min por oferta</div>
+        <div class="auto-title" id="a9-title">Renders Avanzados con 3 Clicks</div>
+        <div class="auto-desc" id="a9-desc">Suite de 3 macros que automatiza el proceso de renders avanzados. Lo que antes requería configuración manual paso a paso ahora se ejecuta en 3 clicks.</div>
+        <div class="auto-saving" id="a9-saving">⚡ Ahorro: 4 min por oferta</div>
       </div>
 
     </div>
@@ -1798,13 +1825,13 @@
 <section id="tools">
   <div class="tools-container">
     <div class="section-header">
-      <span class="section-tag">// 05 — Stack Técnico</span>
-      <h2 class="section-title">Herramientas y <span style="color:var(--accent)">Tecnologías</span></h2>
+      <span class="section-tag" id="tools-tag">// 05 — Stack Técnico</span>
+      <h2 class="section-title" id="tools-title">Herramientas y <span style="color:var(--accent)">Tecnologías</span></h2>
       <div class="section-line"></div>
     </div>
 
     <div class="tools-category">
-      <div class="tools-cat-title">Diseño 3D y CAD</div>
+      <div class="tools-cat-title" id="tcat-1">Diseño 3D y CAD</div>
       <div class="tools-list">
         <span class="tool-badge">Autodesk Inventor</span>
         <span class="tool-badge">AutoCAD</span>
@@ -1815,7 +1842,7 @@
     </div>
 
     <div class="tools-category">
-      <div class="tools-cat-title">Automatización y Scripting</div>
+      <div class="tools-cat-title" id="tcat-2">Automatización y Scripting</div>
       <div class="tools-list">
         <span class="tool-badge">Macros Excel / VBA</span>
         <span class="tool-badge">iLogics Inventor</span>
@@ -1828,7 +1855,7 @@
     </div>
 
     <div class="tools-category">
-      <div class="tools-cat-title">Diseño Gráfico y Vídeo</div>
+      <div class="tools-cat-title" id="tcat-3">Diseño Gráfico y Vídeo</div>
       <div class="tools-list">
         <span class="tool-badge">Adobe Photoshop</span>
         <span class="tool-badge">Adobe Illustrator</span>
@@ -1842,7 +1869,7 @@
     </div>
 
     <div class="tools-category">
-      <div class="tools-cat-title">Ofimática y ERP</div>
+      <div class="tools-cat-title" id="tcat-4">Ofimática y ERP</div>
       <div class="tools-list">
         <span class="tool-badge">Excel Avanzado</span>
         <span class="tool-badge">Microsoft Project</span>
@@ -1854,7 +1881,7 @@
     </div>
 
     <div class="tools-category">
-      <div class="tools-cat-title">Cálculo e Ingeniería</div>
+      <div class="tools-cat-title" id="tcat-5">Cálculo e Ingeniería</div>
       <div class="tools-list">
         <span class="tool-badge">MATLAB / Simulink</span>
         <span class="tool-badge">LabVIEW</span>
@@ -1872,30 +1899,30 @@
 <section id="education">
   <div style="max-width:1200px; margin:0 auto;">
     <div class="section-header">
-      <span class="section-tag">// 06 — Formación</span>
-      <h2 class="section-title">Educación <span style="color:var(--accent)">Académica</span></h2>
+      <span class="section-tag" id="edu-tag">// 06 — Formación</span>
+      <h2 class="section-title" id="edu-title">Educación <span style="color:var(--accent)">Académica</span></h2>
       <div class="section-line"></div>
     </div>
     <div class="edu-grid">
       <div class="edu-card">
         <div class="edu-year">16—18</div>
         <div>
-          <div class="edu-degree">Máster Oficial de Ingeniería Industrial</div>
-          <div class="edu-school">Escuela de Ingenieros Industriales · UCLM · Albacete</div>
+          <div class="edu-degree" id="edu1-degree">Máster Oficial de Ingeniería Industrial</div>
+          <div class="edu-school" id="edu1-school">Escuela de Ingenieros Industriales · UCLM · Albacete</div>
         </div>
       </div>
       <div class="edu-card">
         <div class="edu-year">11—16</div>
         <div>
-          <div class="edu-degree">Grado en Ingeniería Mecánica</div>
-          <div class="edu-school">Escuela de Ingenieros Industriales · UCLM · Albacete</div>
+          <div class="edu-degree" id="edu2-degree">Grado en Ingeniería Mecánica</div>
+          <div class="edu-school" id="edu2-school">Escuela de Ingenieros Industriales · UCLM · Albacete</div>
         </div>
       </div>
       <div class="edu-card">
         <div class="edu-year">B2</div>
         <div>
-          <div class="edu-degree">Inglés Nivel B2 — Cambridge</div>
-          <div class="edu-school">Certificado Internacional · Cambridge Assessment English</div>
+          <div class="edu-degree" id="edu3-degree">Inglés Nivel B2 — Cambridge</div>
+          <div class="edu-school" id="edu3-school">Certificado Internacional · Cambridge Assessment English</div>
         </div>
       </div>
     </div>
@@ -1906,10 +1933,10 @@
 <section id="contact">
   <div style="max-width:1200px; margin:0 auto;">
     <div class="section-header">
-      <span class="section-tag">// 07 — Contacto</span>
-      <h2 class="section-title">¿Hablamos de tu <span style="color:var(--accent)">Proyecto?</span></h2>
+      <span class="section-tag" id="contact-tag">// 07 — Contacto</span>
+      <h2 class="section-title" id="contact-title">¿Hablamos de tu <span style="color:var(--accent)">Proyecto?</span></h2>
       <div class="section-line"></div>
-      <p style="max-width:480px; margin:24px auto 0; color:var(--text-dim); font-size:1rem; line-height:1.7;">
+      <p id="contact-intro" style="max-width:480px; margin:24px auto 0; color:var(--text-dim); font-size:1rem; line-height:1.7;">
         Abierto a nuevos proyectos desafiantes, colaboraciones técnicas e innovación en ingeniería.
       </p>
     </div>
@@ -1921,7 +1948,7 @@
       </a>
       <a href="tel:+34636627301" class="contact-item">
         <div class="contact-icon">📱</div>
-        <div class="contact-label">Teléfono</div>
+        <div class="contact-label" id="contact-phone">Teléfono</div>
         <div class="contact-value">636 627 301</div>
       </a>
       <a href="https://www.linkedin.com/in/ramon-ps/" target="_blank" class="contact-item">
@@ -1936,7 +1963,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Ramón Panduro Sánchez</div>
-  <div class="footer-text">// Ingeniero Industrial · Albacete, España · 2025</div>
+  <div class="footer-text" id="footer-text">// Ingeniero Industrial · Albacete, España · 2025</div>
 </footer>
 
 <!-- PROJECT MODALS DATA -->
@@ -2200,6 +2227,280 @@
       hamburger.classList.remove('open');
       navLinks.classList.remove('open');
     });
+  });
+  // ── LANGUAGE TOGGLE ──
+  var currentLang = 'es';
+
+  var translations = {
+    es: {
+      // Nav
+      'nav-about':      'Sobre mí',
+      'nav-experience': 'Experiencia',
+      'nav-projects':   'Proyectos',
+      'nav-automation': 'Automatización',
+      'nav-tools':      'Herramientas',
+      'nav-contact':    'Contacto',
+      // Hero
+      'hero-tag':       '// Ingeniero Industrial: Diseño, Fabricación y Automatización',
+      'hero-desc':      'Ingeniero Industrial con <strong>+7 años</strong> en automoción e industria de superficie. Especialista en diseño 3D, proyectos llave en mano y <span style="color:var(--accent)">automatización de procesos de ingeniería</span> mediante macros, iLogics y scripting avanzado.',
+      'hero-btn1':      'Ver Proyectos',
+      'hero-btn2':      'Automatización',
+      'stat-1':         'Años de Experiencia',
+      'stat-2':         'Proyectos Completados',
+      'stat-3':         'Automatizaciones Creadas',
+      'stat-4':         'Países con Proyectos Instalados',
+      // About
+      'about-tag':      '// 01 — Sobre mí',
+      'about-title':    'Ingeniería con <span style="color:var(--accent)">visión</span>',
+      'about-p1':       'Ingeniero Industrial graduado en la UCLM, con Máster Oficial de Ingeniería Industrial. <span class="about-highlight">+7 años de experiencia</span> en los sectores de automoción e industria de acabado superficial, trabajando en proyectos de gran envergadura por <span class="about-highlight">América, Arabia Saudí y Europa</span>.',
+      'about-p2':       'Actualmente Ingeniero Superior en <span class="about-highlight">Martech Corporation</span>, donde he diseñado y gestionado proyectos completos de líneas de tratamiento superficial para sectores aeronáutico, ferroviario, mueble y bicicleta. Como logro destacado, diseñé e implantaré el sistema de referenciación y los <span class="about-highlight">sistemas de automatización</span> actualmente en uso en la empresa.',
+      'about-p3':       'Apasionado del diseño 3D, gráfico y la tecnología. Amante de los proyectos grandes donde seguir creciendo. La creatividad, la iniciativa, la resolución de problemas y el espíritu de liderazgo son mis señas de identidad.',
+      'about-location': 'Albacete, España · B2 Cambridge',
+      // Experience
+      'exp-tag':        '// 02 — Trayectoria',
+      'exp-title':      'Experiencia <span style="color:var(--accent)">Profesional</span>',
+      'exp1-role':      'Ingeniero Superior',
+      'exp1-company':   'Martech Corporation · Industria',
+      'exp1-desc':      'Diseño y gestión de líneas de tratamiento superficial para sectores automoción, aeronáutico, ferroviario y mueble. Contacto y gestión de proyecto con clientes internacionales, elaboración de layouts y planos, presupuestos y documentación técnica. Cálculos térmicos, estructurales y ensayos lumínicos. Coordinación de equipos multidisciplinares entre diferentes empresas. <strong style="color:var(--text)">Logro clave:</strong> Diseñé e implanté el sistema de referenciación y la suite completa de automatizaciones actualmente en producción.',
+      'exp2-role':      'Diseñador Técnico',
+      'exp2-company':   'Martech Corporation',
+      'exp2-desc':      'Diseño de fabricación de piezas (chapa, estructuras, componentes eléctricos). Supervisión de fabricación y gestión con proveedores. Parametrización de diseños, preparación de plantillas y primeras automatizaciones mediante macros y Scripts.',
+      'exp3-role':      'Ingeniero Oficina Técnica',
+      'exp3-company':   'AJUSA · Automoción Multinacional',
+      'exp3-desc':      'Homologación e introducción de nuevas referencias de catálogo. Estudio y desarrollo de nuevos productos para motores multimarca. Análisis técnico funcional, dimensional y de materiales de piezas OEM. Verificaciones en laboratorio dimensional y elaboración de informes.',
+      'exp4-role':      'Diseñador / Técnico Deportivo',
+      'exp4-company':   'DECU Deportes · UCLM',
+      'exp4-desc':      'Árbitro, organizador de eventos deportivos y diseño de artes visuales y vídeo en el servicio de Extensión Universitaria.',
+      // Projects
+      'proj-tag':       '// 03 — Portfolio',
+      'proj-title':     'Proyectos <span style="color:var(--accent)">Destacados</span>',
+      'p1-title':       'Línea de Tratamiento Superficial Aeronáutica',
+      'p1-desc':        'Diseño completo de línea de acabado superficial para industria aeronáutica. Cabinas de grandes dimensiones con control de temperatura, humedad y caudal de alta precisión.',
+      'p2-title':       'Línea de Pintura Ferroviaria',
+      'p2-desc':        'Proyecto llave en mano de instalación completa para el acabado superficial de material ferroviario. Cabinas de grandes dimensiones con sistemas de ventilación y filtración industrial.',
+      'p3-title':       'Planta de Lacado Industrial — Mueble',
+      'p3-desc':        'Diseño de línea de lacado para fabricante de mueble de alta gama. Cabinas de flujo laminar vertical con sistema de calefacción eficiente y zona de preparación.',
+      'p4-title':       'Línea de Pintura para Fabricante de Bicicletas',
+      'p4-desc':        'Instalación completa de línea de tratamiento superficial para fabricante de bicicletas de alto rendimiento. Diseño de cabina industrial paramétrica y sistema de transporte.',
+      'p5-title':       'Centro de Carrocería y Pintura Llave en Mano',
+      'p5-desc':        'Diseño e instalación integral de centros de reparación de carrocería. Desde el layout hasta la puesta en marcha, incluyendo cabinas, bancadas y sistemas de aspiración.',
+      'p6-title':       'Cabina Industrial Paramétrica',
+      'p6-desc':        'Sistema de cabina industrial estándar completamente paramétrica. A partir de datos en Excel se genera automáticamente el ensamblaje 3D completo. 3-4 días ahorrados por proyecto.',
+      'proj-cta':       'Ver más detalles →',
+      // Automation
+      'auto-tag':       '// 04 — Innovación',
+      'auto-title':     'Sistemas de <span style="color:var(--accent)">Automatización</span>',
+      'auto-intro':     'Suite de automatizaciones desarrolladas para eliminar trabajo repetitivo, minimizar errores y multiplicar la productividad del equipo de ingeniería.',
+      'a1-title':       'Autocreador de Dossieres',
+      'a1-desc':        'Genera automáticamente el dossier técnico completo del proyecto (hasta 100 páginas) desde cero, con un solo botón, partiendo del Excel de cálculos. Sin tocar plantillas.',
+      'a1-saving':      '⚡ Ahorro: 30 min — 2 horas por oferta',
+      'a2-title':       'Calculador de Cabinas',
+      'a2-desc':        'Motor de cálculo paramétrico que determina automáticamente iluminación, velocidad, caudal y potencia de la cabina. Sincronizado con Navision para precios en tiempo real.',
+      'a2-saving':      '⚡ Ahorro: 20 min — 4 horas por oferta',
+      'a3-title':       'Gestor de Correos de Proyecto',
+      'a3-desc':        'Redacta y prepara automáticamente el correo para el comercial, adjuntando planos, dossier y fotos del proyecto. El comercial recibe todo listo con un solo click.',
+      'a3-saving':      '⚡ Ahorro: 2-3 min por oferta + cero errores',
+      'a4-title':       'Calculador de Distancias',
+      'a4-desc':        'Calcula automáticamente la distancia del proyecto para el cálculo de portes. Integración con Bing y Google para consultar rutas alternativas directamente desde el Excel.',
+      'a4-saving':      '⚡ Ahorro: 2-3 min por oferta',
+      'a5-title':       'Sistema de Pedido de Piezas',
+      'a5-desc':        'Suite completa: recopila archivos de Inventor, redacta el correo de pedido, prepara los Excel para laser, punzonadora o proveedor específico, y multiplica cantidades automáticamente.',
+      'a5-saving':      '⚡ Ahorro: 20-50 min por pedido',
+      'a6-title':       'Creador de Carpetas de Proyecto',
+      'a6-desc':        'Menú contextual personalizado que despliega la estructura completa de carpetas de proyecto en el directorio deseado. Disponible desde el botón derecho en cualquier ventana.',
+      'a6-saving':      '⚡ Ahorro: 2-3 min por proyecto',
+      'a7-title':       'Verificador de Errores de Chapa',
+      'a7-desc':        'Verifica agujeros de punzonadora y tamaño de chapa al guardar. Resalta en rojo los errores antes de que lleguen a producción, ahorrando tiempo a diseño, taller y laser.',
+      'a7-saving':      '⚡ Ahorro: 30 min — 2 horas por chapa errónea',
+      'a8-title':       'Cabina Industrial Paramétrica',
+      'a8-desc':        'El proyecto estrella. Escribiendo datos en Excel se genera automáticamente el ensamblaje 3D completo de una cabina industrial estándar. En producción desde hace 2 años.',
+      'a8-saving':      '⚡ Ahorro: 3-4 DÍAS por cabina estándar',
+      'a9-title':       'Renders Avanzados con 3 Clicks',
+      'a9-desc':        'Suite de 3 macros que automatiza el proceso de renders avanzados. Lo que antes requería configuración manual paso a paso ahora se ejecuta en 3 clicks.',
+      'a9-saving':      '⚡ Ahorro: 4 min por oferta',
+      // Tools
+      'tools-tag':      '// 05 — Stack Técnico',
+      'tools-title':    'Herramientas y <span style="color:var(--accent)">Tecnologías</span>',
+      'tcat-1':         'Diseño 3D y CAD',
+      'tcat-2':         'Automatización y Scripting',
+      'tcat-3':         'Diseño Gráfico y Vídeo',
+      'tcat-4':         'Ofimática y ERP',
+      'tcat-5':         'Cálculo e Ingeniería',
+      // Education
+      'edu-tag':        '// 06 — Formación',
+      'edu-title':      'Educación <span style="color:var(--accent)">Académica</span>',
+      'edu1-degree':    'Máster Oficial de Ingeniería Industrial',
+      'edu1-school':    'Escuela de Ingenieros Industriales · UCLM · Albacete',
+      'edu2-degree':    'Grado en Ingeniería Mecánica',
+      'edu2-school':    'Escuela de Ingenieros Industriales · UCLM · Albacete',
+      'edu3-degree':    'Inglés Nivel B2 — Cambridge',
+      'edu3-school':    'Certificado Internacional · Cambridge Assessment English',
+      // Contact
+      'contact-tag':    '// 07 — Contacto',
+      'contact-title':  '¿Hablamos de tu <span style="color:var(--accent)">Proyecto?</span>',
+      'contact-intro':  'Abierto a nuevos proyectos desafiantes, colaboraciones técnicas e innovación en ingeniería.',
+      'contact-phone':  'Teléfono',
+      // Footer
+      'footer-text':    '// Ingeniero Industrial · Albacete, España · 2025',
+    },
+    en: {
+      'nav-about':      'About',
+      'nav-experience': 'Experience',
+      'nav-projects':   'Projects',
+      'nav-automation': 'Automation',
+      'nav-tools':      'Tools',
+      'nav-contact':    'Contact',
+      'hero-tag':       '// Industrial Engineer: Design, Manufacturing & Automation',
+      'hero-desc':      'Industrial Engineer with <strong>7+ years</strong> in automotive and surface finishing industry. Specialist in 3D design, turnkey projects and <span style="color:var(--accent)">engineering process automation</span> through macros, iLogics and advanced scripting.',
+      'hero-btn1':      'View Projects',
+      'hero-btn2':      'Automation',
+      'stat-1':         'Years of Experience',
+      'stat-2':         'Completed Projects',
+      'stat-3':         'Automations Built',
+      'stat-4':         'Countries with Installed Projects',
+      'about-tag':      '// 01 — About Me',
+      'about-title':    'Engineering with <span style="color:var(--accent)">vision</span>',
+      'about-p1':       'Industrial Engineer graduated from UCLM, with an Official Master\'s in Industrial Engineering. <span class="about-highlight">7+ years of experience</span> in automotive and surface finishing sectors, working on large-scale projects across <span class="about-highlight">the Americas, Saudi Arabia and Europe</span>.',
+      'about-p2':       'Currently Senior Engineer at <span class="about-highlight">Martech Corporation</span>, where I have designed and managed complete surface treatment line projects for aeronautical, railway, furniture and bicycle sectors. Key achievement: I designed and deployed the referencing system and <span class="about-highlight">automation suite</span> currently in use company-wide.',
+      'about-p3':       'Passionate about 3D design, graphic design and technology. I thrive on ambitious projects with room to grow. Creativity, initiative, problem-solving and leadership drive everything I do.',
+      'about-location': 'Albacete, Spain · B2 Cambridge',
+      'exp-tag':        '// 02 — Career',
+      'exp-title':      'Professional <span style="color:var(--accent)">Experience</span>',
+      'exp1-role':      'Senior Engineer',
+      'exp1-company':   'Martech Corporation · Industry',
+      'exp1-desc':      'Design and management of surface treatment lines for automotive, aeronautical, railway and furniture sectors. International client management, layout and drawing production, budgeting and technical documentation. Thermal, structural calculations and lighting tests. Coordination of multidisciplinary teams across companies. <strong style="color:var(--text)">Key achievement:</strong> Designed and deployed the referencing system and the full automation suite currently in production.',
+      'exp2-role':      'Technical Designer',
+      'exp2-company':   'Martech Corporation',
+      'exp2-desc':      'Manufacturing design of parts (sheet metal, structures, electrical components). Production supervision and supplier management. Design parametrisation, template preparation and first automations via macros and scripts.',
+      'exp3-role':      'Technical Office Engineer',
+      'exp3-company':   'AJUSA · Automotive Multinational',
+      'exp3-desc':      'Homologation and introduction of new catalogue references. Study and development of new products for multi-brand engines. Functional, dimensional and materials analysis of OEM parts. Dimensional laboratory verifications and report writing.',
+      'exp4-role':      'Designer / Sports Technician',
+      'exp4-company':   'DECU Deportes · UCLM',
+      'exp4-desc':      'Referee, sports event organiser and visual arts and video designer at the University Extension Service.',
+      'proj-tag':       '// 03 — Portfolio',
+      'proj-title':     'Featured <span style="color:var(--accent)">Projects</span>',
+      'p1-title':       'Aeronautical Surface Treatment Line',
+      'p1-desc':        'Full design of a surface finishing line for the aeronautical industry. Large-scale booths with high-precision temperature, humidity and airflow control.',
+      'p2-title':       'Railway Paint Line',
+      'p2-desc':        'Turnkey full installation for surface finishing of railway rolling stock. Large-scale booths with industrial ventilation and filtration systems.',
+      'p3-title':       'Industrial Lacquering Plant — Furniture',
+      'p3-desc':        'Design of a lacquering line for a high-end furniture manufacturer. Vertical laminar flow booths with efficient heating and preparation zone.',
+      'p4-title':       'Paint Line for Bicycle Manufacturer',
+      'p4-desc':        'Complete surface treatment line installation for a high-performance bicycle manufacturer. Parametric industrial booth design and conveyor system.',
+      'p5-title':       'Turnkey Bodywork & Paint Centre',
+      'p5-desc':        'Full design and installation of bodywork repair centres. From layout to commissioning, including booths, straightening benches and extraction systems.',
+      'p6-title':       'Parametric Industrial Booth',
+      'p6-desc':        'Fully parametric standard industrial booth system. Excel data automatically generates the complete 3D assembly. 3–4 days saved per project.',
+      'proj-cta':       'View details →',
+      'auto-tag':       '// 04 — Innovation',
+      'auto-title':     '<span style="color:var(--accent)">Automation</span> Systems',
+      'auto-intro':     'A suite of automations built to eliminate repetitive work, minimise errors and multiply engineering team productivity.',
+      'a1-title':       'Automatic Dossier Creator',
+      'a1-desc':        'Automatically generates the full technical project dossier (up to 100 pages) from scratch with a single button, based on the calculation Excel. No template editing required.',
+      'a1-saving':      '⚡ Saves: 30 min — 2 hours per quote',
+      'a2-title':       'Booth Calculator',
+      'a2-desc':        'Parametric calculation engine that automatically determines lighting, airspeed, airflow and booth power. Synced with Navision for real-time pricing.',
+      'a2-saving':      '⚡ Saves: 20 min — 4 hours per quote',
+      'a3-title':       'Project Email Manager',
+      'a3-desc':        'Automatically drafts and prepares the sales email, attaching drawings, dossier and project photos. The sales team receives everything ready with a single click.',
+      'a3-saving':      '⚡ Saves: 2–3 min per quote + zero errors',
+      'a4-title':       'Distance Calculator',
+      'a4-desc':        'Automatically calculates the project distance for shipping cost estimation. Bing and Google integration to check alternative routes directly from Excel.',
+      'a4-saving':      '⚡ Saves: 2–3 min per quote',
+      'a5-title':       'Parts Order System',
+      'a5-desc':        'Full suite: collects Inventor files, drafts the purchase email, prepares Excel files for laser, punch press or specific supplier, and multiplies quantities automatically.',
+      'a5-saving':      '⚡ Saves: 20–50 min per order',
+      'a6-title':       'Project Folder Creator',
+      'a6-desc':        'Custom context menu that deploys the complete project folder structure in any chosen directory. Available via right-click in any Windows Explorer window.',
+      'a6-saving':      '⚡ Saves: 2–3 min per project',
+      'a7-title':       'Sheet Metal Error Checker',
+      'a7-desc':        'Validates punch holes and sheet size on save. Highlights errors in red before they reach production, saving time for design, workshop and laser teams.',
+      'a7-saving':      '⚡ Saves: 30 min — 2 hours per faulty sheet',
+      'a8-title':       'Parametric Industrial Booth',
+      'a8-desc':        'The flagship project. Entering data in Excel automatically generates the complete 3D assembly of a standard industrial booth. In production for 2+ years.',
+      'a8-saving':      '⚡ Saves: 3–4 DAYS per standard booth',
+      'a9-title':       'Advanced Renders in 3 Clicks',
+      'a9-desc':        'A suite of 3 macros that fully automates the advanced render process. What once required manual step-by-step configuration now runs in 3 clicks.',
+      'a9-saving':      '⚡ Saves: 4 min per quote',
+      'tools-tag':      '// 05 — Tech Stack',
+      'tools-title':    'Tools & <span style="color:var(--accent)">Technologies</span>',
+      'tcat-1':         '3D Design & CAD',
+      'tcat-2':         'Automation & Scripting',
+      'tcat-3':         'Graphic Design & Video',
+      'tcat-4':         'Office & ERP',
+      'tcat-5':         'Engineering Calculation',
+      'edu-tag':        '// 06 — Education',
+      'edu-title':      'Academic <span style="color:var(--accent)">Background</span>',
+      'edu1-degree':    'Official Master\'s in Industrial Engineering',
+      'edu1-school':    'School of Industrial Engineers · UCLM · Albacete',
+      'edu2-degree':    'Bachelor\'s Degree in Mechanical Engineering',
+      'edu2-school':    'School of Industrial Engineers · UCLM · Albacete',
+      'edu3-degree':    'English B2 — Cambridge',
+      'edu3-school':    'International Certificate · Cambridge Assessment English',
+      'contact-tag':    '// 07 — Contact',
+      'contact-title':  'Let\'s talk about your <span style="color:var(--accent)">Project</span>',
+      'contact-intro':  'Open to challenging new projects, technical collaborations and engineering innovation.',
+      'contact-phone':  'Phone',
+      'footer-text':    '// Industrial Engineer · Albacete, Spain · 2025',
+    }
+  };
+
+  function applyLang(lang) {
+    var t = translations[lang];
+    function set(id, html) {
+      var el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    }
+    function setText(id, txt) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = txt;
+    }
+    set('nav-about', t['nav-about']); set('nav-experience', t['nav-experience']);
+    set('nav-projects', t['nav-projects']); set('nav-automation', t['nav-automation']);
+    set('nav-tools', t['nav-tools']); set('nav-contact', t['nav-contact']);
+    set('hero-tag', t['hero-tag']); set('hero-desc', t['hero-desc']);
+    set('hero-btn1', t['hero-btn1']); set('hero-btn2', t['hero-btn2']);
+    set('stat-1', t['stat-1']); set('stat-2', t['stat-2']);
+    set('stat-3', t['stat-3']); set('stat-4', t['stat-4']);
+    set('about-tag', t['about-tag']); set('about-title', t['about-title']);
+    set('about-p1', t['about-p1']); set('about-p2', t['about-p2']);
+    set('about-p3', t['about-p3']); setText('about-location', t['about-location']);
+    set('exp-tag', t['exp-tag']); set('exp-title', t['exp-title']);
+    set('exp1-role', t['exp1-role']); set('exp1-company', t['exp1-company']); set('exp1-desc', t['exp1-desc']);
+    set('exp2-role', t['exp2-role']); set('exp2-company', t['exp2-company']); set('exp2-desc', t['exp2-desc']);
+    set('exp3-role', t['exp3-role']); set('exp3-company', t['exp3-company']); set('exp3-desc', t['exp3-desc']);
+    set('exp4-role', t['exp4-role']); set('exp4-company', t['exp4-company']); set('exp4-desc', t['exp4-desc']);
+    set('proj-tag', t['proj-tag']); set('proj-title', t['proj-title']);
+    ['p1','p2','p3','p4','p5','p6'].forEach(function(p) {
+      set(p+'-title', t[p+'-title']); set(p+'-desc', t[p+'-desc']);
+    });
+    document.querySelectorAll('.project-cta').forEach(function(el){ el.innerHTML = t['proj-cta']; });
+    set('auto-tag', t['auto-tag']); set('auto-title', t['auto-title']); set('auto-intro', t['auto-intro']);
+    for (var i=1; i<=9; i++) {
+      set('a'+i+'-title', t['a'+i+'-title']);
+      set('a'+i+'-desc', t['a'+i+'-desc']);
+      set('a'+i+'-saving', t['a'+i+'-saving']);
+    }
+    set('tools-tag', t['tools-tag']); set('tools-title', t['tools-title']);
+    for (var j=1; j<=5; j++) set('tcat-'+j, t['tcat-'+j]);
+    set('edu-tag', t['edu-tag']); set('edu-title', t['edu-title']);
+    set('edu1-degree', t['edu1-degree']); set('edu1-school', t['edu1-school']);
+    set('edu2-degree', t['edu2-degree']); set('edu2-school', t['edu2-school']);
+    set('edu3-degree', t['edu3-degree']); set('edu3-school', t['edu3-school']);
+    set('contact-tag', t['contact-tag']); set('contact-title', t['contact-title']);
+    set('contact-intro', t['contact-intro']); set('contact-phone', t['contact-phone']);
+    set('footer-text', t['footer-text']);
+    // Update lang button
+    var flag  = document.getElementById('langFlag');
+    var label = document.getElementById('langLabel');
+    if (lang === 'es') { flag.textContent = '🇬🇧'; label.textContent = 'EN'; }
+    else               { flag.textContent = '🇪🇸'; label.textContent = 'ES'; }
+  }
+
+  document.getElementById('langToggle').addEventListener('click', function() {
+    currentLang = currentLang === 'es' ? 'en' : 'es';
+    applyLang(currentLang);
   });
 </script>
 </body>

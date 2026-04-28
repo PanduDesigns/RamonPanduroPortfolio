@@ -1534,14 +1534,47 @@
         style="display:block; width:100%; aspect-ratio:16/9; height:auto; border:none; background:#060810;"
         scrolling="no"
         allowfullscreen
-        title="Render 3D interactivo — Cabina Industrial Global Composites"
+        title="Render 3D interactivo — Cabina Industrial"
       ></iframe>
     </div>
 
     <!-- Project label -->
     <div style="text-align:center; margin-top:20px; font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-dim); letter-spacing:1px;">
-      <span style="color:var(--accent);">›</span> Global Composites — <span id="render-label">Cabina Industrial · Render KeyShot</span>
+      <span style="color:var(--accent);">›</span> <span id="render-label">Cabina Industrial · Render KeyShot</span>
     </div>
+
+    <!-- VIDEO -->
+    <div style="margin-top:48px;">
+      <div style="text-align:center; margin-bottom:20px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--text-dim); letter-spacing:2px; text-transform:uppercase;" id="video-label">▶ Vídeo de presentación de la instalación</span>
+      </div>
+      <div style="
+        position:relative;
+        width:100%;
+        max-width:1000px;
+        margin:0 auto;
+        border:1px solid rgba(0,212,255,0.15);
+        box-shadow:0 0 60px rgba(0,212,255,0.07);
+        background:#060810;
+        overflow:hidden;
+      ">
+        <!-- Corner accents -->
+        <div style="position:absolute;top:0;left:0;width:16px;height:16px;border-top:2px solid var(--accent);border-left:2px solid var(--accent);z-index:2;pointer-events:none;"></div>
+        <div style="position:absolute;top:0;right:0;width:16px;height:16px;border-top:2px solid var(--accent);border-right:2px solid var(--accent);z-index:2;pointer-events:none;"></div>
+        <div style="position:absolute;bottom:0;left:0;width:16px;height:16px;border-bottom:2px solid var(--accent);border-left:2px solid var(--accent);z-index:2;pointer-events:none;"></div>
+        <div style="position:absolute;bottom:0;right:0;width:16px;height:16px;border-bottom:2px solid var(--accent);border-right:2px solid var(--accent);z-index:2;pointer-events:none;"></div>
+        <video
+          controls
+          preload="metadata"
+          style="display:block; width:100%; aspect-ratio:16/9; height:auto; background:#060810;"
+        >
+          <source src="assets/vid/Video Render.mp4" type="video/mp4">
+          <source src="assets/vid/Video Render.webm" type="video/webm">
+          <source src="assets/vid/Video Render.mov" type="video/quicktime">
+        </video>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -2405,6 +2438,7 @@
       'hint-touch':     'Desliza en móvil',
       'hint-fs':        'Doble clic para pantalla completa',
       'render-label':   'Cabina Industrial · Render KeyShot',
+      'video-label':    '▶ Vídeo de presentación de la instalación',
     },
     en: {
       'nav-about':      'About',
@@ -2513,6 +2547,7 @@
       'hint-touch':     'Swipe on mobile',
       'hint-fs':        'Double-click for fullscreen',
       'render-label':   'Industrial Booth · KeyShot Render',
+      'video-label':    '▶ Installation presentation video',
     }
   };
 
@@ -2564,7 +2599,7 @@
     set('render-tag', t['render-tag']); set('render-title', t['render-title']);
     set('render-desc', t['render-desc']); set('hint-drag', t['hint-drag']);
     set('hint-touch', t['hint-touch']); set('hint-fs', t['hint-fs']);
-    set('render-label', t['render-label']);
+    set('render-label', t['render-label']); set('video-label', t['video-label']);
     // Update lang button
     var flag  = document.getElementById('langFlag');
     var label = document.getElementById('langLabel');

@@ -679,13 +679,29 @@
 
   .project-img {
     width: 100%;
-    height: 180px;
-    background: linear-gradient(135deg, #0d1117, #1a2332);
+    height: 200px;
+    background: #0d1117;
+    background-size: cover;
+    background-position: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-end;
     position: relative;
     overflow: hidden;
+    transition: transform 0.45s ease;
+  }
+
+  .project-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(6,8,16,0.1) 0%, rgba(6,8,16,0.5) 100%);
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .project-card:hover .project-img {
+    transform: scale(1.04);
   }
 
   .project-img-icon {
@@ -1734,85 +1750,121 @@
     <div class="projects-grid">
 
       <div class="project-card" onclick="openModal('p1')">
-        <div class="project-img proj-pattern-1">
-          <div class="proj-lines"></div>
-          <div class="project-img-icon">✈️</div>
-          <div class="project-sector">Aeronáutico</div>
+        <div class="project-img" style="background-image:url('assets/img/Talgo/render 1.jpg'); background-size:cover; background-position:center;">
+          <div class="project-sector">Ferroviario</div>
         </div>
         <div class="project-body">
-          <div class="project-title" id="p1-title">Línea de Tratamiento Superficial Aeronáutica</div>
-          <div class="project-location">📍 Oriente Medio / Arabia Saudí</div>
-          <div class="project-desc" id="p1-desc">Diseño completo de línea de acabado superficial para industria aeronáutica. Cabinas de grandes dimensiones con control de temperatura, humedad y caudal de alta precisión.</div>
+          <div class="project-title" id="p1-title">Talgo — Planta de Pintura Ferroviaria</div>
+          <div class="project-location">📍 Arabia Saudí</div>
+          <div class="project-desc" id="p1-desc">Instalación de 60 m con dos cabinas de pintura y horno de secado conectados por vías, para el pintado de trenes de alta velocidad del proyecto Haramain.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
 
       <div class="project-card" onclick="openModal('p2')">
-        <div class="project-img proj-pattern-2">
-          <div class="proj-lines"></div>
-          <div class="project-img-icon">🚆</div>
-          <div class="project-sector">Ferroviario</div>
+        <div class="project-img" style="background-image:url('assets/img/Stelia/render 1.jpg'); background-size:cover; background-position:center;">
+          <div class="project-sector">Aeronáutico</div>
         </div>
         <div class="project-body">
-          <div class="project-title" id="p2-title">Línea de Pintura Ferroviaria</div>
-          <div class="project-location">📍 Europa</div>
-          <div class="project-desc" id="p2-desc">Proyecto llave en mano de instalación completa para el acabado superficial de material ferroviario. Cabinas de grandes dimensiones con sistemas de ventilación y filtración industrial.</div>
+          <div class="project-title" id="p2-title">Stelia Aerospace — Planta de Pintura</div>
+          <div class="project-location">📍 Aveiro, Portugal</div>
+          <div class="project-desc" id="p2-desc">Planta especializada en pintura de paneles de aviones con control preciso de temperatura y humedad, cumpliendo los estrictos requisitos del sector aeronáutico.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
 
       <div class="project-card" onclick="openModal('p3')">
-        <div class="project-img proj-pattern-3">
-          <div class="proj-lines"></div>
-          <div class="project-img-icon">🪑</div>
-          <div class="project-sector">Mueble</div>
+        <div class="project-img" style="background-image:url('assets/img/Global Composites/render 1.jpg'); background-size:cover; background-position:center;">
+          <div class="project-sector">Composites</div>
         </div>
         <div class="project-body">
-          <div class="project-title" id="p3-title">Planta de Lacado Industrial — Mueble</div>
-          <div class="project-location">📍 América Latina</div>
-          <div class="project-desc" id="p3-desc">Diseño de línea de lacado para fabricante de mueble de alta gama. Cabinas de flujo laminar vertical con sistema de calefacción eficiente y zona de preparación.</div>
+          <div class="project-title" id="p3-title">Cabina de Aplicación de Gel Coat Robotizada</div>
+          <div class="project-location">📍 Santiago de Querétaro, México</div>
+          <div class="project-desc" id="p3-desc">Cabina con robots de aplicación de última generación para componentes de materiales compuestos en sectores automotriz y aeroespacial.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
 
       <div class="project-card" onclick="openModal('p4')">
-        <div class="project-img proj-pattern-4">
-          <div class="proj-lines"></div>
-          <div class="project-img-icon">🚲</div>
-          <div class="project-sector">Bicicleta</div>
+        <div class="project-img" style="background-image:url('assets/img/Togg/render 1.jpg'); background-size:cover; background-position:center;">
+          <div class="project-sector">Automoción</div>
         </div>
         <div class="project-body">
-          <div class="project-title" id="p4-title">Línea de Pintura para Fabricante de Bicicletas</div>
-          <div class="project-location">📍 Europa</div>
-          <div class="project-desc" id="p4-desc">Instalación completa de línea de tratamiento superficial para fabricante de bicicletas de alto rendimiento. Diseño de cabina industrial paramétrica y sistema de transporte.</div>
+          <div class="project-title" id="p4-title">TOGG — Horno de Secado de Carrocerías</div>
+          <div class="project-location">📍 Gemlik, Turquía</div>
+          <div class="project-desc" id="p4-desc">Horno de curado para vehículos eléctricos con gestión inteligente de zonas térmicas, sensores de alta precisión y arquitectura modular de alta eficiencia energética.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
 
       <div class="project-card" onclick="openModal('p5')">
-        <div class="project-img proj-pattern-5">
-          <div class="proj-lines"></div>
-          <div class="project-img-icon">🏭</div>
-          <div class="project-sector">Automoción</div>
+        <div class="project-img" style="background-image:url('assets/img/Unibike/render 1.jpg'); background-size:cover; background-position:center;">
+          <div class="project-sector">Bicicleta</div>
         </div>
         <div class="project-body">
-          <div class="project-title" id="p5-title">Centro de Carrocería y Pintura Llave en Mano</div>
-          <div class="project-location">📍 España / Europa</div>
-          <div class="project-desc" id="p5-desc">Diseño e instalación integral de centros de reparación de carrocería. Desde el layout hasta la puesta en marcha, incluyendo cabinas, bancadas y sistemas de aspiración.</div>
+          <div class="project-title" id="p5-title">Unibike — Línea de Pintura Integral</div>
+          <div class="project-location">📍 Aveiro, Portugal</div>
+          <div class="project-desc" id="p5-desc">Planta casi automática con pintura líquida y en polvo, horno de pisos, zona de carbono y decoración para bicicletas de alta gama.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
 
       <div class="project-card" onclick="openModal('p6')">
-        <div class="project-img proj-pattern-6">
-          <div class="proj-lines"></div>
-          <div class="project-img-icon">⚙️</div>
-          <div class="project-sector">Metalmecánica</div>
+        <div class="project-img" style="background-image:url('assets/img/Muebles/render 1.jpg'); background-size:cover; background-position:center;">
+          <div class="project-sector">Mueble</div>
         </div>
         <div class="project-body">
-          <div class="project-title" id="p6-title">Cabina Industrial Paramétrica</div>
-          <div class="project-location">📍 Internacional</div>
-          <div class="project-desc" id="p6-desc">Sistema de cabina industrial estándar completamente paramétrica. A partir de datos en Excel se genera automáticamente el ensamblaje 3D completo. 3-4 días ahorrados por proyecto.</div>
+          <div class="project-title" id="p6-title">Línea Automática de Pintado — Mueble</div>
+          <div class="project-location">📍 Aveiro, Portugal</div>
+          <div class="project-desc" id="p6-desc">Dos líneas automáticas con cabinas robotizadas y hornos de doble etapa (endotérmico + convección) para tableros de madera a gran escala.</div>
+          <div class="project-cta">Ver más detalles →</div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="openModal('p7')">
+        <div class="project-img" style="background-image:url('assets/img/Castrosua/render 1.jpg'); background-size:cover; background-position:center;">
+          <div class="project-sector">Transporte</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title" id="p7-title">Castrosua — Mesa de Encolado Industrial</div>
+          <div class="project-location">📍 Aveiro, Portugal</div>
+          <div class="project-desc" id="p7-desc">Línea de encolado con mesas calefactadas, extracción perimetral y turbinas de alto caudal para el ensamblaje de carrocerías de autobús.</div>
+          <div class="project-cta">Ver más detalles →</div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="openModal('p8')">
+        <div class="project-img" style="background-image:url('assets/img/Ilersis/render 1.jpg'); background-size:cover; background-position:center;">
+          <div class="project-sector">Packaging</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title" id="p8-title">Ilersis — Línea de Pintura Completa</div>
+          <div class="project-location">📍 Terres, Lleida</div>
+          <div class="project-desc" id="p8-desc">Planta integral con zona de preparación, cabina presurizada, horno de secado y box APQ para la producción de packaging industrial pintado.</div>
+          <div class="project-cta">Ver más detalles →</div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="openModal('p9')">
+        <div class="project-img" style="background-image:url('assets/img/Uecko/render 1.jpg'); background-size:cover; background-position:center;">
+          <div class="project-sector">Mueble de Diseño</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title" id="p9-title">Uecko — Línea de Preparación y Pintura</div>
+          <div class="project-location">📍 Fuenlabrada, Madrid</div>
+          <div class="project-desc" id="p9-desc">Sistema de preparación, pintura y horno para fabricante de mueble de diseño de alta gama, optimizando cada fase desde el acondicionado hasta el secado final.</div>
+          <div class="project-cta">Ver más detalles →</div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="openModal('p10')">
+        <div class="project-img" style="background-image:url('assets/img/Carbone/render 1.jpg'); background-size:cover; background-position:center;">
+          <div class="project-sector">Automoción · USA</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title" id="p10-title">Carbone Collision Center — Cabina de Pintura</div>
+          <div class="project-location">📍 Utica, New York, EE.UU.</div>
+          <div class="project-desc" id="p10-desc">Instalación de cabina de pintado de autobuses escolares con condiciones óptimas de ventilación, iluminación y secado para un centro de reparación de colisiones.</div>
           <div class="project-cta">Ver más detalles →</div>
         </div>
       </div>
@@ -2090,128 +2142,235 @@
   // ── PROJECT DATA ──
   const projects = {
     p1: {
-      sector: 'Sector Aeronáutico',
-      title: 'Línea de Tratamiento Superficial Aeronáutica',
-      location: '📍 Oriente Medio / Arabia Saudí',
-      desc: `Proyecto de diseño y ejecución llave en mano de una línea completa de tratamiento superficial y acabado para la industria aeronáutica. 
-      Este tipo de instalaciones requiere un control exhaustivo de temperatura, humedad y caudal de aire, así como sistemas de filtración de alta eficiencia 
-      para cumplir con las exigentes normativas del sector. La instalación incluye cabinas de grandes dimensiones adaptadas a las piezas y componentes 
-      de aeronaves, con sistemas de iluminación LED de alta CRI para garantizar la correcta inspección visual del acabado.`,
+      sector: 'Sector Ferroviario',
+      title: 'Talgo — Planta de Pintura Ferroviaria',
+      location: '📍 Arabia Saudí · Proyecto Haramain',
+      desc: `Instalación desarrollada para Talgo en el proyecto Haramain de Arabia Saudí. Con 60 metros de longitud, integra dos cabinas de pintura y un horno de secado conectados mediante un sistema de vías que permite el desplazamiento continuo de las carrocerías de los trenes de alta velocidad.
+      
+      Este diseño lineal asegura que cada etapa —aplicación de recubrimientos, curado y acabado final— se realice de forma secuencial y precisa. Los sensores de última generación y los algoritmos de regulación dinámica permiten ajustar temperatura, flujo de aire y humedad en tiempo real, garantizando acabados de alta calidad y contribuyendo a la sostenibilidad mediante reducción del consumo energético.`,
       specs: [
-        { label: 'Sector', value: 'Aeronáutico' },
-        { label: 'Ubicación', value: 'Arabia Saudí / Oriente Medio' },
-        { label: 'Tipo', value: 'Llave en Mano' },
-        { label: 'Fase', value: 'Diseño + Ejecución' },
+        { label: 'Sector', value: 'Ferroviario · Alta Velocidad' },
+        { label: 'Ubicación', value: 'Arabia Saudí' },
+        { label: 'Longitud', value: '60 metros' },
+        { label: 'Equipos', value: '2 cabinas + horno + sistema de vías' },
+        { label: 'Tipo', value: 'Llave en mano' },
         { label: 'Rol', value: 'Ingeniero Principal / Responsable Técnico' },
-        { label: 'Herramientas', value: 'Inventor 3D, AutoCAD, Cype 3D, Dialux' },
       ],
-      tags: ['Cabinas Industriales', 'Control Ambiental', 'Filtración HEPA', 'Diseño 3D', 'Gestión Internacional']
+      tags: ['Ferroviario', 'Alta Velocidad', 'Horno de Secado', 'Sistema de Vías', 'Grandes Dimensiones', 'Eficiencia Energética', 'Internacional'],
+      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
+      folder: 'Talgo'
     },
     p2: {
-      sector: 'Sector Ferroviario',
-      title: 'Línea de Pintura Ferroviaria',
-      location: '📍 Europa',
-      desc: `Instalación completa llave en mano para el acabado superficial de material ferroviario. Las cabinas ferroviarias son de las mayores que se pueden diseñar, 
-      con longitudes que superan los 30 metros y altura suficiente para locomotoras y vagones completos. El proyecto incluyó el diseño de la estructura metálica 
-      de la cabina, el sistema de ventilación y filtración industrial, los equipos de calefacción, la instalación eléctrica y la puesta en marcha. 
-      Todo coordinado con equipos de obra civiles y empresas locales.`,
+      sector: 'Sector Aeronáutico',
+      title: 'Stelia Aerospace — Planta de Pintura de Paneles',
+      location: '📍 Aveiro, Portugal',
+      desc: `Planta de pintura especializada en paneles de aviones desarrollada para Stelia Aerospace en Aveiro. Diseñada para cumplir con los exigentes requisitos del sector aeronáutico, incorpora un control preciso de la temperatura y la humedad para garantizar que cada proceso de aplicación se realice en condiciones óptimas y con la máxima uniformidad.
+      
+      Este nivel de control asegura acabados resistentes, duraderos y estéticamente impecables, alineados con los más altos estándares internacionales de calidad y seguridad aeronáutica. La planta optimiza los tiempos de trabajo, eleva la eficiencia y garantiza que cada componente cumpla con las especificaciones más estrictas.`,
       specs: [
-        { label: 'Sector', value: 'Ferroviario' },
-        { label: 'Ubicación', value: 'Europa' },
-        { label: 'Tipo', value: 'Llave en Mano' },
-        { label: 'Dimensiones', value: 'Grandes dimensiones (>30m)' },
+        { label: 'Sector', value: 'Aeronáutico' },
+        { label: 'Ubicación', value: 'Aveiro, Portugal' },
+        { label: 'Especialidad', value: 'Pintura de paneles de avión' },
+        { label: 'Control', value: 'Temperatura y humedad de precisión' },
+        { label: 'Tipo', value: 'Llave en mano' },
         { label: 'Rol', value: 'Ingeniero de Proyecto / Diseñador' },
-        { label: 'Herramientas', value: 'Inventor 3D, Cype, AutoCAD' },
       ],
-      tags: ['Cabinas Ferroviarias', 'Grandes Dimensiones', 'Ventilación Industrial', 'Obra Civil', 'Coordinación Multidisciplinar']
+      tags: ['Aeronáutico', 'Control Ambiental', 'Filtración HEPA', 'Alta Precisión', 'Normativa Aeronáutica', 'Portugal'],
+      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
+      folder: 'Stelia'
     },
     p3: {
-      sector: 'Sector Mueble',
-      title: 'Planta de Lacado Industrial — Mueble',
-      location: '📍 América Latina',
-      desc: `Diseño y ejecución de línea de lacado para fabricante de mueble de alta gama en América Latina. El proyecto incluyó el diseño de cabinas con 
-      flujo laminar vertical para garantizar un acabado perfecto libre de polvo, zona de preparación, sistemas de calefacción eficiente y todas las instalaciones 
-      auxiliares. Se gestionó íntegramente desde España: desde los primeros planos y presupuesto hasta la supervisión de la instalación y la formación al personal.`,
+      sector: 'Composites · Robótica',
+      title: 'Cabina de Aplicación de Gel Coat Robotizada',
+      location: '📍 Santiago de Querétaro, México',
+      desc: `Cabina de aplicación de Gel Coat instalada en México para la producción de componentes de materiales compuestos. El sistema incorpora robots de aplicación de última generación capaces de garantizar una cobertura uniforme, precisa y constante en cada pieza, reduciendo tiempos de proceso y asegurando un acabado de máxima calidad.
+      
+      La tecnología implementada optimiza la eficiencia y minimiza el desperdicio de material, respondiendo a las exigencias de los sectores automotriz y aeroespacial. La cabina eleva los estándares de seguridad y productividad en el taller, asegurando que cada producto cumpla con los más altos niveles de durabilidad y estética.`,
       specs: [
-        { label: 'Sector', value: 'Industria del Mueble' },
-        { label: 'Ubicación', value: 'América Latina' },
-        { label: 'Tipo', value: 'Llave en Mano' },
-        { label: 'Sistema', value: 'Flujo Laminar Vertical' },
+        { label: 'Sector', value: 'Composites · Automotriz · Aeroespacial' },
+        { label: 'Ubicación', value: 'Santiago de Querétaro, México' },
+        { label: 'Sistema', value: 'Aplicación robotizada de Gel Coat' },
+        { label: 'Tecnología', value: 'Robots de última generación' },
+        { label: 'Tipo', value: 'Llave en mano' },
         { label: 'Rol', value: 'Ingeniero Principal' },
-        { label: 'Gestión', value: 'Remota + Visitas de Supervisión' },
       ],
-      tags: ['Lacado Industrial', 'Flujo Laminar', 'Alta Gama', 'Gestión Internacional', 'Formación']
+      tags: ['Composites', 'Robótica', 'Gel Coat', 'Automotriz', 'Aeroespacial', 'México', 'Automatización'],
+      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
+      folder: 'Global Composites'
     },
     p4: {
-      sector: 'Industria Bicicleta',
-      title: 'Línea de Pintura para Fabricante de Bicicletas',
-      location: '📍 Europa',
-      desc: `Instalación completa de línea de tratamiento superficial para un reconocido fabricante de bicicletas de alto rendimiento. 
-      El proyecto incluyó el diseño de una cabina industrial basada en el sistema paramétrico desarrollado internamente, adaptada a las 
-      características específicas del sector: manipulación de pequeñas piezas, colores múltiples y alta productividad. 
-      Se diseñaron también sistemas de transporte y carga para optimizar el flujo de producción.`,
+      sector: 'Automoción · EV',
+      title: 'TOGG — Horno de Secado de Carrocerías EV',
+      location: '📍 Gemlik, Turquía',
+      desc: `Horno de secado de carrocerías instalado en la planta de TOGG en Gemlik para el proceso de pintura de vehículos eléctricos. Opera con parámetros de temperatura y flujo de aire optimizados incluso en geometrías complejas, con arquitectura modular y gestión inteligente de zonas térmicas que reduce el consumo energético y minimiza las emisiones.
+      
+      La tecnología permite trazabilidad completa del proceso, asegurando repetibilidad y calidad en cada ciclo. Con sensores de alta precisión y sistemas de control adaptativo, el horno responde dinámicamente a las condiciones de carga y variaciones ambientales, mejorando el acabado superficial y reduciendo tiempos de ciclo.`,
       specs: [
-        { label: 'Sector', value: 'Bicicleta / Deportivo' },
-        { label: 'Ubicación', value: 'Europa' },
-        { label: 'Tipo', value: 'Llave en Mano' },
-        { label: 'Sistema', value: 'Cabina Paramétrica + Transporte' },
-        { label: 'Rol', value: 'Diseñador + Gestor de Proyecto' },
-        { label: 'Innovación', value: 'Cabina Paramétrica Propia' },
+        { label: 'Sector', value: 'Automoción · Vehículo Eléctrico' },
+        { label: 'Ubicación', value: 'Gemlik, Turquía' },
+        { label: 'Sistema', value: 'Horno de secado modular' },
+        { label: 'Tecnología', value: 'Gestión inteligente de zonas térmicas' },
+        { label: 'Tipo', value: 'Llave en mano' },
+        { label: 'Rol', value: 'Ingeniero de Proyecto' },
       ],
-      tags: ['Alta Producción', 'Transporte Automatizado', 'Diseño Paramétrico', 'Sector Deportivo']
+      tags: ['Automoción', 'Vehículo Eléctrico', 'Horno de Secado', 'Eficiencia Energética', 'Trazabilidad', 'Turquía'],
+      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
+      folder: 'Togg'
     },
     p5: {
-      sector: 'Automoción',
-      title: 'Centro de Carrocería y Pintura Llave en Mano',
-      location: '📍 España / Europa',
-      desc: `Diseño e instalación integral de centros de reparación de carrocería y pintura para clientes del sector automoción. 
-      Desde el primer layout hasta la puesta en marcha: cabinas de pintura para automoción, bancadas de enderezado, sistemas de aspiración, 
-      zonas de preparación, línea de aire comprimido y todas las instalaciones eléctricas y mecánicas. 
-      Asesoramiento técnico al cliente sobre el proceso más eficiente para su volumen de trabajo.`,
+      sector: 'Bicicleta · Alta Gama',
+      title: 'Unibike — Línea de Pintura Integral',
+      location: '📍 Aveiro, Portugal',
+      desc: `Línea de pintura integral desarrollada para Unibike, prestigiosa fábrica de bicicletas en Aveiro. La planta combina tres grandes áreas: una línea automática de pintado con dos etapas diferenciadas para recubrimientos líquidos y en polvo, junto a un horno de pisos que asegura un secado uniforme y rápido.
+      
+      La planta funciona de manera casi automática gracias a un sistema de transportadores que desplazan los cuerpos de las bicicletas entre etapas. Incluye un gran recinto cerrado para la zona de carbono con cabinas y hornos específicos, y una zona de decoración para personalizar cada modelo con precisión y creatividad.`,
       specs: [
-        { label: 'Sector', value: 'Automoción' },
-        { label: 'Ubicación', value: 'España y Europa' },
-        { label: 'Tipo', value: 'Llave en Mano' },
-        { label: 'Equipos', value: 'Cabinas, Bancadas, Aspiración' },
-        { label: 'Rol', value: 'Responsable Técnico' },
-        { label: 'Herramientas', value: 'AutoCAD, Inventor, Dialux' },
+        { label: 'Sector', value: 'Bicicleta · Alta Gama' },
+        { label: 'Ubicación', value: 'Aveiro, Portugal' },
+        { label: 'Sistema', value: 'Pintura líquida + polvo + horno de pisos' },
+        { label: 'Automatización', value: 'Transportadores automáticos' },
+        { label: 'Especial', value: 'Zona de carbono + zona de decoración' },
+        { label: 'Rol', value: 'Ingeniero Principal / Diseñador' },
       ],
-      tags: ['Cabinas de Pintura', 'Bancadas', 'Layout', 'Instalación Integral', 'Asesoramiento Técnico']
+      tags: ['Bicicleta', 'Alta Gama', 'Pintura en Polvo', 'Transportador', 'Carbono', 'Automatización', 'Portugal'],
+      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
+      folder: 'Unibike'
     },
     p6: {
-      sector: 'I+D · Innovación',
-      title: 'Cabina Industrial Paramétrica',
-      location: '📍 Uso Internacional',
-      desc: `El proyecto de I+D más ambicioso: una cabina industrial completamente paramétrica. Introduciendo los datos de dimensiones, capacidad y 
-      características técnicas en un Excel, el sistema genera automáticamente el ensamblaje 3D completo en Autodesk Inventor. 
-      Incluye estructura metálica, chapa, componentes eléctricos y todos los elementos estándar. 
-      En producción desde hace 2 años, ha permitido ahorrar entre 3 y 4 días de trabajo por cada cabina estándar proyectada. 
-      Se continúa perfeccionando con cada nuevo proyecto.`,
+      sector: 'Mueble · Automatización',
+      title: 'Línea Automática de Pintado — Tableros de Madera',
+      location: '📍 Aveiro, Portugal',
+      desc: `Línea automatizada de pintado para la producción de mobiliario a gran escala. El sistema consta de dos líneas completamente automáticas con cabinas de pintura robotizadas para aplicar recubrimientos con máxima precisión sobre tableros de madera. La disposición en paralelo permite un flujo continuo y equilibrado de piezas, optimizando la capacidad productiva.
+      
+      Cada línea incorpora hornos de dos etapas que combinan secado por paneles endotérmicos y convección para un curado eficiente y controlado. La integración de sistemas de monitorización y control dinámico garantiza trazabilidad completa y sostenibilidad del proceso.`,
       specs: [
-        { label: 'Tipo', value: 'Proyecto I+D Interno' },
-        { label: 'Tecnología', value: 'Inventor + iLogics + Excel VBA' },
-        { label: 'Ahorro', value: '3-4 días por cabina estándar' },
-        { label: 'En Producción', value: '+2 años' },
-        { label: 'Estado', value: 'Activo · En continua mejora' },
-        { label: 'Impacto', value: 'Adoptado por toda la empresa' },
+        { label: 'Sector', value: 'Industria del Mueble' },
+        { label: 'Ubicación', value: 'Aveiro, Portugal' },
+        { label: 'Sistema', value: '2 líneas automáticas paralelas' },
+        { label: 'Horneado', value: 'Endotérmico + convección (2 etapas)' },
+        { label: 'Tipo', value: 'Llave en mano' },
+        { label: 'Rol', value: 'Ingeniero de Proyecto' },
       ],
-      tags: ['I+D', 'Automatización 3D', 'Paramétrico', 'iLogics', 'VBA', 'Innovación']
+      tags: ['Mueble', 'Robotización', 'Pintura Automática', 'Horno Endotérmico', 'Trazabilidad', 'Sostenibilidad'],
+      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
+      folder: 'Muebles'
+    },
+    p7: {
+      sector: 'Transporte · Fabricación',
+      title: 'Castrosua — Mesa de Encolado Industrial',
+      location: '📍 Aveiro, Portugal',
+      desc: `Mesa de encolado industrial desarrollada para Castrosua, uno de los fabricantes de autobuses más reconocidos del sector. La línea integra mesas calefactadas, sistemas de extracción localizada y turbinas de alto caudal, configurando un entorno de trabajo seguro, eficiente y adaptado a los exigentes procesos de fabricación de carrocerías.
+      
+      Las mesas calefactadas aceleran el curado de adhesivos y mejoran la estabilidad dimensional de los paneles durante el ensamblaje. El sistema de extracción perimetral captura vapores y partículas, complementado con turbinas de alta eficiencia que mantienen la concentración de compuestos volátiles por debajo de los límites normativos.`,
+      specs: [
+        { label: 'Sector', value: 'Fabricación de Autobuses' },
+        { label: 'Ubicación', value: 'Aveiro, Portugal' },
+        { label: 'Sistema', value: 'Mesas calientes + extracción + turbinas' },
+        { label: 'Aplicación', value: 'Encolado de paneles estructurales' },
+        { label: 'Normativa', value: 'Seguridad y salud laboral' },
+        { label: 'Rol', value: 'Ingeniero de Proyecto / Diseñador' },
+      ],
+      tags: ['Carrocería', 'Encolado Industrial', 'Mesas Calientes', 'Extracción', 'Ergonomía', 'Portugal'],
+      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
+      folder: 'Castrosua'
+    },
+    p8: {
+      sector: 'Packaging · Industrial',
+      title: 'Ilersis — Línea de Pintura Completa',
+      location: '📍 Terres, Lleida',
+      desc: `Línea de pintura completa implantada en Ilersis, especializada en packaging y manipulados industriales. La planta se estructura en cuatro áreas: zona de preparación, cabina de aplicación presurizada, horno de secado y box APQ para gestión segura de productos químicos.
+      
+      El proceso abarca desde el lijado, desengrase y acondicionamiento previo hasta la aplicación en cabina filtrada, el curado en horno y el almacenaje seguro de pinturas y disolventes en el box APQ sectorizado, conforme a normativa, con sistemas de ventilación, retención y seguridad específicos.`,
+      specs: [
+        { label: 'Sector', value: 'Packaging Industrial' },
+        { label: 'Ubicación', value: 'Terres, Lleida' },
+        { label: 'Áreas', value: 'Preparación + cabina + horno + box APQ' },
+        { label: 'Cabina', value: 'Presurizada y filtrada' },
+        { label: 'Normativa', value: 'APQ · PRL · Seguridad química' },
+        { label: 'Rol', value: 'Ingeniero Principal' },
+      ],
+      tags: ['Packaging', 'Cabina Presurizada', 'Box APQ', 'Horno de Curado', 'Normativa', 'Lleida'],
+      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
+      folder: 'Ilersis'
+    },
+    p9: {
+      sector: 'Mueble de Diseño',
+      title: 'Uecko — Línea de Preparación, Pintura y Horno',
+      location: '📍 Fuenlabrada, Madrid',
+      desc: `Línea de preparación, pintura y horno instalada en Uecko, empresa de muebles de diseño en Fuenlabrada. El sistema optimiza cada fase del trabajo, desde la preparación de superficies hasta la aplicación de pintura y el secado final, garantizando uniformidad, precisión y una estética impecable en cada pieza.
+      
+      La integración de estas tecnologías permite trabajar en un entorno más seguro y eficiente, adaptado a las exigencias del diseño contemporáneo. Con esta instalación, Uecko refuerza su posición como referente en mobiliario de alta gama, aportando mayor productividad, control en los tiempos de entrega y elevando los estándares de calidad.`,
+      specs: [
+        { label: 'Sector', value: 'Mueble de Diseño · Alta Gama' },
+        { label: 'Ubicación', value: 'Fuenlabrada, Madrid' },
+        { label: 'Sistema', value: 'Preparación + cabina + horno' },
+        { label: 'Especialidad', value: 'Acabados de alta gama' },
+        { label: 'Tipo', value: 'Llave en mano' },
+        { label: 'Rol', value: 'Ingeniero de Proyecto / Diseñador' },
+      ],
+      tags: ['Mueble de Diseño', 'Alta Gama', 'Horno', 'Acabados', 'Madrid', 'Diseño Contemporáneo'],
+      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
+      folder: 'Uecko'
+    },
+    p10: {
+      sector: 'Automoción · USA',
+      title: 'Carbone Collision Center — Cabina de Pintura',
+      location: '📍 Utica, New York, EE.UU.',
+      desc: `Instalación de cabina industrial en Carbone Collision Center, centro especializado en reparación de colisiones de vehículos en Utica, Nueva York. La cabina está diseñada para el pintado de autobuses escolares, ofreciendo a los pintores las mejores condiciones de ventilación, iluminación y secado.
+      
+      Cuando un automóvil, camioneta o SUV sufre daños de cualquier tipo, Carbone Collision Center dispone ahora de la capacitación, los equipos y la experiencia para reparar vehículos con los más altos estándares, con esta instalación como pieza clave del proceso de acabado.`,
+      specs: [
+        { label: 'Sector', value: 'Automoción · Reparación de Colisiones' },
+        { label: 'Ubicación', value: 'Utica, New York, EE.UU.' },
+        { label: 'Especialidad', value: 'Pintura de autobuses escolares' },
+        { label: 'Sistemas', value: 'Ventilación + iluminación + secado' },
+        { label: 'Tipo', value: 'Instalación completa' },
+        { label: 'Rol', value: 'Ingeniero de Proyecto' },
+      ],
+      tags: ['Automoción', 'Reparación', 'Autobuses', 'EE.UU.', 'Ventilación Industrial', 'Internacional'],
+      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
+      folder: 'Carbone'
     }
   };
+
+  function buildGallery(folder, photos) {
+    return photos.map((name, i) => `
+      <div class="modal-thumb ${i===0?'active':''}" onclick="switchPhoto(this, 'assets/img/${folder}/${name}.jpg')" style="
+        width:60px; height:44px; background-image:url('assets/img/${folder}/${name}.jpg');
+        background-size:cover; background-position:center; cursor:pointer;
+        border:2px solid ${i===0?'var(--accent)':'rgba(255,255,255,0.15)'}; flex-shrink:0; transition:border-color 0.2s;
+      "></div>`).join('');
+  }
+
+  function switchPhoto(thumb, src) {
+    document.querySelectorAll('.modal-thumb').forEach(t => t.style.borderColor = 'rgba(255,255,255,0.15)');
+    thumb.style.borderColor = 'var(--accent)';
+    document.getElementById('modalMainImg').src = src;
+  }
 
   function openModal(id) {
     const p = projects[id];
     const modal = document.getElementById('modalContent');
+    const firstPhoto = `assets/img/${p.folder}/${p.photos[0]}.jpg`;
     modal.innerHTML = `
       <div class="modal-header">
         <span class="modal-sector-tag">${p.sector}</span>
         <button class="modal-close" onclick="closeModal()">✕</button>
       </div>
+      <div style="background:#060810; position:relative;">
+        <img id="modalMainImg" src="${firstPhoto}" alt="${p.title}"
+          style="width:100%; aspect-ratio:16/9; object-fit:cover; display:block;"
+          onerror="this.style.display='none'; this.nextSibling.style.display='flex'">
+        <div style="display:none; width:100%; aspect-ratio:16/9; background:#0d1117; align-items:center; justify-content:center; color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:0.8rem;">📷 Imagen no disponible</div>
+        <div style="display:flex; gap:8px; padding:10px 12px; overflow-x:auto; background:#060810;">
+          ${buildGallery(p.folder, p.photos)}
+        </div>
+      </div>
       <div class="modal-body">
         <div class="modal-title">${p.title}</div>
         <div class="modal-location">${p.location}</div>
         <div class="modal-section-title">// Descripción del Proyecto</div>
-        <div class="modal-desc">${p.desc}</div>
+        <div class="modal-desc" style="white-space:pre-line">${p.desc}</div>
         <div class="modal-section-title">// Ficha Técnica</div>
         <div class="modal-specs">
           ${p.specs.map(s => `<div class="modal-spec"><strong>${s.label}</strong>${s.value}</div>`).join('')}
@@ -2363,18 +2522,16 @@
       // Projects
       'proj-tag':       '// 03 — Portfolio',
       'proj-title':     'Proyectos <span style="color:var(--accent)">Destacados</span>',
-      'p1-title':       'Línea de Tratamiento Superficial Aeronáutica',
-      'p1-desc':        'Diseño completo de línea de acabado superficial para industria aeronáutica. Cabinas de grandes dimensiones con control de temperatura, humedad y caudal de alta precisión.',
-      'p2-title':       'Línea de Pintura Ferroviaria',
-      'p2-desc':        'Proyecto llave en mano de instalación completa para el acabado superficial de material ferroviario. Cabinas de grandes dimensiones con sistemas de ventilación y filtración industrial.',
-      'p3-title':       'Planta de Lacado Industrial — Mueble',
-      'p3-desc':        'Diseño de línea de lacado para fabricante de mueble de alta gama. Cabinas de flujo laminar vertical con sistema de calefacción eficiente y zona de preparación.',
-      'p4-title':       'Línea de Pintura para Fabricante de Bicicletas',
-      'p4-desc':        'Instalación completa de línea de tratamiento superficial para fabricante de bicicletas de alto rendimiento. Diseño de cabina industrial paramétrica y sistema de transporte.',
-      'p5-title':       'Centro de Carrocería y Pintura Llave en Mano',
-      'p5-desc':        'Diseño e instalación integral de centros de reparación de carrocería. Desde el layout hasta la puesta en marcha, incluyendo cabinas, bancadas y sistemas de aspiración.',
-      'p6-title':       'Cabina Industrial Paramétrica',
-      'p6-desc':        'Sistema de cabina industrial estándar completamente paramétrica. A partir de datos en Excel se genera automáticamente el ensamblaje 3D completo. 3-4 días ahorrados por proyecto.',
+      'p1-title':  'Talgo — Planta de Pintura Ferroviaria',           'p1-desc':  'Instalación de 60 m con dos cabinas de pintura y horno de secado conectados por vías, para el pintado de trenes de alta velocidad del proyecto Haramain.',
+      'p2-title':  'Stelia Aerospace — Planta de Pintura',            'p2-desc':  'Planta especializada en pintura de paneles de aviones con control preciso de temperatura y humedad, cumpliendo los estrictos requisitos del sector aeronáutico.',
+      'p3-title':  'Cabina de Aplicación de Gel Coat Robotizada',     'p3-desc':  'Cabina con robots de aplicación de última generación para componentes de materiales compuestos en sectores automotriz y aeroespacial.',
+      'p4-title':  'TOGG — Horno de Secado de Carrocerías EV',        'p4-desc':  'Horno de curado para vehículos eléctricos con gestión inteligente de zonas térmicas, sensores de alta precisión y arquitectura modular eficiente.',
+      'p5-title':  'Unibike — Línea de Pintura Integral',             'p5-desc':  'Planta casi automática con pintura líquida y en polvo, horno de pisos, zona de carbono y decoración para bicicletas de alta gama.',
+      'p6-title':  'Línea Automática de Pintado — Mueble',            'p6-desc':  'Dos líneas automáticas con cabinas robotizadas y hornos de doble etapa para tableros de madera a gran escala.',
+      'p7-title':  'Castrosua — Mesa de Encolado Industrial',         'p7-desc':  'Línea de encolado con mesas calefactadas, extracción perimetral y turbinas de alto caudal para ensamblaje de carrocerías de autobús.',
+      'p8-title':  'Ilersis — Línea de Pintura Completa',             'p8-desc':  'Planta integral con zona de preparación, cabina presurizada, horno de secado y box APQ para producción de packaging industrial.',
+      'p9-title':  'Uecko — Línea de Preparación y Pintura',         'p9-desc':  'Sistema de preparación, pintura y horno para fabricante de mueble de diseño de alta gama en Fuenlabrada.',
+      'p10-title': 'Carbone Collision — Cabina de Pintura',           'p10-desc': 'Instalación de cabina de pintado de autobuses escolares con óptimas condiciones de ventilación, iluminación y secado en Nueva York.',
       'proj-cta':       'Ver más detalles →',
       // Automation
       'auto-tag':       '// 04 — Innovación',
@@ -2477,18 +2634,16 @@
       'exp4-desc':      'Referee, sports event organiser and visual arts and video designer at the University Extension Service.',
       'proj-tag':       '// 03 — Portfolio',
       'proj-title':     'Featured <span style="color:var(--accent)">Projects</span>',
-      'p1-title':       'Aeronautical Surface Treatment Line',
-      'p1-desc':        'Full design of a surface finishing line for the aeronautical industry. Large-scale booths with high-precision temperature, humidity and airflow control.',
-      'p2-title':       'Railway Paint Line',
-      'p2-desc':        'Turnkey full installation for surface finishing of railway rolling stock. Large-scale booths with industrial ventilation and filtration systems.',
-      'p3-title':       'Industrial Lacquering Plant — Furniture',
-      'p3-desc':        'Design of a lacquering line for a high-end furniture manufacturer. Vertical laminar flow booths with efficient heating and preparation zone.',
-      'p4-title':       'Paint Line for Bicycle Manufacturer',
-      'p4-desc':        'Complete surface treatment line installation for a high-performance bicycle manufacturer. Parametric industrial booth design and conveyor system.',
-      'p5-title':       'Turnkey Bodywork & Paint Centre',
-      'p5-desc':        'Full design and installation of bodywork repair centres. From layout to commissioning, including booths, straightening benches and extraction systems.',
-      'p6-title':       'Parametric Industrial Booth',
-      'p6-desc':        'Fully parametric standard industrial booth system. Excel data automatically generates the complete 3D assembly. 3–4 days saved per project.',
+      'p1-title':  'Talgo — Railway Paint Plant',                     'p1-desc':  '60-metre installation with two paint booths and a drying oven connected by rail, for painting high-speed trains on the Haramain project.',
+      'p2-title':  'Stelia Aerospace — Panel Paint Plant',            'p2-desc':  'Specialist plant for painting aircraft panels with precise temperature and humidity control, meeting the strict requirements of the aeronautical sector.',
+      'p3-title':  'Robotic Gel Coat Application Booth',              'p3-desc':  'Booth with state-of-the-art application robots for composite material components in the automotive and aerospace sectors.',
+      'p4-title':  'TOGG — EV Body Drying Oven',                      'p4-desc':  'Curing oven for electric vehicles with intelligent thermal zone management, high-precision sensors and efficient modular architecture.',
+      'p5-title':  'Unibike — Full Paint Line',                       'p5-desc':  'Near-fully automatic plant with liquid and powder paint, floor oven, carbon zone and decoration area for high-end bicycles.',
+      'p6-title':  'Automatic Painting Line — Wood Boards',           'p6-desc':  'Two automatic lines with robotic booths and dual-stage ovens for large-scale wood board painting.',
+      'p7-title':  'Castrosua — Industrial Gluing Station',           'p7-desc':  'Gluing line with heated tables, perimeter extraction and high-flow turbines for bus bodywork panel assembly.',
+      'p8-title':  'Ilersis — Complete Paint Line',                   'p8-desc':  'Full plant with preparation zone, pressurised booth, drying oven and APQ room for industrial packaging production.',
+      'p9-title':  'Uecko — Preparation & Paint Line',                'p9-desc':  'Preparation, paint and oven system for a high-end design furniture manufacturer in Fuenlabrada.',
+      'p10-title': 'Carbone Collision — Paint Booth',                 'p10-desc': 'Paint booth installation for school buses with optimal ventilation, lighting and drying conditions in New York.',
       'proj-cta':       'View details →',
       'auto-tag':       '// 04 — Innovation',
       'auto-title':     '<span style="color:var(--accent)">Automation</span> Systems',
@@ -2577,9 +2732,9 @@
     set('exp3-role', t['exp3-role']); set('exp3-company', t['exp3-company']); set('exp3-desc', t['exp3-desc']);
     set('exp4-role', t['exp4-role']); set('exp4-company', t['exp4-company']); set('exp4-desc', t['exp4-desc']);
     set('proj-tag', t['proj-tag']); set('proj-title', t['proj-title']);
-    ['p1','p2','p3','p4','p5','p6'].forEach(function(p) {
-      set(p+'-title', t[p+'-title']); set(p+'-desc', t[p+'-desc']);
-    });
+    for (var pi=1; pi<=10; pi++) {
+      set('p'+pi+'-title', t['p'+pi+'-title']); set('p'+pi+'-desc', t['p'+pi+'-desc']);
+    }
     document.querySelectorAll('.project-cta').forEach(function(el){ el.innerHTML = t['proj-cta']; });
     set('auto-tag', t['auto-tag']); set('auto-title', t['auto-title']); set('auto-intro', t['auto-intro']);
     for (var i=1; i<=9; i++) {

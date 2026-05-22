@@ -2157,7 +2157,6 @@
         { label: 'Rol', value: 'Ingeniero Principal / Responsable Técnico' },
       ],
       tags: ['Ferroviario', 'Alta Velocidad', 'Horno de Secado', 'Sistema de Vías', 'Grandes Dimensiones', 'Eficiencia Energética', 'Internacional'],
-      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
       folder: 'Talgo'
     },
     p2: {
@@ -2176,7 +2175,6 @@
         { label: 'Rol', value: 'Ingeniero de Proyecto / Diseñador' },
       ],
       tags: ['Aeronáutico', 'Control Ambiental', 'Filtración HEPA', 'Alta Precisión', 'Normativa Aeronáutica', 'Portugal'],
-      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
       folder: 'Stelia'
     },
     p3: {
@@ -2195,7 +2193,6 @@
         { label: 'Rol', value: 'Ingeniero Principal' },
       ],
       tags: ['Composites', 'Robótica', 'Gel Coat', 'Automotriz', 'Aeroespacial', 'México', 'Automatización'],
-      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
       folder: 'Global Composites'
     },
     p4: {
@@ -2214,7 +2211,6 @@
         { label: 'Rol', value: 'Ingeniero de Proyecto' },
       ],
       tags: ['Automoción', 'Vehículo Eléctrico', 'Horno de Secado', 'Eficiencia Energética', 'Trazabilidad', 'Turquía'],
-      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
       folder: 'Togg'
     },
     p5: {
@@ -2233,7 +2229,6 @@
         { label: 'Rol', value: 'Ingeniero Principal / Diseñador' },
       ],
       tags: ['Bicicleta', 'Alta Gama', 'Pintura en Polvo', 'Transportador', 'Carbono', 'Automatización', 'Portugal'],
-      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
       folder: 'Unibike'
     },
     p6: {
@@ -2252,7 +2247,6 @@
         { label: 'Rol', value: 'Ingeniero de Proyecto' },
       ],
       tags: ['Mueble', 'Robotización', 'Pintura Automática', 'Horno Endotérmico', 'Trazabilidad', 'Sostenibilidad'],
-      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
       folder: 'Muebles'
     },
     p7: {
@@ -2271,7 +2265,6 @@
         { label: 'Rol', value: 'Ingeniero de Proyecto / Diseñador' },
       ],
       tags: ['Carrocería', 'Encolado Industrial', 'Mesas Calientes', 'Extracción', 'Ergonomía', 'Portugal'],
-      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
       folder: 'Castrosua'
     },
     p8: {
@@ -2290,7 +2283,6 @@
         { label: 'Rol', value: 'Ingeniero Principal' },
       ],
       tags: ['Packaging', 'Cabina Presurizada', 'Box APQ', 'Horno de Curado', 'Normativa', 'Lleida'],
-      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
       folder: 'Ilersis'
     },
     p9: {
@@ -2309,7 +2301,6 @@
         { label: 'Rol', value: 'Ingeniero de Proyecto / Diseñador' },
       ],
       tags: ['Mueble de Diseño', 'Alta Gama', 'Horno', 'Acabados', 'Madrid', 'Diseño Contemporáneo'],
-      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
       folder: 'Uecko'
     },
     p10: {
@@ -2328,22 +2319,66 @@
         { label: 'Rol', value: 'Ingeniero de Proyecto' },
       ],
       tags: ['Automoción', 'Reparación', 'Autobuses', 'EE.UU.', 'Ventilación Industrial', 'Internacional'],
-      photos: ['render 1', 'render 2', 'real 1', 'real 2'],
       folder: 'Carbone'
     }
   };
 
+  // ── GALLERY: probe images dynamically ──
+  // Tries render 1, render 2... then real 1, real 2, real 3... until a 404 is hit.
+  // Uses <img> elements for thumbnails so onerror works reliably.
+
+  function probeImages(folder, callback) {
+    const candidates = [];
+    for (var r = 1; r <= 10; r++) candidates.push('render ' + r);
+    for (var n = 1; n <= 10; n++) candidates.push('real ' + n);
+
+    const found = [];
+    let i = 0;
+    let renderDone = false;
+    let realDone = false;
+
+    function tryNext() {
+      if (i >= candidates.length) { callback(found); return; }
+      const name = candidates[i];
+      const isRender = name.startsWith('render');
+      // Skip to reals if renders are exhausted
+      if (isRender && renderDone) { i++; tryNext(); return; }
+      if (!isRender && realDone) { i++; tryNext(); return; }
+
+      const img = new Image();
+      const src = 'assets/img/' + folder + '/' + name + '.jpg';
+      img.onload = function() { found.push(name); i++; tryNext(); };
+      img.onerror = function() {
+        if (isRender) renderDone = true;
+        else realDone = true;
+        i++;
+        tryNext();
+      };
+      img.src = src;
+    }
+    tryNext();
+  }
+
   function buildGallery(folder, photos) {
-    return photos.map((name, i) => `
-      <div class="modal-thumb ${i===0?'active':''}" onclick="switchPhoto(this, 'assets/img/${folder}/${name}.jpg')" style="
-        width:60px; height:44px; background-image:url('assets/img/${folder}/${name}.jpg');
-        background-size:cover; background-position:center; cursor:pointer;
-        border:2px solid ${i===0?'var(--accent)':'rgba(255,255,255,0.15)'}; flex-shrink:0; transition:border-color 0.2s;
-      "></div>`).join('');
+    const strip = document.getElementById('modalThumbStrip');
+    if (!strip) return;
+    strip.innerHTML = '';
+    photos.forEach(function(name, idx) {
+      const src = 'assets/img/' + folder + '/' + name + '.jpg';
+      const thumb = document.createElement('img');
+      thumb.src = src;
+      thumb.style.cssText = 'width:60px; height:44px; object-fit:cover; cursor:pointer; flex-shrink:0; border:2px solid ' + (idx===0 ? 'var(--accent)' : 'rgba(255,255,255,0.15)') + '; transition:border-color 0.2s;';
+      thumb.onclick = function() {
+        strip.querySelectorAll('img').forEach(function(t){ t.style.borderColor = 'rgba(255,255,255,0.15)'; });
+        thumb.style.borderColor = 'var(--accent)';
+        document.getElementById('modalMainImg').src = src;
+      };
+      strip.appendChild(thumb);
+    });
   }
 
   function switchPhoto(thumb, src) {
-    document.querySelectorAll('.modal-thumb').forEach(t => t.style.borderColor = 'rgba(255,255,255,0.15)');
+    document.querySelectorAll('#modalThumbStrip img').forEach(function(t){ t.style.borderColor = 'rgba(255,255,255,0.15)'; });
     thumb.style.borderColor = 'var(--accent)';
     document.getElementById('modalMainImg').src = src;
   }
@@ -2351,19 +2386,20 @@
   function openModal(id) {
     const p = projects[id];
     const modal = document.getElementById('modalContent');
-    const firstPhoto = `assets/img/${p.folder}/${p.photos[0]}.jpg`;
+    // Determine cover: prefer render 1, fallback to real 1
+    const cover = 'assets/img/' + p.folder + '/render 1.jpg';
+
     modal.innerHTML = `
       <div class="modal-header">
         <span class="modal-sector-tag">${p.sector}</span>
         <button class="modal-close" onclick="closeModal()">✕</button>
       </div>
       <div style="background:#060810; position:relative;">
-        <img id="modalMainImg" src="${firstPhoto}" alt="${p.title}"
+        <img id="modalMainImg" src="${cover}" alt="${p.title}"
           style="width:100%; aspect-ratio:16/9; object-fit:cover; display:block;"
-          onerror="this.style.display='none'; this.nextSibling.style.display='flex'">
-        <div style="display:none; width:100%; aspect-ratio:16/9; background:#0d1117; align-items:center; justify-content:center; color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:0.8rem;">📷 Imagen no disponible</div>
-        <div style="display:flex; gap:8px; padding:10px 12px; overflow-x:auto; background:#060810;">
-          ${buildGallery(p.folder, p.photos)}
+          onerror="this.src='assets/img/${p.folder}/real 1.jpg'">
+        <div id="modalThumbStrip" style="display:flex; gap:8px; padding:10px 12px; overflow-x:auto; background:#060810; min-height:64px;">
+          <div style="color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:12px 0;">Cargando fotos…</div>
         </div>
       </div>
       <div class="modal-body">
@@ -2373,16 +2409,27 @@
         <div class="modal-desc" style="white-space:pre-line">${p.desc}</div>
         <div class="modal-section-title">// Ficha Técnica</div>
         <div class="modal-specs">
-          ${p.specs.map(s => `<div class="modal-spec"><strong>${s.label}</strong>${s.value}</div>`).join('')}
+          ${p.specs.map(function(s){ return '<div class="modal-spec"><strong>'+s.label+'</strong>'+s.value+'</div>'; }).join('')}
         </div>
         <div class="modal-section-title">// Tecnologías Aplicadas</div>
         <div class="modal-tags">
-          ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          ${p.tags.map(function(t){ return '<span class="tag">'+t+'</span>'; }).join('')}
         </div>
       </div>
     `;
+
     document.getElementById('modalOverlay').classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    // Probe all images asynchronously and populate strip when done
+    probeImages(p.folder, function(found) {
+      if (found.length > 0) {
+        buildGallery(p.folder, found);
+      } else {
+        const strip = document.getElementById('modalThumbStrip');
+        if (strip) strip.innerHTML = '<div style="color:var(--text-dim);font-family:\'JetBrains Mono\',monospace;font-size:0.75rem;padding:12px 0;">Sin imágenes disponibles</div>';
+      }
+    });
   }
 
   function closeModal(e) {

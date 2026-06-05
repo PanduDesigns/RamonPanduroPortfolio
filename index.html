@@ -1782,129 +1782,203 @@
         box-shadow:0 0 20px rgba(0,212,255,0.2);
       "></div>
 
-      <svg id="worldSvg" viewBox="0 0 1010 500" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
+      <svg id="worldSvg" viewBox="0 0 1010 505" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <!-- Continent fills: subtle tints on dark base -->
+          <style>
+            .c-na  { fill:#0d2235; stroke:#1a4060; stroke-width:0.5; }
+            .c-sa  { fill:#0d2a1a; stroke:#1a5030; stroke-width:0.5; }
+            .c-eu  { fill:#1a1a35; stroke:#303080; stroke-width:0.5; }
+            .c-af  { fill:#2a1a0a; stroke:#604020; stroke-width:0.5; }
+            .c-as  { fill:#1a2a1a; stroke:#305030; stroke-width:0.5; }
+            .c-oc  { fill:#1a2a2a; stroke:#206060; stroke-width:0.5; }
+          </style>
         </defs>
 
-        <!-- Ocean background -->
-        <rect width="1010" height="500" fill="#060c14"/>
+        <!-- Ocean -->
+        <rect width="1010" height="505" fill="#060c14"/>
 
-        <!-- Grid lines -->
-        <g stroke="rgba(0,212,255,0.06)" stroke-width="0.5">
-          <line x1="0" y1="100" x2="1010" y2="100"/>
-          <line x1="0" y1="200" x2="1010" y2="200"/>
-          <line x1="0" y1="300" x2="1010" y2="300"/>
-          <line x1="0" y1="400" x2="1010" y2="400"/>
-          <line x1="200" y1="0" x2="200" y2="500"/>
-          <line x1="400" y1="0" x2="400" y2="500"/>
-          <line x1="600" y1="0" x2="600" y2="500"/>
-          <line x1="800" y1="0" x2="800" y2="500"/>
+        <!-- Latitude/Longitude grid -->
+        <g stroke="rgba(0,212,255,0.05)" stroke-width="0.5">
+          <line x1="0" y1="84"  x2="1010" y2="84"/>
+          <line x1="0" y1="168" x2="1010" y2="168"/>
+          <line x1="0" y1="252" x2="1010" y2="252"/>
+          <line x1="0" y1="336" x2="1010" y2="336"/>
+          <line x1="0" y1="420" x2="1010" y2="420"/>
+          <line x1="126" y1="0" x2="126" y2="505"/>
+          <line x1="252" y1="0" x2="252" y2="505"/>
+          <line x1="378" y1="0" x2="378" y2="505"/>
+          <line x1="504" y1="0" x2="504" y2="505"/>
+          <line x1="630" y1="0" x2="630" y2="505"/>
+          <line x1="756" y1="0" x2="756" y2="505"/>
+          <line x1="882" y1="0" x2="882" y2="505"/>
         </g>
-
         <!-- Equator -->
-        <line x1="0" y1="250" x2="1010" y2="250" stroke="rgba(0,212,255,0.12)" stroke-width="1" stroke-dasharray="6,4"/>
+        <line x1="0" y1="252" x2="1010" y2="252" stroke="rgba(0,212,255,0.18)" stroke-width="0.8" stroke-dasharray="5,4"/>
+        <!-- Tropic of Cancer -->
+        <line x1="0" y1="189" x2="1010" y2="189" stroke="rgba(0,212,255,0.07)" stroke-width="0.5" stroke-dasharray="3,5"/>
+        <!-- Tropic of Capricorn -->
+        <line x1="0" y1="315" x2="1010" y2="315" stroke="rgba(0,212,255,0.07)" stroke-width="0.5" stroke-dasharray="3,5"/>
 
-        <!-- CONTINENTS (simplified paths) -->
-        <!-- North America -->
-        <path d="M120,60 L180,55 L230,70 L260,90 L275,130 L265,170 L250,200 L240,220 L230,250 L210,260 L195,240 L185,210 L170,195 L150,200 L130,190 L115,170 L105,145 L100,120 L108,90 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
-        <!-- Central America -->
-        <path d="M210,260 L230,250 L240,270 L235,285 L220,290 L210,275 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.6"/>
-        <!-- South America -->
-        <path d="M230,295 L265,285 L295,295 L315,320 L325,360 L320,400 L305,430 L285,450 L265,445 L248,420 L238,390 L232,355 L225,325 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
+        <!-- ═══════════════════════════ NORTH AMERICA ═══════════════════════════ -->
         <!-- Greenland -->
-        <path d="M185,20 L215,15 L230,30 L220,55 L200,60 L180,48 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.1)" stroke-width="0.6"/>
-        <!-- Europe -->
-        <path d="M435,55 L470,50 L500,55 L520,70 L515,90 L495,100 L480,115 L465,120 L450,115 L440,100 L430,80 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
-        <!-- Iberian Peninsula -->
-        <path d="M435,95 L455,90 L465,100 L462,118 L448,122 L436,115 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.6"/>
-        <!-- UK -->
-        <path d="M445,58 L458,54 L462,64 L455,72 L444,68 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.5"/>
-        <!-- Africa -->
-        <path d="M450,135 L490,130 L520,140 L540,165 L548,200 L545,240 L535,270 L520,300 L500,320 L480,318 L462,300 L450,270 L442,240 L440,200 L442,165 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
-        <!-- Asia - main -->
-        <path d="M530,50 L600,40 L680,35 L760,40 L810,50 L840,70 L850,100 L840,130 L810,145 L780,140 L750,150 L720,145 L690,155 L660,150 L630,145 L600,150 L575,140 L555,120 L540,100 L530,80 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
-        <!-- Middle East / Arabian Peninsula -->
-        <path d="M555,130 L590,125 L610,135 L615,165 L600,185 L580,185 L562,170 L552,150 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.6"/>
-        <!-- India -->
-        <path d="M640,155 L670,150 L685,170 L680,205 L665,220 L648,210 L638,185 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.6"/>
-        <!-- Southeast Asia -->
-        <path d="M750,155 L790,150 L810,165 L805,190 L785,195 L760,185 L748,170 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.6"/>
-        <!-- China/East Asia -->
-        <path d="M720,70 L780,65 L820,75 L840,95 L830,120 L800,130 L765,125 L740,115 L718,100 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.6"/>
-        <!-- Japan -->
-        <path d="M845,80 L860,75 L868,88 L858,98 L844,92 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/>
-        <!-- Australia -->
-        <path d="M790,310 L850,300 L900,310 L920,340 L910,375 L885,395 L855,395 L825,380 L800,355 L788,330 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.8"/>
-        <!-- New Zealand -->
-        <path d="M930,370 L940,360 L948,375 L940,385 L930,380 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/>
-
-        <!-- ═══════════════════════════════════════════════ -->
-        <!-- PROJECT MARKERS — glow dots with pulse rings   -->
-        <!-- ═══════════════════════════════════════════════ -->
-
-        <!-- Spain (Albacete / Madrid / Lleida) -->
-        <g class="map-marker" data-project="🇪🇸 España — Uecko (Madrid) · Ilersis (Lleida)" style="cursor:pointer">
-          <circle cx="452" cy="106" r="14" fill="rgba(0,212,255,0.07)" class="pulse-ring"/>
-          <circle cx="452" cy="106" r="8" fill="rgba(0,212,255,0.15)"/>
-          <circle cx="452" cy="106" r="4" fill="#00d4ff" filter="url(#glow)"/>
-        </g>
-
-        <!-- Portugal (Aveiro) -->
-        <g class="map-marker" data-project="🇵🇹 Portugal — Stelia (Aeronáutica) · Unibike · Muebles · Castrosua" style="cursor:pointer">
-          <circle cx="437" cy="108" r="14" fill="rgba(0,212,255,0.07)" class="pulse-ring"/>
-          <circle cx="437" cy="108" r="8" fill="rgba(0,212,255,0.15)"/>
-          <circle cx="437" cy="108" r="4" fill="#00d4ff" filter="url(#glow)"/>
-        </g>
-
-        <!-- Saudi Arabia -->
-        <g class="map-marker" data-project="🇸🇦 Arabia Saudí — Talgo Haramain (Ferroviario)" style="cursor:pointer">
-          <circle cx="590" cy="152" r="14" fill="rgba(255,107,53,0.1)" class="pulse-ring"/>
-          <circle cx="590" cy="152" r="8" fill="rgba(255,107,53,0.2)"/>
-          <circle cx="590" cy="152" r="4" fill="#ff6b35" filter="url(#glow)"/>
-        </g>
-
-        <!-- Turkey -->
-        <g class="map-marker" data-project="🇹🇷 Turquía — TOGG (Vehículo Eléctrico)" style="cursor:pointer">
-          <circle cx="553" cy="105" r="14" fill="rgba(255,107,53,0.1)" class="pulse-ring"/>
-          <circle cx="553" cy="105" r="8" fill="rgba(255,107,53,0.2)"/>
-          <circle cx="553" cy="105" r="4" fill="#ff6b35" filter="url(#glow)"/>
-        </g>
-
+        <path class="c-na" d="M390,18 L415,12 L438,16 L452,26 L458,40 L448,56 L428,64 L408,60 L392,46 L384,32 Z"/>
+        <!-- Alaska -->
+        <path class="c-na" d="M42,60 L68,52 L90,58 L105,72 L100,88 L80,94 L58,88 L40,76 Z"/>
+        <!-- Canada + USA -->
+        <path class="c-na" d="M88,80 L140,68 L195,64 L240,68 L275,76 L298,88 L308,104 L312,124 L305,145 L292,162 L272,172 L248,178 L228,188 L214,200 L204,215 L192,228 L178,232 L162,228 L145,218 L128,208 L110,198 L95,182 L82,165 L74,148 L72,130 L76,112 L82,96 Z"/>
+        <!-- Florida -->
+        <path class="c-na" d="M248,188 L258,185 L264,196 L260,210 L250,214 L244,204 Z"/>
         <!-- Mexico -->
-        <g class="map-marker" data-project="🇲🇽 México — Cabina Gel Coat Robotizada (Composites)" style="cursor:pointer">
-          <circle cx="182" cy="215" r="14" fill="rgba(0,212,255,0.07)" class="pulse-ring"/>
-          <circle cx="182" cy="215" r="8" fill="rgba(0,212,255,0.15)"/>
-          <circle cx="182" cy="215" r="4" fill="#00d4ff" filter="url(#glow)"/>
+        <path class="c-na" d="M155,218 L188,210 L210,212 L224,222 L228,238 L220,252 L204,260 L185,262 L168,255 L155,242 L148,230 Z"/>
+        <!-- Central America -->
+        <path class="c-na" d="M196,262 L212,256 L222,262 L220,275 L210,282 L198,276 Z"/>
+        <!-- Cuba + Caribbean -->
+        <path class="c-na" d="M248,218 L268,215 L278,222 L272,230 L255,232 L245,225 Z"/>
+
+        <!-- ═══════════════════════════ SOUTH AMERICA ═══════════════════════════ -->
+        <path class="c-sa" d="M210,278 L240,270 L268,268 L294,272 L314,284 L328,302 L336,325 L338,350 L332,378 L320,404 L302,428 L282,446 L260,450 L240,442 L222,425 L210,404 L202,378 L198,348 L200,318 L204,295 Z"/>
+        <!-- Falklands -->
+        <path class="c-sa" d="M258,452 L266,448 L270,455 L263,460 Z"/>
+
+        <!-- ═══════════════════════════════ EUROPE ══════════════════════════════ -->
+        <!-- Main Europe -->
+        <path class="c-eu" d="M436,68 L454,62 L472,60 L492,64 L508,72 L516,84 L514,96 L504,106 L490,114 L474,118 L460,116 L446,110 L436,98 L432,84 Z"/>
+        <!-- Iberian Peninsula -->
+        <path class="c-eu" d="M430,100 L450,95 L464,100 L468,114 L462,126 L446,130 L432,124 L424,112 Z"/>
+        <!-- UK + Ireland -->
+        <path class="c-eu" d="M428,72 L440,66 L446,74 L440,84 L428,80 Z"/>
+        <path class="c-eu" d="M418,74 L426,70 L428,78 L420,82 Z"/>
+        <!-- Scandinavia -->
+        <path class="c-eu" d="M472,42 L488,36 L502,40 L508,54 L502,68 L488,72 L474,66 L466,54 Z"/>
+        <!-- Italy -->
+        <path class="c-eu" d="M476,106 L488,100 L494,110 L490,126 L480,134 L472,128 L468,116 Z"/>
+        <!-- Balkan + Greece -->
+        <path class="c-eu" d="M500,100 L518,96 L526,108 L520,120 L506,126 L494,118 Z"/>
+        <!-- Iceland -->
+        <path class="c-eu" d="M390,52 L404,46 L414,52 L410,62 L396,64 L386,58 Z"/>
+
+        <!-- ════════════════════════════════ AFRICA ══════════════════════════════ -->
+        <path class="c-af" d="M430,134 L460,128 L492,128 L520,134 L542,148 L556,168 L562,192 L560,218 L554,245 L540,270 L522,294 L500,312 L476,318 L454,312 L434,294 L420,270 L414,245 L414,218 L418,192 L424,166 Z"/>
+        <!-- Madagascar -->
+        <path class="c-af" d="M558,280 L568,272 L574,285 L570,300 L558,304 L550,292 Z"/>
+
+        <!-- ════════════════════════════════ ASIA ════════════════════════════════ -->
+        <!-- Main Asia body -->
+        <path class="c-as" d="M524,58 L560,48 L604,40 L652,36 L700,36 L748,40 L790,48 L822,58 L844,72 L852,90 L848,108 L834,122 L812,132 L785,138 L756,140 L726,138 L700,142 L672,148 L648,152 L622,150 L598,148 L574,142 L554,130 L536,114 L524,96 Z"/>
+        <!-- Arabian Peninsula -->
+        <path class="c-as" d="M548,138 L574,132 L596,136 L608,150 L612,170 L604,188 L590,196 L574,194 L560,180 L548,162 Z"/>
+        <!-- India -->
+        <path class="c-as" d="M630,148 L660,144 L678,152 L686,170 L682,196 L668,214 L650,220 L634,210 L624,192 L622,170 Z"/>
+        <!-- Indochina / SEA -->
+        <path class="c-as" d="M730,142 L760,138 L784,144 L796,158 L792,176 L775,185 L754,182 L736,170 L726,156 Z"/>
+        <!-- Indonesia (simplified) -->
+        <path class="c-as" d="M764,192 L784,186 L800,190 L808,200 L800,210 L780,212 L762,204 Z"/>
+        <path class="c-as" d="M812,188 L832,184 L844,192 L840,202 L820,206 L808,198 Z"/>
+        <!-- Japan -->
+        <path class="c-as" d="M848,84 L860,78 L868,86 L864,98 L852,102 L844,94 Z"/>
+        <!-- Sri Lanka -->
+        <path class="c-as" d="M660,216 L666,212 L670,220 L664,226 Z"/>
+        <!-- Taiwan -->
+        <path class="c-as" d="M800,132 L808,128 L812,136 L806,142 L800,138 Z"/>
+        <!-- Philippines -->
+        <path class="c-as" d="M828,152 L836,146 L844,152 L840,162 L830,164 Z"/>
+        <!-- Kamchatka -->
+        <path class="c-as" d="M876,60 L890,54 L900,64 L896,82 L882,86 L872,74 Z"/>
+
+        <!-- ═══════════════════════════════ OCEANIA ═══════════════════════════════ -->
+        <!-- Australia -->
+        <path class="c-oc" d="M810,310 L848,298 L884,296 L916,306 L934,322 L940,344 L934,368 L916,388 L890,400 L860,402 L830,394 L808,374 L796,350 L796,326 Z"/>
+        <!-- Tasmania -->
+        <path class="c-oc" d="M856,404 L866,400 L872,410 L864,418 L854,414 Z"/>
+        <!-- New Zealand North -->
+        <path class="c-oc" d="M952,360 L964,352 L970,362 L962,374 L950,370 Z"/>
+        <!-- New Zealand South -->
+        <path class="c-oc" d="M948,376 L960,370 L966,382 L958,396 L944,392 Z"/>
+        <!-- Papua New Guinea -->
+        <path class="c-oc" d="M856,268 L878,260 L900,264 L910,278 L900,290 L876,292 L856,282 Z"/>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- PROJECT MARKERS                                          -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+
+        <!-- Connector lines (behind markers) -->
+        <!-- ES → PT -->
+        <line x1="446" y1="114" x2="434" y2="116" stroke="rgba(100,160,255,0.3)" stroke-width="1"/>
+        <!-- ES → SA -->
+        <line x1="446" y1="114" x2="582" y2="168" stroke="rgba(255,160,80,0.25)" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <!-- ES → TR -->
+        <line x1="446" y1="114" x2="548" y2="110" stroke="rgba(255,160,80,0.25)" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <!-- ES → US -->
+        <line x1="446" y1="114" x2="252" y2="136" stroke="rgba(100,160,255,0.2)" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <!-- ES → MX -->
+        <line x1="446" y1="114" x2="180" y2="236" stroke="rgba(100,160,255,0.2)" stroke-width="0.8" stroke-dasharray="4,3"/>
+
+        <!-- SPAIN -->
+        <g class="map-marker" data-project="🇪🇸 España — Uecko (Madrid) · Ilersis (Lleida)" style="cursor:pointer">
+          <circle cx="446" cy="114" r="16" fill="rgba(0,212,255,0.06)" class="pulse-ring"/>
+          <circle cx="446" cy="114" r="9"  fill="rgba(0,212,255,0.18)"/>
+          <circle cx="446" cy="114" r="4.5" fill="#00d4ff" filter="url(#glow)"/>
         </g>
 
-        <!-- USA (New York) -->
+        <!-- PORTUGAL -->
+        <g class="map-marker" data-project="🇵🇹 Portugal — Stelia (Aeronáutica) · Unibike · Muebles · Castrosua" style="cursor:pointer">
+          <circle cx="434" cy="116" r="16" fill="rgba(0,212,255,0.06)" class="pulse-ring"/>
+          <circle cx="434" cy="116" r="9"  fill="rgba(0,212,255,0.18)"/>
+          <circle cx="434" cy="116" r="4.5" fill="#00d4ff" filter="url(#glow)"/>
+        </g>
+
+        <!-- SAUDI ARABIA -->
+        <g class="map-marker" data-project="🇸🇦 Arabia Saudí — Talgo Haramain (Alta Velocidad)" style="cursor:pointer">
+          <circle cx="582" cy="168" r="16" fill="rgba(255,160,80,0.08)" class="pulse-ring"/>
+          <circle cx="582" cy="168" r="9"  fill="rgba(255,160,80,0.2)"/>
+          <circle cx="582" cy="168" r="4.5" fill="#ffa050" filter="url(#glow)"/>
+        </g>
+
+        <!-- TURKEY -->
+        <g class="map-marker" data-project="🇹🇷 Turquía — TOGG (Vehículo Eléctrico · Gemlik)" style="cursor:pointer">
+          <circle cx="548" cy="110" r="16" fill="rgba(255,100,100,0.08)" class="pulse-ring"/>
+          <circle cx="548" cy="110" r="9"  fill="rgba(255,100,100,0.2)"/>
+          <circle cx="548" cy="110" r="4.5" fill="#ff6464" filter="url(#glow)"/>
+        </g>
+
+        <!-- MEXICO -->
+        <g class="map-marker" data-project="🇲🇽 México — Cabina Gel Coat Robotizada (Querétaro)" style="cursor:pointer">
+          <circle cx="180" cy="236" r="16" fill="rgba(80,255,160,0.06)" class="pulse-ring"/>
+          <circle cx="180" cy="236" r="9"  fill="rgba(80,255,160,0.15)"/>
+          <circle cx="180" cy="236" r="4.5" fill="#50ffa0" filter="url(#glow)"/>
+        </g>
+
+        <!-- USA -->
         <g class="map-marker" data-project="🇺🇸 EE.UU. — Carbone Collision Center (Nueva York)" style="cursor:pointer">
-          <circle cx="218" cy="130" r="14" fill="rgba(0,212,255,0.07)" class="pulse-ring"/>
-          <circle cx="218" cy="130" r="8" fill="rgba(0,212,255,0.15)"/>
-          <circle cx="218" cy="130" r="4" fill="#00d4ff" filter="url(#glow)"/>
+          <circle cx="252" cy="136" r="16" fill="rgba(80,160,255,0.06)" class="pulse-ring"/>
+          <circle cx="252" cy="136" r="9"  fill="rgba(80,160,255,0.15)"/>
+          <circle cx="252" cy="136" r="4.5" fill="#50a0ff" filter="url(#glow)"/>
         </g>
-
-        <!-- Connector lines from Spain -->
-        <line x1="452" y1="106" x2="590" y2="152" stroke="rgba(255,107,53,0.2)" stroke-width="0.8" stroke-dasharray="4,3"/>
-        <line x1="452" y1="106" x2="553" y2="105" stroke="rgba(255,107,53,0.2)" stroke-width="0.8" stroke-dasharray="4,3"/>
-        <line x1="452" y1="106" x2="218" y2="130" stroke="rgba(0,212,255,0.15)" stroke-width="0.8" stroke-dasharray="4,3"/>
-        <line x1="452" y1="106" x2="182" y2="215" stroke="rgba(0,212,255,0.15)" stroke-width="0.8" stroke-dasharray="4,3"/>
-        <line x1="452" y1="106" x2="437" y2="108" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
       </svg>
 
-      <!-- Legend -->
-      <div style="display:flex;gap:24px;justify-content:center;margin-top:28px;flex-wrap:wrap;">
-        <div style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-dim);">
-          <div style="width:10px;height:10px;border-radius:50%;background:#00d4ff;box-shadow:0 0 8px #00d4ff;"></div>
-          <span id="map-legend-eu">Europa y América</span>
+      <!-- Legend — one entry per continent color -->
+      <div style="display:flex;gap:20px;justify-content:center;margin-top:28px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-dim);">
+          <div style="width:9px;height:9px;border-radius:50%;background:#00d4ff;box-shadow:0 0 6px #00d4ff;"></div>
+          <span id="map-legend-eu">Europa</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-dim);">
-          <div style="width:10px;height:10px;border-radius:50%;background:#ff6b35;box-shadow:0 0 8px #ff6b35;"></div>
-          <span id="map-legend-me">Oriente Medio y Asia</span>
+        <div style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-dim);">
+          <div style="width:9px;height:9px;border-radius:50%;background:#50a0ff;box-shadow:0 0 6px #50a0ff;"></div>
+          <span id="map-legend-na">Norteamérica</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-dim);">
+          <div style="width:9px;height:9px;border-radius:50%;background:#50ffa0;box-shadow:0 0 6px #50ffa0;"></div>
+          <span id="map-legend-la">Latinoamérica</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-dim);">
+          <div style="width:9px;height:9px;border-radius:50%;background:#ffa050;box-shadow:0 0 6px #ffa050;"></div>
+          <span id="map-legend-me">Oriente Medio</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-dim);">
+          <div style="width:9px;height:9px;border-radius:50%;background:#ff6464;box-shadow:0 0 6px #ff6464;"></div>
+          <span id="map-legend-as">Asia</span>
         </div>
       </div>
     </div>
@@ -2845,8 +2919,11 @@
       'map-tag':        '// Presencia Internacional',
       'map-title':      'Proyectos en <span style="color:var(--accent)">Todo el Mundo</span>',
       'map-desc':       'Instalaciones diseñadas y ejecutadas en 4 continentes. Pasa el ratón sobre cada país para ver el proyecto.',
-      'map-legend-eu':  'Europa y América',
-      'map-legend-me':  'Oriente Medio y Asia',
+      'map-legend-eu':  'Europa',
+      'map-legend-na':  'Norteamérica',
+      'map-legend-la':  'Latinoamérica',
+      'map-legend-me':  'Oriente Medio',
+      'map-legend-as':  'Asia',
       'render-tag':     '// Render Interactivo 3D',
       'render-title':   'Explora el Diseño en <span style="color:var(--accent)">360°</span>',
       'render-desc':    'Render fotorrealista de una cabina industrial de composites. Arrastra o desliza para rotar el modelo y explorar cada ángulo.',
@@ -2957,8 +3034,11 @@
       'map-tag':        '// International Presence',
       'map-title':      'Projects Around <span style="color:var(--accent)">the World</span>',
       'map-desc':       'Installations designed and delivered across 4 continents. Hover over each country to see the project.',
-      'map-legend-eu':  'Europe & Americas',
-      'map-legend-me':  'Middle East & Asia',
+      'map-legend-eu':  'Europe',
+      'map-legend-na':  'North America',
+      'map-legend-la':  'Latin America',
+      'map-legend-me':  'Middle East',
+      'map-legend-as':  'Asia',
       'render-tag':     '// Interactive 3D Render',
       'render-title':   'Explore the Design in <span style="color:var(--accent)">360°</span>',
       'render-desc':    'Photorealistic render of an industrial composites booth. Drag or swipe to rotate the model and explore every angle.',
@@ -3016,7 +3096,10 @@
     set('contact-intro', t['contact-intro']); set('contact-phone', t['contact-phone']);
     set('footer-text', t['footer-text']);
     set('map-tag', t['map-tag']); set('map-title', t['map-title']);
-    set('map-desc', t['map-desc']); set('map-legend-eu', t['map-legend-eu']); set('map-legend-me', t['map-legend-me']);
+    set('map-desc', t['map-desc']);
+    set('map-legend-eu', t['map-legend-eu']); set('map-legend-na', t['map-legend-na']);
+    set('map-legend-la', t['map-legend-la']); set('map-legend-me', t['map-legend-me']);
+    set('map-legend-as', t['map-legend-as']);
     set('render-tag', t['render-tag']); set('render-title', t['render-title']);
     set('render-desc', t['render-desc']); set('hint-drag', t['hint-drag']);
     set('hint-touch', t['hint-touch']); set('hint-fs', t['hint-fs']);

@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ramón Panduro Sánchez — Ingeniero Industrial</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080b10'/%3E%3Cpolygon points='1,1 31,1 31,31 1,31' fill='none' stroke='%2300d4ff' stroke-width='1.5'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='13' fill='%2300d4ff' letter-spacing='0.5'%3ERPS%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080b10'/%3E%3Cpolygon points='1,1 31,1 31,31 1,31' fill='none' stroke='%2300d4ff' stroke-width='1.5'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='13' fill='%2300d4ff' letter-spacing='0.5'%3ERPS%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1342,6 +1344,25 @@
   .door-line.grow { transform: scaleY(1); }
   .door-line.hide { opacity: 0; transition: opacity 0.15s, transform 1.0s cubic-bezier(0.25, 1, 0.5, 1); }
 
+  /* ── WORLD MAP ── */
+  .pulse-ring {
+    animation: pulseRing 2.5s ease-out infinite;
+    transform-origin: center;
+  }
+  @keyframes pulseRing {
+    0%   { r: 6;  opacity: 0.6; }
+    70%  { r: 18; opacity: 0; }
+    100% { r: 6;  opacity: 0; }
+  }
+  .map-marker circle:last-child { transition: r 0.2s; }
+  .map-marker:hover circle:last-child { r: 6; }
+  .map-marker:nth-child(1) .pulse-ring { animation-delay: 0s; }
+  .map-marker:nth-child(2) .pulse-ring { animation-delay: 0.5s; }
+  .map-marker:nth-child(3) .pulse-ring { animation-delay: 1s; }
+  .map-marker:nth-child(4) .pulse-ring { animation-delay: 1.5s; }
+  .map-marker:nth-child(5) .pulse-ring { animation-delay: 0.3s; }
+  .map-marker:nth-child(6) .pulse-ring { animation-delay: 0.8s; }
+
   /* ── ANIMATIONS ── */
 
   @keyframes fadeUp {
@@ -1733,6 +1754,157 @@
             <span class="tag">Catálogo Técnico</span>
             <span class="tag">Laboratorio</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORLD MAP -->
+<section id="worldmap" style="padding:100px 20px 80px; background:linear-gradient(180deg,var(--bg) 0%,rgba(0,212,255,0.03) 50%,var(--bg) 100%);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-header">
+      <span class="section-tag" id="map-tag">// Presencia Internacional</span>
+      <h2 class="section-title" id="map-title">Proyectos en <span style="color:var(--accent)">Todo el Mundo</span></h2>
+      <div class="section-line"></div>
+      <p id="map-desc" style="max-width:520px;margin:20px auto 0;color:var(--text-dim);font-size:1rem;line-height:1.7;">
+        Instalaciones diseñadas y ejecutadas en 4 continentes. Pasa el ratón sobre cada país para ver el proyecto.
+      </p>
+    </div>
+
+    <div style="position:relative;margin-top:48px;">
+      <!-- Tooltip -->
+      <div id="mapTooltip" style="
+        position:absolute;z-index:20;pointer-events:none;
+        background:rgba(8,11,16,0.95);border:1px solid var(--accent);
+        padding:10px 16px;font-family:'JetBrains Mono',monospace;font-size:0.78rem;
+        color:var(--text);white-space:nowrap;opacity:0;transition:opacity 0.2s;
+        box-shadow:0 0 20px rgba(0,212,255,0.2);
+      "></div>
+
+      <svg id="worldSvg" viewBox="0 0 1010 500" style="width:100%;display:block;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Ocean background -->
+        <rect width="1010" height="500" fill="#060c14"/>
+
+        <!-- Grid lines -->
+        <g stroke="rgba(0,212,255,0.06)" stroke-width="0.5">
+          <line x1="0" y1="100" x2="1010" y2="100"/>
+          <line x1="0" y1="200" x2="1010" y2="200"/>
+          <line x1="0" y1="300" x2="1010" y2="300"/>
+          <line x1="0" y1="400" x2="1010" y2="400"/>
+          <line x1="200" y1="0" x2="200" y2="500"/>
+          <line x1="400" y1="0" x2="400" y2="500"/>
+          <line x1="600" y1="0" x2="600" y2="500"/>
+          <line x1="800" y1="0" x2="800" y2="500"/>
+        </g>
+
+        <!-- Equator -->
+        <line x1="0" y1="250" x2="1010" y2="250" stroke="rgba(0,212,255,0.12)" stroke-width="1" stroke-dasharray="6,4"/>
+
+        <!-- CONTINENTS (simplified paths) -->
+        <!-- North America -->
+        <path d="M120,60 L180,55 L230,70 L260,90 L275,130 L265,170 L250,200 L240,220 L230,250 L210,260 L195,240 L185,210 L170,195 L150,200 L130,190 L115,170 L105,145 L100,120 L108,90 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
+        <!-- Central America -->
+        <path d="M210,260 L230,250 L240,270 L235,285 L220,290 L210,275 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.6"/>
+        <!-- South America -->
+        <path d="M230,295 L265,285 L295,295 L315,320 L325,360 L320,400 L305,430 L285,450 L265,445 L248,420 L238,390 L232,355 L225,325 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
+        <!-- Greenland -->
+        <path d="M185,20 L215,15 L230,30 L220,55 L200,60 L180,48 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.1)" stroke-width="0.6"/>
+        <!-- Europe -->
+        <path d="M435,55 L470,50 L500,55 L520,70 L515,90 L495,100 L480,115 L465,120 L450,115 L440,100 L430,80 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
+        <!-- Iberian Peninsula -->
+        <path d="M435,95 L455,90 L465,100 L462,118 L448,122 L436,115 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.6"/>
+        <!-- UK -->
+        <path d="M445,58 L458,54 L462,64 L455,72 L444,68 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.5"/>
+        <!-- Africa -->
+        <path d="M450,135 L490,130 L520,140 L540,165 L548,200 L545,240 L535,270 L520,300 L500,320 L480,318 L462,300 L450,270 L442,240 L440,200 L442,165 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
+        <!-- Asia - main -->
+        <path d="M530,50 L600,40 L680,35 L760,40 L810,50 L840,70 L850,100 L840,130 L810,145 L780,140 L750,150 L720,145 L690,155 L660,150 L630,145 L600,150 L575,140 L555,120 L540,100 L530,80 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.8"/>
+        <!-- Middle East / Arabian Peninsula -->
+        <path d="M555,130 L590,125 L610,135 L615,165 L600,185 L580,185 L562,170 L552,150 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.15)" stroke-width="0.6"/>
+        <!-- India -->
+        <path d="M640,155 L670,150 L685,170 L680,205 L665,220 L648,210 L638,185 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.6"/>
+        <!-- Southeast Asia -->
+        <path d="M750,155 L790,150 L810,165 L805,190 L785,195 L760,185 L748,170 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.6"/>
+        <!-- China/East Asia -->
+        <path d="M720,70 L780,65 L820,75 L840,95 L830,120 L800,130 L765,125 L740,115 L718,100 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.6"/>
+        <!-- Japan -->
+        <path d="M845,80 L860,75 L868,88 L858,98 L844,92 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/>
+        <!-- Australia -->
+        <path d="M790,310 L850,300 L900,310 L920,340 L910,375 L885,395 L855,395 L825,380 L800,355 L788,330 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.12)" stroke-width="0.8"/>
+        <!-- New Zealand -->
+        <path d="M930,370 L940,360 L948,375 L940,385 L930,380 Z" fill="#0d1f30" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/>
+
+        <!-- ═══════════════════════════════════════════════ -->
+        <!-- PROJECT MARKERS — glow dots with pulse rings   -->
+        <!-- ═══════════════════════════════════════════════ -->
+
+        <!-- Spain (Albacete / Madrid / Lleida) -->
+        <g class="map-marker" data-project="🇪🇸 España — Uecko (Madrid) · Ilersis (Lleida)" style="cursor:pointer">
+          <circle cx="452" cy="106" r="14" fill="rgba(0,212,255,0.07)" class="pulse-ring"/>
+          <circle cx="452" cy="106" r="8" fill="rgba(0,212,255,0.15)"/>
+          <circle cx="452" cy="106" r="4" fill="#00d4ff" filter="url(#glow)"/>
+        </g>
+
+        <!-- Portugal (Aveiro) -->
+        <g class="map-marker" data-project="🇵🇹 Portugal — Stelia (Aeronáutica) · Unibike · Muebles · Castrosua" style="cursor:pointer">
+          <circle cx="437" cy="108" r="14" fill="rgba(0,212,255,0.07)" class="pulse-ring"/>
+          <circle cx="437" cy="108" r="8" fill="rgba(0,212,255,0.15)"/>
+          <circle cx="437" cy="108" r="4" fill="#00d4ff" filter="url(#glow)"/>
+        </g>
+
+        <!-- Saudi Arabia -->
+        <g class="map-marker" data-project="🇸🇦 Arabia Saudí — Talgo Haramain (Ferroviario)" style="cursor:pointer">
+          <circle cx="590" cy="152" r="14" fill="rgba(255,107,53,0.1)" class="pulse-ring"/>
+          <circle cx="590" cy="152" r="8" fill="rgba(255,107,53,0.2)"/>
+          <circle cx="590" cy="152" r="4" fill="#ff6b35" filter="url(#glow)"/>
+        </g>
+
+        <!-- Turkey -->
+        <g class="map-marker" data-project="🇹🇷 Turquía — TOGG (Vehículo Eléctrico)" style="cursor:pointer">
+          <circle cx="553" cy="105" r="14" fill="rgba(255,107,53,0.1)" class="pulse-ring"/>
+          <circle cx="553" cy="105" r="8" fill="rgba(255,107,53,0.2)"/>
+          <circle cx="553" cy="105" r="4" fill="#ff6b35" filter="url(#glow)"/>
+        </g>
+
+        <!-- Mexico -->
+        <g class="map-marker" data-project="🇲🇽 México — Cabina Gel Coat Robotizada (Composites)" style="cursor:pointer">
+          <circle cx="182" cy="215" r="14" fill="rgba(0,212,255,0.07)" class="pulse-ring"/>
+          <circle cx="182" cy="215" r="8" fill="rgba(0,212,255,0.15)"/>
+          <circle cx="182" cy="215" r="4" fill="#00d4ff" filter="url(#glow)"/>
+        </g>
+
+        <!-- USA (New York) -->
+        <g class="map-marker" data-project="🇺🇸 EE.UU. — Carbone Collision Center (Nueva York)" style="cursor:pointer">
+          <circle cx="218" cy="130" r="14" fill="rgba(0,212,255,0.07)" class="pulse-ring"/>
+          <circle cx="218" cy="130" r="8" fill="rgba(0,212,255,0.15)"/>
+          <circle cx="218" cy="130" r="4" fill="#00d4ff" filter="url(#glow)"/>
+        </g>
+
+        <!-- Connector lines from Spain -->
+        <line x1="452" y1="106" x2="590" y2="152" stroke="rgba(255,107,53,0.2)" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <line x1="452" y1="106" x2="553" y2="105" stroke="rgba(255,107,53,0.2)" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <line x1="452" y1="106" x2="218" y2="130" stroke="rgba(0,212,255,0.15)" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <line x1="452" y1="106" x2="182" y2="215" stroke="rgba(0,212,255,0.15)" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <line x1="452" y1="106" x2="437" y2="108" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
+      </svg>
+
+      <!-- Legend -->
+      <div style="display:flex;gap:24px;justify-content:center;margin-top:28px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-dim);">
+          <div style="width:10px;height:10px;border-radius:50%;background:#00d4ff;box-shadow:0 0 8px #00d4ff;"></div>
+          <span id="map-legend-eu">Europa y América</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-dim);">
+          <div style="width:10px;height:10px;border-radius:50%;background:#ff6b35;box-shadow:0 0 8px #ff6b35;"></div>
+          <span id="map-legend-me">Oriente Medio y Asia</span>
         </div>
       </div>
     </div>
@@ -2523,6 +2695,41 @@
       navLinks.classList.remove('open');
     });
   });
+  // ── WORLD MAP TOOLTIPS ──
+  (function() {
+    const svg    = document.getElementById('worldSvg');
+    const tip    = document.getElementById('mapTooltip');
+    if (!svg || !tip) return;
+
+    svg.querySelectorAll('.map-marker').forEach(function(marker) {
+      marker.addEventListener('mouseenter', function(e) {
+        tip.textContent = marker.dataset.project;
+        tip.style.opacity = '1';
+      });
+      marker.addEventListener('mousemove', function(e) {
+        const rect = svg.parentElement.getBoundingClientRect();
+        const x = e.clientX - rect.left + 14;
+        const y = e.clientY - rect.top - 14;
+        tip.style.left = x + 'px';
+        tip.style.top  = y + 'px';
+      });
+      marker.addEventListener('mouseleave', function() {
+        tip.style.opacity = '0';
+      });
+      // Touch support
+      marker.addEventListener('touchstart', function(e) {
+        tip.textContent = marker.dataset.project;
+        tip.style.opacity = '1';
+        const rect = svg.parentElement.getBoundingClientRect();
+        const t = e.touches[0];
+        tip.style.left = (t.clientX - rect.left + 14) + 'px';
+        tip.style.top  = (t.clientY - rect.top - 40) + 'px';
+        setTimeout(function(){ tip.style.opacity='0'; }, 2500);
+        e.preventDefault();
+      }, { passive: false });
+    });
+  })();
+
   // ── LANGUAGE TOGGLE ──
   var currentLang = 'es';
 
@@ -2635,6 +2842,11 @@
       'contact-phone':  'Teléfono',
       // Footer
       'footer-text':    '// Ingeniero Industrial · Albacete, España · 2025',
+      'map-tag':        '// Presencia Internacional',
+      'map-title':      'Proyectos en <span style="color:var(--accent)">Todo el Mundo</span>',
+      'map-desc':       'Instalaciones diseñadas y ejecutadas en 4 continentes. Pasa el ratón sobre cada país para ver el proyecto.',
+      'map-legend-eu':  'Europa y América',
+      'map-legend-me':  'Oriente Medio y Asia',
       'render-tag':     '// Render Interactivo 3D',
       'render-title':   'Explora el Diseño en <span style="color:var(--accent)">360°</span>',
       'render-desc':    'Render fotorrealista de una cabina industrial de composites. Arrastra o desliza para rotar el modelo y explorar cada ángulo.',
@@ -2742,6 +2954,11 @@
       'contact-intro':  'Open to challenging new projects, technical collaborations and engineering innovation.',
       'contact-phone':  'Phone',
       'footer-text':    '// Industrial Engineer · Albacete, Spain · 2025',
+      'map-tag':        '// International Presence',
+      'map-title':      'Projects Around <span style="color:var(--accent)">the World</span>',
+      'map-desc':       'Installations designed and delivered across 4 continents. Hover over each country to see the project.',
+      'map-legend-eu':  'Europe & Americas',
+      'map-legend-me':  'Middle East & Asia',
       'render-tag':     '// Interactive 3D Render',
       'render-title':   'Explore the Design in <span style="color:var(--accent)">360°</span>',
       'render-desc':    'Photorealistic render of an industrial composites booth. Drag or swipe to rotate the model and explore every angle.',
@@ -2798,6 +3015,8 @@
     set('contact-tag', t['contact-tag']); set('contact-title', t['contact-title']);
     set('contact-intro', t['contact-intro']); set('contact-phone', t['contact-phone']);
     set('footer-text', t['footer-text']);
+    set('map-tag', t['map-tag']); set('map-title', t['map-title']);
+    set('map-desc', t['map-desc']); set('map-legend-eu', t['map-legend-eu']); set('map-legend-me', t['map-legend-me']);
     set('render-tag', t['render-tag']); set('render-title', t['render-title']);
     set('render-desc', t['render-desc']); set('hint-drag', t['hint-drag']);
     set('hint-touch', t['hint-touch']); set('hint-fs', t['hint-fs']);

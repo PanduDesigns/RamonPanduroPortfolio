@@ -257,6 +257,48 @@
     align-items: center;
     padding: 100px 60px 60px;
     overflow: hidden;
+    position: relative;
+  }
+
+  /* ── HERO BACKGROUND SLIDER ── */
+  #heroSlider {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.8s ease-in-out;
+    /* Dark overlay so content stays readable */
+    filter: brightness(0.18) saturate(0.6);
+  }
+
+  .hero-slide.active {
+    opacity: 1;
+  }
+
+  /* Extra dark gradient overlay on top of slider */
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(105deg, rgba(6,8,16,0.88) 0%, rgba(6,8,16,0.60) 50%, rgba(6,8,16,0.72) 100%),
+      linear-gradient(180deg, rgba(6,8,16,0.3) 0%, transparent 40%, rgba(6,8,16,0.5) 100%);
+    pointer-events: none;
+  }
+
+  /* All hero content must sit above slider and overlay */
+  .hero-glow, .hero-glow-2, .hero-content {
+    position: relative;
+    z-index: 2;
   }
 
   .hero-glow {
@@ -1470,6 +1512,17 @@
 
 <!-- HERO -->
 <section id="hero">
+  <!-- Background photo slider -->
+  <div id="heroSlider" aria-hidden="true">
+    <div class="hero-slide active" style="background-image:url('assets/img/Unibike/render 1.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/img/Unibike/render 2.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/img/Talgo/render 1.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/img/Stelia/render 1.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/img/Togg/render 1.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/img/Global Composites/render 1.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/img/Unibike/real 1.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/img/Castrosua/render 1.jpg')"></div>
+  </div>
   <div class="hero-glow"></div>
   <div class="hero-glow-2"></div>
   <div class="hero-content">
@@ -1521,11 +1574,11 @@
 <section id="render3d" style="padding:80px 20px; background:linear-gradient(180deg, var(--bg) 0%, rgba(0,212,255,0.04) 50%, var(--bg) 100%); overflow:hidden;">
   <div style="max-width:1100px; margin:0 auto;">
     <div class="section-header">
-      <span class="section-tag" id="render-tag">// Render Interactivo 3D</span>
-      <h2 class="section-title" id="render-title">Explora el Diseño en <span style="color:var(--accent)">360°</span></h2>
+      <span class="section-tag" id="render-tag">// Ejemplo de Presentación Visual</span>
+      <h2 class="section-title" id="render-title">Render Realista en <span style="color:var(--accent)">360°</span> — Cabina de Composites</h2>
       <div class="section-line"></div>
       <p id="render-desc" style="max-width:560px; margin:20px auto 0; color:var(--text-dim); font-size:1rem; line-height:1.7;">
-        Render fotorrealista de una cabina industrial de composites. Arrastra o desliza para rotar el modelo y explorar cada ángulo.
+        Ejemplo de presentación visual con render fotorrealista de una cabina industrial de composites. Arrastra o desliza para rotar el modelo 360° y explorar cada detalle.
       </p>
     </div>
 
@@ -1583,7 +1636,7 @@
     <!-- VIDEO -->
     <div style="margin-top:48px;">
       <div style="text-align:center; margin-bottom:20px;">
-        <span style="font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--text-dim); letter-spacing:2px; text-transform:uppercase;" id="video-label">▶ Vídeo de presentación de la instalación</span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--text-dim); letter-spacing:2px; text-transform:uppercase;" id="video-label">▶ Ejemplo: Vídeo de presentación con render realista de cabina industrial</span>
       </div>
       <div style="
         position:relative;
@@ -1612,151 +1665,6 @@
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-header">
-      <span class="section-tag" id="about-tag">// 01 — Sobre mí</span>
-      <h2 class="section-title" id="about-title">Ingeniería con <span style="color:var(--accent)">visión</span></h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="about-grid">
-      <div class="about-text">
-        <p id="about-p1">
-          Ingeniero Industrial graduado en la UCLM, con Máster Oficial de Ingeniería Industrial. 
-          <span class="about-highlight">+7 años de experiencia</span> en los sectores de automoción e industria de acabado superficial, 
-          trabajando en proyectos de gran envergadura por <span class="about-highlight">América, Arabia Saudí y Europa</span>.
-        </p>
-        <p id="about-p2">
-          Actualmente Ingeniero Superior en <span class="about-highlight">Martech Corporation</span>, donde he diseñado y gestionado 
-          proyectos completos de líneas de tratamiento superficial para sectores aeronáutico, ferroviario, mueble y bicicleta.
-          Como logro destacado, diseñé e implant&eacute; el sistema de referenciación y los <span class="about-highlight">sistemas de automatización</span> 
-          actualmente en uso en la empresa.
-        </p>
-        <p id="about-p3">
-          Apasionado del diseño 3D, gráfico y la tecnología. Amante de los proyectos grandes donde seguir creciendo.
-          La creatividad, la iniciativa, la resolución de problemas y el espíritu de liderazgo son mis señas de identidad.
-        </p>
-        <div style="margin-top:28px; display:flex; gap:20px; align-items:center;">
-          <a href="https://www.linkedin.com/in/ramon-ps/" target="_blank" class="btn-secondary" style="font-size:0.75rem; padding:10px 24px;">LinkedIn</a>
-          <span id="about-location" style="font-size:0.75rem; color:var(--text-dim); font-family:'JetBrains Mono',monospace;">Albacete, España · B2 Cambridge</span>
-        </div>
-      </div>
-      <div>
-        <div class="skills-grid" id="skillsGrid">
-          <div class="skill-item">
-            <span class="skill-name">Diseño 3D</span>
-            <div class="skill-bar-wrap"><div class="skill-bar" data-width="95"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Automatización</span>
-            <div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Gestión de Proyectos</span>
-            <div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Diseño Gráfico</span>
-            <div class="skill-bar-wrap"><div class="skill-bar" data-width="82"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Cálculo Estructural</span>
-            <div class="skill-bar-wrap"><div class="skill-bar" data-width="80"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">LLMs / Vibe Coding</span>
-            <div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Macro Excel / VBA</span>
-            <div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">iLogics / Inventor</span>
-            <div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-header">
-      <span class="section-tag" id="exp-tag">// 02 — Trayectoria</span>
-      <h2 class="section-title" id="exp-title">Experiencia <span style="color:var(--accent)">Profesional</span></h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div>
-          <div class="timeline-date">2021 — HOY</div>
-          <div class="timeline-dot" style="top:4px"></div>
-        </div>
-        <div class="timeline-content">
-          <div class="timeline-role" id="exp1-role">Ingeniero Superior</div>
-          <div class="timeline-company" id="exp1-company">Martech Corporation · Industria</div>
-          <div class="timeline-desc" id="exp1-desc">
-            Diseño y gestión de líneas de tratamiento superficial para sectores automoción, aeronáutico, ferroviario y mueble. 
-            Contacto y gestión de proyecto con clientes internacionales, elaboración de layouts y planos, presupuestos y documentación técnica. 
-            Cálculos térmicos, estructurales y ensayos lumínicos. Coordinación de equipos multidisciplinares entre diferentes empresas. 
-            <strong style="color:var(--text)">Logro clave:</strong> Diseñé e implanté el sistema de referenciación y la suite completa de automatizaciones actualmente en producción.
-          </div>
-          <div class="timeline-tags">
-            <span class="tag">Inventor 3D</span>
-            <span class="tag">Macros VBA</span>
-            <span class="tag">iLogics</span>
-            <span class="tag">Proyectos Llave en Mano</span>
-            <span class="tag">América / Arabia / Europa</span>
-          </div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div>
-          <div class="timeline-date">2019 — 2021</div>
-          <div class="timeline-dot" style="top:4px"></div>
-        </div>
-        <div class="timeline-content">
-          <div class="timeline-role" id="exp2-role">Diseñador Técnico</div>
-          <div class="timeline-company" id="exp2-company">Martech Corporation</div>
-          <div class="timeline-desc" id="exp2-desc">
-            Diseño de fabricación de piezas (chapa, estructuras, componentes eléctricos). Supervisión de fabricación y gestión con proveedores. 
-            Parametrización de diseños, preparación de plantillas y primeras automatizaciones mediante macros y Scripts.
-          </div>
-          <div class="timeline-tags">
-            <span class="tag">Diseño de Chapa</span>
-            <span class="tag">AutoCAD</span>
-            <span class="tag">SolidWorks</span>
-            <span class="tag">Proveedores</span>
-          </div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div>
-          <div class="timeline-date">2018 — 2019</div>
-          <div class="timeline-dot" style="top:4px"></div>
-        </div>
-        <div class="timeline-content">
-          <div class="timeline-role" id="exp3-role">Ingeniero Oficina Técnica</div>
-          <div class="timeline-company" id="exp3-company">AJUSA · Automoción Multinacional</div>
-          <div class="timeline-desc" id="exp3-desc">
-            Homologación e introducción de nuevas referencias de catálogo. Estudio y desarrollo de nuevos productos para motores multimarca. 
-            Análisis técnico funcional, dimensional y de materiales de piezas OEM. Verificaciones en laboratorio dimensional y elaboración de informes.
-          </div>
-          <div class="timeline-tags">
-            <span class="tag">OEM Analysis</span>
-            <span class="tag">Catálogo Técnico</span>
-            <span class="tag">Laboratorio</span>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -2125,6 +2033,151 @@
         <div class="auto-saving" id="a9-saving">⚡ Ahorro: 4 min por oferta</div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-tag" id="about-tag">// 01 — Sobre mí</span>
+      <h2 class="section-title" id="about-title">Ingeniería con <span style="color:var(--accent)">visión</span></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p id="about-p1">
+          Ingeniero Industrial graduado en la UCLM, con Máster Oficial de Ingeniería Industrial. 
+          <span class="about-highlight">+7 años de experiencia</span> en los sectores de automoción e industria de acabado superficial, 
+          trabajando en proyectos de gran envergadura por <span class="about-highlight">América, Arabia Saudí y Europa</span>.
+        </p>
+        <p id="about-p2">
+          Actualmente Ingeniero Superior en <span class="about-highlight">Martech Corporation</span>, donde he diseñado y gestionado 
+          proyectos completos de líneas de tratamiento superficial para sectores aeronáutico, ferroviario, mueble y bicicleta.
+          Como logro destacado, diseñé e implant&eacute; el sistema de referenciación y los <span class="about-highlight">sistemas de automatización</span> 
+          actualmente en uso en la empresa.
+        </p>
+        <p id="about-p3">
+          Apasionado del diseño 3D, gráfico y la tecnología. Amante de los proyectos grandes donde seguir creciendo.
+          La creatividad, la iniciativa, la resolución de problemas y el espíritu de liderazgo son mis señas de identidad.
+        </p>
+        <div style="margin-top:28px; display:flex; gap:20px; align-items:center;">
+          <a href="https://www.linkedin.com/in/ramon-ps/" target="_blank" class="btn-secondary" style="font-size:0.75rem; padding:10px 24px;">LinkedIn</a>
+          <span id="about-location" style="font-size:0.75rem; color:var(--text-dim); font-family:'JetBrains Mono',monospace;">Albacete, España · B2 Cambridge</span>
+        </div>
+      </div>
+      <div>
+        <div class="skills-grid" id="skillsGrid">
+          <div class="skill-item">
+            <span class="skill-name">Diseño 3D</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="95"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Automatización</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Gestión de Proyectos</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Diseño Gráfico</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="82"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Cálculo Estructural</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="80"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">LLMs / Vibe Coding</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Macro Excel / VBA</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">iLogics / Inventor</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-tag" id="exp-tag">// 02 — Trayectoria</span>
+      <h2 class="section-title" id="exp-title">Experiencia <span style="color:var(--accent)">Profesional</span></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-date">2021 — HOY</div>
+          <div class="timeline-dot" style="top:4px"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-role" id="exp1-role">Ingeniero Superior</div>
+          <div class="timeline-company" id="exp1-company">Martech Corporation · Industria</div>
+          <div class="timeline-desc" id="exp1-desc">
+            Diseño y gestión de líneas de tratamiento superficial para sectores automoción, aeronáutico, ferroviario y mueble. 
+            Contacto y gestión de proyecto con clientes internacionales, elaboración de layouts y planos, presupuestos y documentación técnica. 
+            Cálculos térmicos, estructurales y ensayos lumínicos. Coordinación de equipos multidisciplinares entre diferentes empresas. 
+            <strong style="color:var(--text)">Logro clave:</strong> Diseñé e implanté el sistema de referenciación y la suite completa de automatizaciones actualmente en producción.
+          </div>
+          <div class="timeline-tags">
+            <span class="tag">Inventor 3D</span>
+            <span class="tag">Macros VBA</span>
+            <span class="tag">iLogics</span>
+            <span class="tag">Proyectos Llave en Mano</span>
+            <span class="tag">América / Arabia / Europa</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-date">2019 — 2021</div>
+          <div class="timeline-dot" style="top:4px"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-role" id="exp2-role">Diseñador Técnico</div>
+          <div class="timeline-company" id="exp2-company">Martech Corporation</div>
+          <div class="timeline-desc" id="exp2-desc">
+            Diseño de fabricación de piezas (chapa, estructuras, componentes eléctricos). Supervisión de fabricación y gestión con proveedores. 
+            Parametrización de diseños, preparación de plantillas y primeras automatizaciones mediante macros y Scripts.
+          </div>
+          <div class="timeline-tags">
+            <span class="tag">Diseño de Chapa</span>
+            <span class="tag">AutoCAD</span>
+            <span class="tag">SolidWorks</span>
+            <span class="tag">Proveedores</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-date">2018 — 2019</div>
+          <div class="timeline-dot" style="top:4px"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-role" id="exp3-role">Ingeniero Oficina Técnica</div>
+          <div class="timeline-company" id="exp3-company">AJUSA · Automoción Multinacional</div>
+          <div class="timeline-desc" id="exp3-desc">
+            Homologación e introducción de nuevas referencias de catálogo. Estudio y desarrollo de nuevos productos para motores multimarca. 
+            Análisis técnico funcional, dimensional y de materiales de piezas OEM. Verificaciones en laboratorio dimensional y elaboración de informes.
+          </div>
+          <div class="timeline-tags">
+            <span class="tag">OEM Analysis</span>
+            <span class="tag">Catálogo Técnico</span>
+            <span class="tag">Laboratorio</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2690,6 +2743,31 @@
       navLinks.classList.remove('open');
     });
   });
+  // ── HERO BACKGROUND SLIDER ──
+  (function() {
+    var slides = document.querySelectorAll('.hero-slide');
+    if (!slides.length) return;
+    var current = 0;
+
+    // Preload slides that fail (missing image → hide that slide)
+    slides.forEach(function(slide) {
+      var url = slide.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+      var img = new Image();
+      img.onerror = function() { slide.style.display = 'none'; };
+      img.src = url;
+    });
+
+    function nextSlide() {
+      var visible = Array.from(slides).filter(function(s){ return s.style.display !== 'none'; });
+      if (visible.length < 2) return;
+      visible[current % visible.length].classList.remove('active');
+      current = (current + 1) % visible.length;
+      visible[current].classList.add('active');
+    }
+
+    setInterval(nextSlide, 5000);
+  })();
+
   // ── WORLD MAP TOOLTIPS ──
   (function() {
     const svg    = document.getElementById('worldSvg');
@@ -2845,14 +2923,14 @@
       'map-legend-la':  'Latinoamérica',
       'map-legend-me':  'Oriente Medio',
       'map-legend-as':  'Asia',
-      'render-tag':     '// Render Interactivo 3D',
-      'render-title':   'Explora el Diseño en <span style="color:var(--accent)">360°</span>',
-      'render-desc':    'Render fotorrealista de una cabina industrial de composites. Arrastra o desliza para rotar el modelo y explorar cada ángulo.',
+      'render-tag':     '// Ejemplo de Presentación Visual',
+      'render-title':   'Render Realista en <span style="color:var(--accent)">360°</span> — Cabina de Composites',
+      'render-desc':    'Ejemplo de presentación visual con render fotorrealista de una cabina industrial de composites. Arrastra o desliza para rotar el modelo 360° y explorar cada detalle.',
       'hint-drag':      'Arrastra para rotar',
       'hint-touch':     'Desliza en móvil',
       'hint-fs':        'Doble clic para pantalla completa',
       'render-label':   'Cabina Industrial · Render KeyShot',
-      'video-label':    '▶ Vídeo de presentación de la instalación',
+      'video-label':    '▶ Ejemplo: Vídeo de presentación con render realista de cabina industrial',
     },
     en: {
       'nav-about':      'About',
@@ -2960,14 +3038,14 @@
       'map-legend-la':  'Latin America',
       'map-legend-me':  'Middle East',
       'map-legend-as':  'Asia',
-      'render-tag':     '// Interactive 3D Render',
-      'render-title':   'Explore the Design in <span style="color:var(--accent)">360°</span>',
-      'render-desc':    'Photorealistic render of an industrial composites booth. Drag or swipe to rotate the model and explore every angle.',
+      'render-tag':     '// Visual Presentation Example',
+      'render-title':   'Photorealistic Render in <span style="color:var(--accent)">360°</span> — Composites Booth',
+      'render-desc':    'Visual presentation example with a photorealistic render of an industrial composites booth. Drag or swipe to rotate the model 360° and explore every detail.',
       'hint-drag':      'Drag to rotate',
       'hint-touch':     'Swipe on mobile',
       'hint-fs':        'Double-click for fullscreen',
       'render-label':   'Industrial Booth · KeyShot Render',
-      'video-label':    '▶ Installation presentation video',
+      'video-label':    '▶ Example: presentation video with photorealistic render of industrial booth',
     }
   };
 

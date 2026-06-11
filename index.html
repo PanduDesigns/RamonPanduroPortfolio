@@ -276,22 +276,22 @@
     opacity: 0;
     transition: opacity 1.8s ease-in-out;
     /* Dark overlay so content stays readable */
-    filter: brightness(0.50) saturate(0.7);
+    filter: brightness(0.60) saturate(0.75);
   }
 
   .hero-slide.active {
     opacity: 1;
   }
 
-  /* Extra dark gradient overlay on top of slider */
+  /* Overlay: side vignette + strong bottom fade */
   #hero::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: 1;
     background:
-      linear-gradient(105deg, rgba(6,8,16,0.88) 0%, rgba(6,8,16,0.60) 50%, rgba(6,8,16,0.72) 100%),
-      linear-gradient(180deg, rgba(6,8,16,0.3) 0%, transparent 40%, rgba(6,8,16,0.5) 100%);
+      linear-gradient(105deg, rgba(6,8,16,0.82) 0%, rgba(6,8,16,0.45) 55%, rgba(6,8,16,0.65) 100%),
+      linear-gradient(180deg, rgba(6,8,16,0.2) 0%, transparent 35%, transparent 55%, rgba(6,8,16,0.75) 78%, rgba(6,8,16,1.0) 100%);
     pointer-events: none;
   }
 

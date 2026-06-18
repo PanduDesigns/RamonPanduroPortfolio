@@ -4,6 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ramón Panduro Sánchez — Ingeniero Industrial</title>
+<meta name="description" content="Ingeniero Industrial especialista en diseño 3D, proyectos llave en mano y automatización de procesos. +7 años de experiencia en automoción, aeronáutica y acabado superficial. Proyectos en +10 países.">
+<meta name="author" content="Ramón Panduro Sánchez">
+<meta name="keywords" content="ingeniero industrial, diseño 3D, automatización, Autodesk Inventor, cabinas de pintura, tratamiento superficial, proyectos internacionales, Albacete">
+
+<!-- Open Graph (LinkedIn, WhatsApp, Facebook) -->
+<meta property="og:type"        content="website">
+<meta property="og:title"       content="Ramón Panduro Sánchez — Ingeniero Industrial">
+<meta property="og:description" content="Especialista en diseño 3D, proyectos llave en mano y automatización de procesos de ingeniería. +30 proyectos en +10 países.">
+<meta property="og:image"       content="assets/img/Unibike/render 1.jpg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+<meta property="og:locale"      content="es_ES">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="Ramón Panduro Sánchez — Ingeniero Industrial">
+<meta name="twitter:description" content="Especialista en diseño 3D, proyectos llave en mano y automatización de procesos de ingeniería. +30 proyectos en +10 países.">
+<meta name="twitter:image"       content="assets/img/Unibike/render 1.jpg">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080b10'/%3E%3Cpolygon points='1,1 31,1 31,31 1,31' fill='none' stroke='%2300d4ff' stroke-width='1.5'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='13' fill='%2300d4ff' letter-spacing='0.5'%3ERPS%3C/text%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080b10'/%3E%3Cpolygon points='1,1 31,1 31,31 1,31' fill='none' stroke='%2300d4ff' stroke-width='1.5'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='13' fill='%2300d4ff' letter-spacing='0.5'%3ERPS%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
@@ -1405,6 +1423,79 @@
   .map-marker:nth-child(5) .pulse-ring { animation-delay: 0.3s; }
   .map-marker:nth-child(6) .pulse-ring { animation-delay: 0.8s; }
 
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── CUSTOM CURSOR ── */
+  @media (pointer: fine) {
+    * { cursor: none !important; }
+
+    #cursor-dot,
+    #cursor-ring {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999999;
+      will-change: transform;
+      transition: opacity 0.3s;
+    }
+
+    #cursor-dot {
+      width: 5px; height: 5px;
+      background: var(--accent);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    #cursor-ring {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(0,212,255,0.6);
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, border-color 0.2s, opacity 0.3s;
+    }
+
+    /* Crosshair lines */
+    #cursor-ring::before,
+    #cursor-ring::after {
+      content: '';
+      position: absolute;
+      background: rgba(0,212,255,0.4);
+    }
+    #cursor-ring::before {
+      width: 1px; height: 10px;
+      left: 50%; top: -14px;
+      transform: translateX(-50%);
+      box-shadow: 0 22px 0 rgba(0,212,255,0.4);
+    }
+    #cursor-ring::after {
+      height: 1px; width: 10px;
+      top: 50%; left: -14px;
+      transform: translateY(-50%);
+      box-shadow: 22px 0 0 rgba(0,212,255,0.4);
+    }
+
+    /* Expand on hover over interactive elements */
+    body.cursor-hover #cursor-ring {
+      width: 48px; height: 48px;
+      border-color: rgba(0,212,255,0.9);
+    }
+    body.cursor-hover #cursor-dot {
+      transform: translate(-50%, -50%) scale(1.6);
+    }
+  }
+
   /* ── ANIMATIONS ── */
 
   @keyframes fadeUp {
@@ -1474,6 +1565,10 @@
 </style>
 </head>
 <body>
+
+<!-- Custom cursor (desktop only) -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
 
 <!-- INTRO SCREEN -->
 <div id="intro-screen">
@@ -1549,19 +1644,19 @@
         <div class="hero-photo-corner br"></div>
       </div>
     <div class="hero-stats">
-      <div class="stat-card">
+      <div class="stat-card reveal reveal-delay-1">
         <div class="stat-number"><span class="counter" data-target="7">0</span>+</div>
         <div class="stat-label" id="stat-1">Años de Experiencia</div>
       </div>
-      <div class="stat-card">
+      <div class="stat-card reveal reveal-delay-2">
         <div class="stat-number"><span class="counter" data-target="30">0</span>+</div>
         <div class="stat-label" id="stat-2">Proyectos Completados</div>
       </div>
-      <div class="stat-card">
+      <div class="stat-card reveal reveal-delay-3">
         <div class="stat-number"><span class="counter" data-target="20">0</span>+</div>
         <div class="stat-label" id="stat-3">Automatizaciones Creadas</div>
       </div>
-      <div class="stat-card">
+      <div class="stat-card reveal reveal-delay-4">
         <div class="stat-number"><span class="counter" data-target="10">0</span>+</div>
         <div class="stat-label" id="stat-4">Países con Proyectos Instalados</div>
       </div>
@@ -1573,7 +1668,7 @@
 <!-- 3D RENDER VIEWER -->
 <section id="render3d" style="padding:80px 20px; background:linear-gradient(180deg, var(--bg) 0%, rgba(0,212,255,0.04) 50%, var(--bg) 100%); overflow:hidden;">
   <div style="max-width:1100px; margin:0 auto;">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag" id="render-tag">// Ejemplo de Presentación Visual</span>
       <h2 class="section-title" id="render-title">Render Realista en <span style="color:var(--accent)">360°</span> — Cabina de Composites</h2>
       <div class="section-line"></div>
@@ -1671,7 +1766,7 @@
 <!-- WORLD MAP -->
 <section id="worldmap" style="padding:100px 20px 80px; background:linear-gradient(180deg,var(--bg) 0%,rgba(0,212,255,0.03) 50%,var(--bg) 100%);">
   <div style="max-width:1100px;margin:0 auto;">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag" id="map-tag">// Presencia Internacional</span>
       <h2 class="section-title" id="map-title">Proyectos en <span style="color:var(--accent)">Todo el Mundo</span></h2>
       <div class="section-line"></div>
@@ -1817,15 +1912,15 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag" id="proj-tag">// 03 — Portfolio</span>
       <h2 class="section-title" id="proj-title">Proyectos <span style="color:var(--accent)">Destacados</span></h2>
       <div class="section-line"></div>
     </div>
     <div class="projects-grid">
 
-      <div class="project-card" onclick="openModal('p1')">
-        <div class="project-img" style="background-image:url('assets/img/Talgo/render 1.jpg'); background-size:cover; background-position:center;">
+      <div class="project-card reveal reveal-delay-1" onclick="openModal('p1')">
+        <div class="project-img" data-bg="assets/img/Talgo/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
           <div class="project-sector">Ferroviario</div>
         </div>
         <div class="project-body">
@@ -1836,8 +1931,8 @@
         </div>
       </div>
 
-      <div class="project-card" onclick="openModal('p2')">
-        <div class="project-img" style="background-image:url('assets/img/Stelia/render 1.jpg'); background-size:cover; background-position:center;">
+      <div class="project-card reveal reveal-delay-2" onclick="openModal('p2')">
+        <div class="project-img" data-bg="assets/img/Stelia/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
           <div class="project-sector">Aeronáutico</div>
         </div>
         <div class="project-body">
@@ -1848,8 +1943,8 @@
         </div>
       </div>
 
-      <div class="project-card" onclick="openModal('p3')">
-        <div class="project-img" style="background-image:url('assets/img/Global Composites/render 1.jpg'); background-size:cover; background-position:center;">
+      <div class="project-card reveal reveal-delay-3" onclick="openModal('p3')">
+        <div class="project-img" data-bg="assets/img/Global Composites/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
           <div class="project-sector">Composites</div>
         </div>
         <div class="project-body">
@@ -1860,8 +1955,8 @@
         </div>
       </div>
 
-      <div class="project-card" onclick="openModal('p4')">
-        <div class="project-img" style="background-image:url('assets/img/Togg/render 1.jpg'); background-size:cover; background-position:center;">
+      <div class="project-card reveal reveal-delay-4" onclick="openModal('p4')">
+        <div class="project-img" data-bg="assets/img/Togg/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
           <div class="project-sector">Automoción</div>
         </div>
         <div class="project-body">
@@ -1872,8 +1967,8 @@
         </div>
       </div>
 
-      <div class="project-card" onclick="openModal('p5')">
-        <div class="project-img" style="background-image:url('assets/img/Unibike/render 1.jpg'); background-size:cover; background-position:center;">
+      <div class="project-card reveal reveal-delay-1" onclick="openModal('p5')">
+        <div class="project-img" data-bg="assets/img/Unibike/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
           <div class="project-sector">Bicicleta</div>
         </div>
         <div class="project-body">
@@ -1884,8 +1979,8 @@
         </div>
       </div>
 
-      <div class="project-card" onclick="openModal('p6')">
-        <div class="project-img" style="background-image:url('assets/img/Muebles/render 1.jpg'); background-size:cover; background-position:center;">
+      <div class="project-card reveal reveal-delay-2" onclick="openModal('p6')">
+        <div class="project-img" data-bg="assets/img/Muebles/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
           <div class="project-sector">Mueble</div>
         </div>
         <div class="project-body">
@@ -1896,8 +1991,8 @@
         </div>
       </div>
 
-      <div class="project-card" onclick="openModal('p7')">
-        <div class="project-img" style="background-image:url('assets/img/Castrosua/render 1.jpg'); background-size:cover; background-position:center;">
+      <div class="project-card reveal reveal-delay-3" onclick="openModal('p7')">
+        <div class="project-img" data-bg="assets/img/Castrosua/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
           <div class="project-sector">Transporte</div>
         </div>
         <div class="project-body">
@@ -1908,8 +2003,8 @@
         </div>
       </div>
 
-      <div class="project-card" onclick="openModal('p8')">
-        <div class="project-img" style="background-image:url('assets/img/Ilersis/render 1.jpg'); background-size:cover; background-position:center;">
+      <div class="project-card reveal reveal-delay-4" onclick="openModal('p8')">
+        <div class="project-img" data-bg="assets/img/Ilersis/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
           <div class="project-sector">Packaging</div>
         </div>
         <div class="project-body">
@@ -1920,8 +2015,8 @@
         </div>
       </div>
 
-      <div class="project-card" onclick="openModal('p9')">
-        <div class="project-img" style="background-image:url('assets/img/Uecko/render 1.jpg'); background-size:cover; background-position:center;">
+      <div class="project-card reveal reveal-delay-1" onclick="openModal('p9')">
+        <div class="project-img" data-bg="assets/img/Uecko/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
           <div class="project-sector">Mueble de Diseño</div>
         </div>
         <div class="project-body">
@@ -1932,8 +2027,8 @@
         </div>
       </div>
 
-      <div class="project-card" onclick="openModal('p10')">
-        <div class="project-img" style="background-image:url('assets/img/Carbone/render 1.jpg'); background-size:cover; background-position:center;">
+      <div class="project-card reveal reveal-delay-2" onclick="openModal('p10')">
+        <div class="project-img" data-bg="assets/img/Carbone/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
           <div class="project-sector">Automoción · USA</div>
         </div>
         <div class="project-body">
@@ -1951,7 +2046,7 @@
 <!-- AUTOMATION -->
 <section id="automation">
   <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag" id="auto-tag">// 04 — Innovación</span>
       <h2 class="section-title" id="auto-title">Sistemas de <span style="color:var(--accent)">Automatización</span></h2>
       <div class="section-line"></div>
@@ -1961,7 +2056,7 @@
     </div>
     <div class="automation-grid">
 
-      <div class="auto-card">
+      <div class="auto-card reveal reveal-delay-1">
         <div class="auto-icon">📄</div>
         <div class="auto-category">Excel · Macros VBA</div>
         <div class="auto-title" id="a1-title">Autocreador de Dossieres</div>
@@ -1969,7 +2064,7 @@
         <div class="auto-saving" id="a1-saving">⚡ Ahorro: 30 min — 2 horas por oferta</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card reveal reveal-delay-2">
         <div class="auto-icon">🧮</div>
         <div class="auto-category">Excel · Cálculo Paramétrico</div>
         <div class="auto-title" id="a2-title">Calculador de Cabinas</div>
@@ -1977,7 +2072,7 @@
         <div class="auto-saving" id="a2-saving">⚡ Ahorro: 20 min — 4 horas por oferta</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card reveal reveal-delay-3">
         <div class="auto-icon">📧</div>
         <div class="auto-category">Excel · Outlook Automation</div>
         <div class="auto-title" id="a3-title">Gestor de Correos de Proyecto</div>
@@ -1985,7 +2080,7 @@
         <div class="auto-saving" id="a3-saving">⚡ Ahorro: 2-3 min por oferta + cero errores</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card reveal reveal-delay-4">
         <div class="auto-icon">🗺️</div>
         <div class="auto-category">Excel · Bing / Google Maps API</div>
         <div class="auto-title" id="a4-title">Calculador de Distancias</div>
@@ -1993,7 +2088,7 @@
         <div class="auto-saving" id="a4-saving">⚡ Ahorro: 2-3 min por oferta</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card reveal reveal-delay-1">
         <div class="auto-icon">🔩</div>
         <div class="auto-category">Excel · Inventor · Outlook</div>
         <div class="auto-title" id="a5-title">Sistema de Pedido de Piezas</div>
@@ -2001,7 +2096,7 @@
         <div class="auto-saving" id="a5-saving">⚡ Ahorro: 20-50 min por pedido</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card reveal reveal-delay-2">
         <div class="auto-icon">📁</div>
         <div class="auto-category">Windows Shell · PowerShell</div>
         <div class="auto-title" id="a6-title">Creador de Carpetas de Proyecto</div>
@@ -2009,7 +2104,7 @@
         <div class="auto-saving" id="a6-saving">⚡ Ahorro: 2-3 min por proyecto</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card reveal reveal-delay-3">
         <div class="auto-icon">🔍</div>
         <div class="auto-category">Autodesk Inventor · iLogics</div>
         <div class="auto-title" id="a7-title">Verificador de Errores de Chapa</div>
@@ -2017,7 +2112,7 @@
         <div class="auto-saving" id="a7-saving">⚡ Ahorro: 30 min — 2 horas por chapa errónea</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card reveal reveal-delay-4">
         <div class="auto-icon">🏗️</div>
         <div class="auto-category">Inventor · iLogics · Excel</div>
         <div class="auto-title" id="a8-title">Cabina Industrial Paramétrica</div>
@@ -2025,7 +2120,7 @@
         <div class="auto-saving" id="a8-saving">⚡ Ahorro: 3-4 DÍAS por cabina estándar</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card reveal reveal-delay-1">
         <div class="auto-icon">🎨</div>
         <div class="auto-category">Inventor · Renders</div>
         <div class="auto-title" id="a9-title">Renders Avanzados con 3 Clicks</div>
@@ -2040,7 +2135,7 @@
 <!-- ABOUT -->
 <section id="about">
   <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag" id="about-tag">// 01 — Sobre mí</span>
       <h2 class="section-title" id="about-title">Ingeniería con <span style="color:var(--accent)">visión</span></h2>
       <div class="section-line"></div>
@@ -2110,7 +2205,7 @@
 <!-- EXPERIENCE -->
 <section id="experience">
   <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag" id="exp-tag">// 02 — Trayectoria</span>
       <h2 class="section-title" id="exp-title">Experiencia <span style="color:var(--accent)">Profesional</span></h2>
       <div class="section-line"></div>
@@ -2185,7 +2280,7 @@
 <!-- TOOLS -->
 <section id="tools">
   <div class="tools-container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag" id="tools-tag">// 05 — Stack Técnico</span>
       <h2 class="section-title" id="tools-title">Herramientas y <span style="color:var(--accent)">Tecnologías</span></h2>
       <div class="section-line"></div>
@@ -2259,7 +2354,7 @@
 <!-- EDUCATION -->
 <section id="education">
   <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag" id="edu-tag">// 06 — Formación</span>
       <h2 class="section-title" id="edu-title">Educación <span style="color:var(--accent)">Académica</span></h2>
       <div class="section-line"></div>
@@ -2293,7 +2388,7 @@
 <!-- CONTACT -->
 <section id="contact">
   <div style="max-width:1200px; margin:0 auto;">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-tag" id="contact-tag">// 07 — Contacto</span>
       <h2 class="section-title" id="contact-title">¿Hablamos de tu <span style="color:var(--accent)">Proyecto?</span></h2>
       <div class="section-line"></div>
@@ -2743,6 +2838,83 @@
       navLinks.classList.remove('open');
     });
   });
+  // ── CUSTOM CURSOR ──
+  (function() {
+    if (window.matchMedia('(pointer: fine)').matches) {
+      var dot  = document.getElementById('cursor-dot');
+      var ring = document.getElementById('cursor-ring');
+      var mx = 0, my = 0, rx = 0, ry = 0;
+
+      document.addEventListener('mousemove', function(e) {
+        mx = e.clientX; my = e.clientY;
+        dot.style.left  = mx + 'px';
+        dot.style.top   = my + 'px';
+      });
+
+      // Ring follows with slight lag
+      function animateRing() {
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        ring.style.left = rx + 'px';
+        ring.style.top  = ry + 'px';
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      // Expand on interactive elements
+      var interactives = 'a, button, .project-card, .auto-card, .map-marker, .modal-thumb, .stat-card';
+      document.addEventListener('mouseover', function(e) {
+        if (e.target.closest(interactives)) document.body.classList.add('cursor-hover');
+      });
+      document.addEventListener('mouseout', function(e) {
+        if (e.target.closest(interactives)) document.body.classList.remove('cursor-hover');
+      });
+
+      // Hide when leaving window
+      document.addEventListener('mouseleave', function() { dot.style.opacity='0'; ring.style.opacity='0'; });
+      document.addEventListener('mouseenter', function() { dot.style.opacity='1'; ring.style.opacity='1'; });
+    }
+  })();
+
+  // ── LAZY LOADING — project card background images ──
+  (function() {
+    if (!('IntersectionObserver' in window)) return;
+    var lazyObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var src = el.dataset.bg;
+          if (src) {
+            el.style.backgroundImage = "url('" + src + "')";
+            el.removeAttribute('data-bg');
+          }
+          lazyObserver.unobserve(el);
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    document.querySelectorAll('.project-img[data-bg]').forEach(function(el) {
+      lazyObserver.observe(el);
+    });
+  })();
+
+  // ── SCROLL REVEAL ──
+  (function() {
+    if (!('IntersectionObserver' in window)) return;
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  })();
+
   // ── HERO BACKGROUND SLIDER ──
   (function() {
     var slides = document.querySelectorAll('.hero-slide');

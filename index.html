@@ -2028,7 +2028,7 @@
       </div>
 
       <div class="project-card reveal reveal-delay-2" onclick="openModal('p10')">
-        <div class="project-img" data-bg="assets/img/Carbone/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
+        <div class="project-img" data-bg="assets/img/Carbone Collision Center/render 1.jpg" style="background-image:none; background-size:cover; background-position:center;">
           <div class="project-sector">Automoción · USA</div>
         </div>
         <div class="project-body">
@@ -2634,7 +2634,7 @@
         { label: 'Rol', value: 'Ingeniero de Proyecto' },
       ],
       tags: ['Automoción', 'Reparación', 'Autobuses', 'EE.UU.', 'Ventilación Industrial', 'Internacional'],
-      folder: 'Carbone'
+      folder: 'Carbone Collision Center'
     }
   };
 
@@ -2935,44 +2935,54 @@
     };
 
     var typed    = false;
-    var interval = null;
+    var timer    = null;
+    var blinkTimer = null;
 
     function typeText(text) {
       if (typed) return;
       typed = true;
-      el.textContent = '';
+      el.innerHTML = '';
+
+      // Text node + inline cursor span right after last character
+      var textNode   = document.createTextNode('');
+      var cursor     = document.createElement('span');
+      cursor.textContent = '|';
+      cursor.style.cssText = 'color:var(--accent); font-weight:300; animation:blink 0.7s step-end infinite; margin-left:1px;';
+      el.appendChild(textNode);
+      el.appendChild(cursor);
+
       var i = 0;
-      // Add blinking cursor while typing
-      el.style.borderRight = '2px solid var(--accent)';
-      interval = setInterval(function() {
+      timer = setInterval(function() {
         if (i < text.length) {
-          el.textContent += text[i];
+          textNode.nodeValue += text[i];
           i++;
         } else {
-          clearInterval(interval);
-          // Cursor blinks for 2s then disappears
-          setTimeout(function() {
-            el.style.borderRight = 'none';
+          clearInterval(timer);
+          // Blink 2s then remove cursor
+          blinkTimer = setTimeout(function() {
+            cursor.style.animation = 'none';
+            cursor.style.opacity   = '0';
           }, 2000);
         }
       }, 38);
     }
 
-    // Start after intro finishes (5.3s) — but wait for DOM visibility
+    function reset() {
+      typed = false;
+      if (timer)      clearInterval(timer);
+      if (blinkTimer) clearTimeout(blinkTimer);
+    }
+
+    // Start after intro finishes (~5.4s)
     setTimeout(function() {
-      var lang = window.currentLang || 'es';
-      typeText(texts[lang]);
+      typeText(texts[window.currentLang || 'es']);
     }, 5400);
 
-    // If lang changes while typing — restart
-    var origApply = window.applyLang;
-    // Hook into language toggle: re-type in new language
+    // Re-type when language changes
     document.getElementById('langToggle') && document.getElementById('langToggle').addEventListener('click', function() {
       setTimeout(function() {
-        var lang = window.currentLang || 'es';
-        typed = false;
-        if (interval) clearInterval(interval);
-        typeText(texts[lang]);
+        reset();
+        typeText(texts[window.currentLang || 'es']);
       }, 50);
     });
   })();

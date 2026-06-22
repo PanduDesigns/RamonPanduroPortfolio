@@ -1557,13 +1557,20 @@
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transition: opacity 1.8s ease-in-out;
+    /* Fade AND keep zoom during crossfade — no snap back */
+    transition: opacity 1.8s ease-in-out, transform 1.8s ease-in-out;
     filter: brightness(0.60) saturate(0.75);
     transform: scale(1.0);
   }
   .hero-slide.active {
     opacity: 1;
     animation: kenBurns 6s ease-in-out forwards;
+  }
+  /* Leaving slide: freeze at zoomed state and fade out smoothly */
+  .hero-slide.leaving {
+    opacity: 0;
+    transform: scale(1.08);
+    transition: opacity 1.8s ease-in-out, transform 0s;
   }
   @keyframes kenBurns {
     from { transform: scale(1.0); }
@@ -3108,7 +3115,11 @@
     function nextSlide() {
       var visible = Array.from(slides).filter(function(s){ return s.style.display !== 'none'; });
       if (visible.length < 2) return;
-      visible[current % visible.length].classList.remove('active');
+      var outgoing = visible[current % visible.length];
+      outgoing.classList.remove('active');
+      outgoing.classList.add('leaving');
+      // Remove 'leaving' after crossfade completes so it resets for reuse
+      setTimeout(function() { outgoing.classList.remove('leaving'); }, 2000);
       current = (current + 1) % visible.length;
       visible[current].classList.add('active');
     }

@@ -286,20 +286,7 @@
     pointer-events: none;
   }
 
-  .hero-slide {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1.8s ease-in-out;
-    /* Dark overlay so content stays readable */
-    filter: brightness(0.60) saturate(0.75);
-  }
 
-  .hero-slide.active {
-    opacity: 1;
-  }
 
   /* Overlay: side vignette + strong bottom fade */
   #hero::before {
@@ -1562,6 +1549,98 @@
       rgba(0,212,255,0.03) 10px, rgba(0,212,255,0.03) 11px
     );
   }
+
+  /* ── KEN BURNS ── */
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.8s ease-in-out;
+    filter: brightness(0.60) saturate(0.75);
+    transform: scale(1.0);
+  }
+  .hero-slide.active {
+    opacity: 1;
+    animation: kenBurns 6s ease-in-out forwards;
+  }
+  @keyframes kenBurns {
+    from { transform: scale(1.0); }
+    to   { transform: scale(1.08); }
+  }
+
+  /* ── CV BUTTON ── */
+  .btn-cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-cv:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(0,212,255,0.05);
+  }
+  .btn-cv-icon {
+    font-size: 1rem;
+    display: inline-block;
+    transition: transform 0.3s;
+  }
+  .btn-cv:hover .btn-cv-icon { transform: translateY(3px); }
+
+  /* ── SCROLL PROGRESS BAR ── */
+  #scrollProgress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), rgba(0,212,255,0.4));
+    box-shadow: 0 0 8px rgba(0,212,255,0.6);
+    z-index: 99998;
+    pointer-events: none;
+  }
+
+  /* ── BACK TO TOP ── */
+  #backToTop {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    width: 44px; height: 44px;
+    background: rgba(8,11,16,0.9);
+    border: 1px solid rgba(0,212,255,0.35);
+    color: var(--accent);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 9997;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.3s, transform 0.3s, border-color 0.3s, background 0.3s;
+    pointer-events: none;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  }
+  #backToTop.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+  #backToTop:hover {
+    background: rgba(0,212,255,0.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 16px rgba(0,212,255,0.2);
+  }
+
 </style>
 </head>
 <body>
@@ -1569,6 +1648,12 @@
 <!-- Custom cursor (desktop only) -->
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
+
+<!-- Scroll progress bar -->
+<div id="scrollProgress"></div>
+
+<!-- Back to top -->
+<button id="backToTop" aria-label="Volver arriba" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <!-- INTRO SCREEN -->
 <div id="intro-screen">
@@ -1632,6 +1717,9 @@
       <div class="hero-btns">
         <a href="#projects" class="btn-primary" id="hero-btn1">Ver Proyectos</a>
         <a href="#automation" class="btn-secondary" id="hero-btn2">Automatización</a>
+        <a href="assets/Curriculum.pdf" download="Ramon_Panduro_Sanchez_CV.pdf" class="btn-cv" id="hero-btn3">
+          <span class="btn-cv-icon">↓</span><span id="hero-btn3-label">Descargar CV</span>
+        </a>
       </div>
     </div>
     <div class="hero-right-col">
@@ -2836,6 +2924,22 @@
       navLinks.classList.remove('open');
     });
   });
+  // ── SCROLL PROGRESS + BACK TO TOP ──
+  (function() {
+    var bar   = document.getElementById('scrollProgress');
+    var btn   = document.getElementById('backToTop');
+    var shown = false;
+    window.addEventListener('scroll', function() {
+      var scrolled = window.scrollY;
+      var total    = document.documentElement.scrollHeight - window.innerHeight;
+      if (bar) bar.style.width = (total > 0 ? scrolled / total * 100 : 0) + '%';
+      if (btn) {
+        if (scrolled > 500 && !shown)  { btn.classList.add('visible');    shown = true;  }
+        if (scrolled <= 500 && shown)  { btn.classList.remove('visible'); shown = false; }
+      }
+    }, { passive: true });
+  })();
+
   // ── CUSTOM CURSOR ──
   (function() {
     if (window.matchMedia('(pointer: fine)').matches) {
@@ -3064,6 +3168,7 @@
       'hero-desc':      'Ingeniero Industrial con <strong>+7 años</strong> en automoción e industria de superficie. Especialista en diseño 3D, proyectos llave en mano y <span style="color:var(--accent)">automatización de procesos de ingeniería</span> mediante macros, iLogics y scripting avanzado.',
       'hero-btn1':      'Ver Proyectos',
       'hero-btn2':      'Automatización',
+      'hero-btn3':      'Descargar CV',
       'stat-1':         'Años de Experiencia',
       'stat-2':         'Proyectos Completados',
       'stat-3':         'Automatizaciones Creadas',
@@ -3187,6 +3292,7 @@
       'hero-desc':      'Industrial Engineer with <strong>7+ years</strong> in automotive and surface finishing industry. Specialist in 3D design, turnkey projects and <span style="color:var(--accent)">engineering process automation</span> through macros, iLogics and advanced scripting.',
       'hero-btn1':      'View Projects',
       'hero-btn2':      'Automation',
+      'hero-btn3':      'Download CV',
       'stat-1':         'Years of Experience',
       'stat-2':         'Completed Projects',
       'stat-3':         'Automations Built',
@@ -3307,7 +3413,7 @@
     set('nav-projects', t['nav-projects']); set('nav-automation', t['nav-automation']);
     set('nav-tools', t['nav-tools']); set('nav-contact', t['nav-contact']);
     set('hero-tag', t['hero-tag']); set('hero-desc', t['hero-desc']);
-    set('hero-btn1', t['hero-btn1']); set('hero-btn2', t['hero-btn2']);
+    set('hero-btn1', t['hero-btn1']); set('hero-btn2', t['hero-btn2']); set('hero-btn3-label', t['hero-btn3']);
     set('stat-1', t['stat-1']); set('stat-2', t['stat-2']);
     set('stat-3', t['stat-3']); set('stat-4', t['stat-4']);
     set('about-tag', t['about-tag']); set('about-title', t['about-title']);

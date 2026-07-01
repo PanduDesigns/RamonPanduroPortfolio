@@ -1672,6 +1672,78 @@
     border-color: rgba(0,212,255,0.5);
     background: rgba(0,212,255,0.07);
   }
+
+  /* ── LOGROS CLAVE ── */
+  .logros-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .logro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 48px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .logro-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .logro-card:hover { border-color: rgba(0,212,255,0.3); background: rgba(0,212,255,0.03); }
+  .logro-card:hover::before { opacity: 1; }
+
+  .logro-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .logro-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    color: var(--accent);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .logro-text {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .logros-grid { grid-template-columns: 1fr; gap: 1px; }
+    .logro-card  { padding: 36px 24px; }
+  }
+
+
+  /* ── PAGE TRANSITION FADE ── */
+  #pageTransition {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 88888;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  #pageTransition.flash { opacity: 0.18; }
+
 </style>
 </head>
 <body>
@@ -1679,6 +1751,9 @@
 <!-- Custom cursor (desktop only) -->
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
+
+<!-- Page transition overlay -->
+<div id="pageTransition"></div>
 
 <!-- Scroll progress bar -->
 <div id="scrollProgress"></div>
@@ -1780,7 +1855,7 @@
       </div>
       <div class="stat-card reveal reveal-delay-4">
         <div class="stat-number"><span class="counter" data-target="10">0</span>+</div>
-        <div class="stat-label" id="stat-4">Países con Proyectos Instalados</div>
+        <div class="stat-label" id="stat-4">Proyectos Instalados Fuera de España</div>
       </div>
     </div>
     </div><!-- /hero-right-col -->
@@ -1943,12 +2018,14 @@
         <line x1="494.6" y1="244.8" x2="586.6" y2="244.8" stroke="rgba(0,212,255,0.18)" stroke-width="0.8" stroke-dasharray="4,3"/>
         <line x1="494.6" y1="244.8" x2="297.4" y2="244.1" stroke="rgba(0,212,255,0.18)" stroke-width="0.8" stroke-dasharray="4,3"/>
         <line x1="494.6" y1="244.8" x2="223.3" y2="286.8" stroke="rgba(0,212,255,0.18)" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <!-- Argentina connector -->
+        <line x1="494.6" y1="244.8" x2="325.4" y2="390.6" stroke="rgba(80,255,160,0.15)" stroke-width="0.8" stroke-dasharray="4,3"/>
         <!-- New connectors -->
         <line x1="494.6" y1="244.8" x2="502.8" y2="226.9" stroke="rgba(0,212,255,0.15)" stroke-width="0.8" stroke-dasharray="4,3"/>
         <line x1="494.6" y1="244.8" x2="297.2" y2="316.5" stroke="rgba(80,255,160,0.15)" stroke-width="0.8" stroke-dasharray="4,3"/>
 
         <!-- SPAIN (main — Madrid/Albacete/Vitoria/Barcelona + Solintal/Irizar/Eulosa/IVECO/AD Marina/Mercedes) -->
-        <g class="map-marker" data-project="🇪🇸 España — Madrid: Solintal · Irizar · Eulosa | Vitoria: Mercedes-Benz | Barcelona: AD Marina | Albacete: IVECO" style="cursor:pointer">
+        <g class="map-marker" data-project="🇪🇸 España&#10;Madrid: Solintal · Irizar · Eulosa · Uecko&#10;Vitoria: Mercedes-Benz&#10;Barcelona: AD Marina&#10;Lleida: Ilersis&#10;Albacete: IVECO" style="cursor:pointer">
           <circle cx="494.6" cy="244.8" r="16" fill="rgba(0,212,255,0.06)" class="pulse-ring"/>
           <circle cx="494.6" cy="244.8" r="9"  fill="rgba(0,212,255,0.18)"/>
           <circle cx="494.6" cy="244.8" r="4.5" fill="#00d4ff" filter="url(#glow)"/>
@@ -2002,6 +2079,13 @@
           <circle cx="297.2" cy="316.5" r="9"  fill="rgba(80,255,160,0.15)"/>
           <circle cx="297.2" cy="316.5" r="4.5" fill="#50ffa0" filter="url(#glow)"/>
         </g>
+
+        <!-- ARGENTINA — Toyota -->
+        <g class="map-marker" data-project="🇦🇷 Argentina — Toyota" style="cursor:pointer">
+          <circle cx="325.4" cy="390.6" r="16" fill="rgba(80,255,160,0.06)" class="pulse-ring"/>
+          <circle cx="325.4" cy="390.6" r="9"  fill="rgba(80,255,160,0.15)"/>
+          <circle cx="325.4" cy="390.6" r="4.5" fill="#50ffa0" filter="url(#glow)"/>
+        </g>
       </svg>
 
       <!-- Legend -->
@@ -2028,6 +2112,33 @@
         </div>
       </div>
 </div>
+  </div>
+</section>
+
+<!-- LOGROS CLAVE -->
+<section id="logros" style="padding:80px 20px; background:var(--bg);">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="logros-grid">
+
+      <div class="logro-card reveal reveal-delay-1">
+        <div class="logro-icon">⚡</div>
+        <div class="logro-number" id="logro-1-num">+5 días</div>
+        <div class="logro-text" id="logro-1-text">de ahorro por proyecto gracias a automatizaciones</div>
+      </div>
+
+      <div class="logro-card reveal reveal-delay-2">
+        <div class="logro-icon">🌍</div>
+        <div class="logro-number" id="logro-2-num">10 países</div>
+        <div class="logro-text" id="logro-2-text">proyectos y colaboraciones realizadas en todo el mundo</div>
+      </div>
+
+      <div class="logro-card reveal reveal-delay-3">
+        <div class="logro-icon">🏗️</div>
+        <div class="logro-number" id="logro-3-num">Llave en mano</div>
+        <div class="logro-text" id="logro-3-text">gestión completa del proyecto, desde la oferta hasta el diseño de fabricación</div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -2245,7 +2356,7 @@
       <div class="auto-card reveal reveal-delay-1">
         <div class="auto-icon">🎨</div>
         <div class="auto-category">Inventor · Renders</div>
-        <div class="auto-title" id="a9-title">Renders Avanzados con 3 Clicks</div>
+        <div class="auto-title" id="a9-title">Menú Rápido para Renderización</div>
         <div class="auto-desc" id="a9-desc">Suite de 3 macros que automatiza el proceso de renders avanzados. Lo que antes requería configuración manual paso a paso ahora se ejecuta en 3 clicks.</div>
         <div class="auto-saving" id="a9-saving">⚡ Ahorro: 4 min por oferta</div>
       </div>
@@ -2984,6 +3095,25 @@
       navLinks.classList.remove('open');
     });
   });
+  // ── NAV SCROLL TRANSITIONS ──
+  (function() {
+    var overlay = document.getElementById('pageTransition');
+    if (!overlay) return;
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var target = document.querySelector(link.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        // Brief flash then smooth scroll
+        overlay.classList.add('flash');
+        setTimeout(function() {
+          target.scrollIntoView({ behavior: 'smooth' });
+          overlay.classList.remove('flash');
+        }, 200);
+      });
+    });
+  })();
+
   // ── SCROLL PROGRESS + BACK TO TOP ──
   (function() {
     var bar   = document.getElementById('scrollProgress');
@@ -3218,7 +3348,9 @@
 
     svg.querySelectorAll('.map-marker').forEach(function(marker) {
       marker.addEventListener('mouseenter', function(e) {
-        tip.textContent = marker.dataset.project;
+        tip.innerHTML = marker.dataset.project
+          .replace(/&#10;/g, '<br>')
+          .replace(/\n/g, '<br>');
         tip.style.opacity = '1';
       });
       marker.addEventListener('mousemove', function(e) {
@@ -3266,7 +3398,7 @@
       'stat-1':         'Años de Experiencia',
       'stat-2':         'Proyectos Completados',
       'stat-3':         'Automatizaciones Creadas',
-      'stat-4':         'Países con Proyectos Instalados',
+      'stat-4':         'Proyectos Instalados Fuera de España',
       // About
       'about-tag':      '// 01 — Sobre mí',
       'about-title':    'Ingeniería con <span style="color:var(--accent)">visión</span>',
@@ -3331,7 +3463,7 @@
       'a8-title':       'Cabina Industrial Paramétrica',
       'a8-desc':        'El proyecto estrella. Escribiendo datos en Excel se genera automáticamente el ensamblaje 3D completo de una cabina industrial estándar. En producción desde hace 2 años.',
       'a8-saving':      '⚡ Ahorro: 3-4 DÍAS por cabina estándar',
-      'a9-title':       'Renders Avanzados con 3 Clicks',
+      'a9-title':       'Menú Rápido para Renderización',
       'a9-desc':        'Suite de 3 macros que automatiza el proceso de renders avanzados. Lo que antes requería configuración manual paso a paso ahora se ejecuta en 3 clicks.',
       'a9-saving':      '⚡ Ahorro: 4 min por oferta',
       // Tools
@@ -3358,6 +3490,12 @@
       'contact-phone':  'Teléfono',
       // Footer
       'footer-text':    '// Ingeniero Industrial · Albacete, España · 2025',
+      'logro-1-num':  '+5 días',
+      'logro-1-text': 'de ahorro por proyecto gracias a automatizaciones',
+      'logro-2-num':  '10 países',
+      'logro-2-text': 'proyectos y colaboraciones realizadas en todo el mundo',
+      'logro-3-num':  'Llave en mano',
+      'logro-3-text': 'gestión completa del proyecto, desde la oferta hasta el diseño de fabricación',
       'map-tag':        '// Presencia Internacional',
       'map-title':      'Proyectos en <span style="color:var(--accent)">Todo el Mundo</span>',
       'map-desc':       'Instalaciones diseñadas y ejecutadas en 5 continentes y más de 10 países. Pasa el ratón sobre cada punto para ver el proyecto.',
@@ -3390,7 +3528,7 @@
       'stat-1':         'Years of Experience',
       'stat-2':         'Completed Projects',
       'stat-3':         'Automations Built',
-      'stat-4':         'Countries with Installed Projects',
+      'stat-4':         'Projects Installed Outside Spain',
       'about-tag':      '// 01 — About Me',
       'about-title':    'Engineering with <span style="color:var(--accent)">vision</span>',
       'about-p1':       'Industrial Engineer graduated from UCLM, with an Official Master\'s in Industrial Engineering. <span class="about-highlight">7+ years of experience</span> in automotive and surface finishing sectors, working on large-scale projects across <span class="about-highlight">the Americas, Saudi Arabia and Europe</span>.',
@@ -3451,7 +3589,7 @@
       'a8-title':       'Parametric Industrial Booth',
       'a8-desc':        'The flagship project. Entering data in Excel automatically generates the complete 3D assembly of a standard industrial booth. In production for 2+ years.',
       'a8-saving':      '⚡ Saves: 3–4 DAYS per standard booth',
-      'a9-title':       'Advanced Renders in 3 Clicks',
+      'a9-title':       'Quick Render Menu',
       'a9-desc':        'A suite of 3 macros that fully automates the advanced render process. What once required manual step-by-step configuration now runs in 3 clicks.',
       'a9-saving':      '⚡ Saves: 4 min per quote',
       'tools-tag':      '// 05 — Tech Stack',
@@ -3474,6 +3612,12 @@
       'contact-intro':  'Open to challenging new projects, technical collaborations and engineering innovation.',
       'contact-phone':  'Phone',
       'footer-text':    '// Industrial Engineer · Albacete, Spain · 2025',
+      'logro-1-num':  '+5 days',
+      'logro-1-text': 'saved per project thanks to automation',
+      'logro-2-num':  '10 countries',
+      'logro-2-text': 'projects and collaborations carried out worldwide',
+      'logro-3-num':  'Turnkey',
+      'logro-3-text': 'complete project management, from the offer phase to manufacturing design',
       'map-tag':        '// International Presence',
       'map-title':      'Projects Around <span style="color:var(--accent)">the World</span>',
       'map-desc':       'Installations designed and delivered across 5 continents and 10+ countries. Hover over each dot to see the project.',
@@ -3539,6 +3683,9 @@
     set('contact-tag', t['contact-tag']); set('contact-title', t['contact-title']);
     set('contact-intro', t['contact-intro']); set('contact-phone', t['contact-phone']);
     set('footer-text', t['footer-text']);
+    set('logro-1-num', t['logro-1-num']); set('logro-1-text', t['logro-1-text']);
+    set('logro-2-num', t['logro-2-num']); set('logro-2-text', t['logro-2-text']);
+    set('logro-3-num', t['logro-3-num']); set('logro-3-text', t['logro-3-text']);
     set('map-tag', t['map-tag']); set('map-title', t['map-title']);
     set('map-desc', t['map-desc']);
     set('map-legend-eu', t['map-legend-eu']); set('map-legend-na', t['map-legend-na']);

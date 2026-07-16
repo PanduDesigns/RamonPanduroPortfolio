@@ -848,6 +848,66 @@
 
   .modal-overlay.active .modal { transform: scale(1); }
 
+  .modal-gallery {
+    background: #060810;
+    position: relative;
+  }
+
+  .modal-image-stage {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at center, rgba(0,212,255,0.1), transparent 55%),
+      #0d1117;
+  }
+
+  .modal-main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .modal-image-stage.is-ready .modal-main-img { opacity: 1; }
+
+  .modal-image-loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .modal-image-loader__gear {
+    width: 42px;
+    height: 42px;
+    animation: modalGearSpin 1.8s linear infinite;
+    filter: drop-shadow(0 0 8px rgba(0,212,255,0.45));
+  }
+
+  .modal-image-stage.is-ready .modal-image-loader {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .modal-image-stage.has-error .modal-image-loader { color: var(--text-dim); }
+  .modal-image-stage.has-error .modal-image-loader__gear { display: none; }
+
+  @keyframes modalGearSpin {
+    to { transform: rotate(360deg); }
+  }
+
   .modal-header {
     padding: 32px 32px 0;
     display: flex;
@@ -2024,8 +2084,8 @@
         <line x1="494.6" y1="244.8" x2="502.8" y2="226.9" stroke="rgba(0,212,255,0.15)" stroke-width="0.8" stroke-dasharray="4,3"/>
         <line x1="494.6" y1="244.8" x2="297.2" y2="316.5" stroke="rgba(80,255,160,0.15)" stroke-width="0.8" stroke-dasharray="4,3"/>
 
-        <!-- SPAIN (main — Madrid/Albacete/Vitoria/Barcelona + Solintal/Irizar/Eulosa/IVECO/AD Marina/Mercedes) -->
-        <g class="map-marker" data-project="🇪🇸 España&#10;Galicia: W Made · Global Paint&#10;Madrid: Solintal · Irizar · Eulosa · Uecko&#10;Cáceres: Faramax&#10;País Vasco: Mercedes-Benz&#10;Cataluña: AD Marina · Ilersis&#10;Castilla-La Mancha: IVECO" style="cursor:pointer">
+        <!-- SPAIN — projects grouped by autonomous community -->
+        <g class="map-marker" data-project="🇪🇸 España&#10;Galicia: W Made · Global Paint&#10;Comunidad de Madrid: Solintal · Irizar · Eulosa · Uecko&#10;Extremadura: Faramax&#10;País Vasco: Mercedes-Benz&#10;Cataluña: AD Marina · Ilersis&#10;Castilla-La Mancha: IVECO" style="cursor:pointer">
           <circle cx="494.6" cy="244.8" r="16" fill="rgba(0,212,255,0.06)" class="pulse-ring"/>
           <circle cx="494.6" cy="244.8" r="9"  fill="rgba(0,212,255,0.18)"/>
           <circle cx="494.6" cy="244.8" r="4.5" fill="#00d4ff" filter="url(#glow)"/>
@@ -2934,6 +2994,31 @@
     tryNext();
   }
 
+  function setModalMainImage(src) {
+    var stage = document.getElementById('modalImageStage');
+    var main = document.getElementById('modalMainImg');
+    var loaderText = document.getElementById('modalImageLoaderText');
+    if (!stage || !main) return;
+
+    stage.classList.remove('is-ready', 'has-error');
+    if (loaderText) loaderText.textContent = 'Cargando imágenes…';
+
+    main.onload = function() {
+      if (main.getAttribute('src') !== src) return;
+      var reveal = function() {
+        if (main.getAttribute('src') === src) stage.classList.add('is-ready');
+      };
+      if (typeof main.decode === 'function') main.decode().then(reveal, reveal);
+      else reveal();
+    };
+    main.onerror = function() {
+      if (main.getAttribute('src') !== src) return;
+      stage.classList.add('has-error');
+      if (loaderText) loaderText.textContent = 'No se pudo cargar la imagen';
+    };
+    main.setAttribute('src', src);
+  }
+
   function buildGallery(folder, photos) {
     var strip = document.getElementById('modalThumbStrip');
     if (!strip) return;
@@ -2947,7 +3032,7 @@
         thumb.onclick = function() {
           strip.querySelectorAll('img').forEach(function(t){ t.style.borderColor='rgba(255,255,255,0.15)'; });
           thumb.style.borderColor = 'var(--accent)';
-          document.getElementById('modalMainImg').src = src;
+          setModalMainImage(src);
         };
       })(photo.src);
       strip.appendChild(thumb);
@@ -2957,19 +3042,29 @@
   function switchPhoto(thumb, src) {
     document.querySelectorAll('#modalThumbStrip img').forEach(function(t){ t.style.borderColor='rgba(255,255,255,0.15)'; });
     thumb.style.borderColor = 'var(--accent)';
-    document.getElementById('modalMainImg').src = src;
+    setModalMainImage(src);
   }
 
   function openModal(id) {
     var p = projects[id];
     var modal = document.getElementById('modalContent');
+    modal.dataset.projectId = id;
     modal.innerHTML =
       '<div class="modal-header">' +
         '<span class="modal-sector-tag">' + p.sector + '</span>' +
         '<button class="modal-close" onclick="closeModal()">✕</button>' +
       '</div>' +
-      '<div style="background:#060810; position:relative;">' +
-        '<img id="modalMainImg" src="" alt="' + p.title + '" style="width:100%; aspect-ratio:16/9; object-fit:cover; display:block; background:#0d1117;">' +
+      '<div class="modal-gallery">' +
+        '<div class="modal-image-stage" id="modalImageStage">' +
+          '<img id="modalMainImg" class="modal-main-img" alt="' + p.title + '">' +
+          '<div class="modal-image-loader" role="status" aria-live="polite">' +
+            '<svg class="modal-image-loader__gear" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3">' +
+              '<path d="M32 5v8m0 38v8M5 32h8m38 0h8M12.9 12.9l5.7 5.7m26.8 26.8l5.7 5.7m0-38.2-5.7 5.7M18.6 45.4l-5.7 5.7" stroke-linecap="round"/>' +
+              '<circle cx="32" cy="32" r="14"/><circle cx="32" cy="32" r="5"/>' +
+            '</svg>' +
+            '<span id="modalImageLoaderText">Cargando imágenes…</span>' +
+          '</div>' +
+        '</div>' +
         '<div id="modalThumbStrip" style="display:flex; gap:8px; padding:10px 12px; overflow-x:auto; background:#060810; min-height:64px;">' +
           '<div style="color:var(--text-dim);font-family:JetBrains Mono,monospace;font-size:0.75rem;padding:12px 0;">Cargando fotos…</div>' +
         '</div>' +
@@ -2993,12 +3088,16 @@
     document.body.style.overflow = 'hidden';
 
     probeImages(p.folder, function(found) {
-      var main = document.getElementById('modalMainImg');
+      if (modal.dataset.projectId !== id) return;
       if (found.length > 0) {
-        if (main) main.src = found[0].src;
+        setModalMainImage(found[0].src);
         buildGallery(p.folder, found);
       } else {
         var strip = document.getElementById('modalThumbStrip');
+        var stage = document.getElementById('modalImageStage');
+        var loaderText = document.getElementById('modalImageLoaderText');
+        if (stage) stage.classList.add('has-error');
+        if (loaderText) loaderText.textContent = 'Sin imágenes disponibles';
         if (strip) strip.innerHTML = '<div style="color:var(--text-dim);font-size:0.75rem;padding:12px 0;">Sin imágenes disponibles</div>';
       }
     });
@@ -3007,6 +3106,7 @@
   function closeModal(e) {
     if (!e || e.target === document.getElementById('modalOverlay')) {
       document.getElementById('modalOverlay').classList.remove('active');
+      document.getElementById('modalContent').dataset.projectId = '';
       document.body.style.overflow = '';
     }
   }

@@ -1088,6 +1088,137 @@
     letter-spacing: 1px;
   }
 
+  /* ── AUTOMATION: FEATURED CARD (Chusy) ── */
+  .auto-card.featured {
+    grid-column: 1 / -1;
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(0,255,136,0.05));
+    border: 1px solid rgba(0,212,255,0.3);
+  }
+
+  .auto-card.featured:hover {
+    border-color: rgba(0,255,136,0.45);
+    background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,255,136,0.07));
+    box-shadow: 0 10px 50px rgba(0,255,136,0.1);
+  }
+
+  .auto-featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent3);
+    background: rgba(0,255,136,0.08);
+    border: 1px solid rgba(0,255,136,0.3);
+    padding: 7px 14px;
+    margin-bottom: 24px;
+  }
+
+  .auto-featured-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  .auto-featured-top .auto-icon {
+    font-size: 2.6rem;
+    margin-bottom: 0;
+    line-height: 1;
+  }
+
+  .auto-title-featured {
+    font-size: 1.7rem;
+  }
+
+  .auto-card.featured .auto-desc {
+    max-width: 740px;
+    font-size: 0.95rem;
+  }
+
+  .auto-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .auto-highlight {
+    flex: 1 1 260px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+  }
+
+  .auto-highlight.money {
+    background: rgba(0,255,136,0.07);
+    border: 1px solid rgba(0,255,136,0.22);
+    color: var(--accent3);
+  }
+
+  .auto-highlight.process {
+    background: rgba(0,212,255,0.07);
+    border: 1px solid rgba(0,212,255,0.25);
+    color: var(--accent);
+  }
+
+  .auto-highlight.errors {
+    background: rgba(255,107,53,0.08);
+    border: 1px solid rgba(255,107,53,0.28);
+    color: var(--accent2);
+  }
+
+  .auto-featured-body {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 36px;
+    align-items: center;
+  }
+
+  .auto-featured-media {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .auto-media-frame {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,212,255,0.2);
+    box-shadow: 0 0 40px rgba(0,212,255,0.07);
+    background: #eceef1;
+  }
+
+  .auto-media-corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .auto-media-corner.tl { top: 0; left: 0; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+  .auto-media-corner.tr { top: 0; right: 0; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+  .auto-media-corner.bl { bottom: 0; left: 0; border-bottom: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+  .auto-media-corner.br { bottom: 0; right: 0; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+
+  .auto-media-caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--text-dim);
+  }
+
   /* ── TOOLS ── */
   #tools {
     padding: 120px 60px;
@@ -1577,6 +1708,12 @@
     .automation-grid { grid-template-columns: 1fr; }
     .skills-grid { grid-template-columns: 1fr; }
     .modal-specs { grid-template-columns: 1fr; }
+    .auto-card.featured { padding: 26px; }
+    .auto-featured-top { gap: 14px; }
+    .auto-featured-top .auto-icon { font-size: 2.1rem; }
+    .auto-title-featured { font-size: 1.35rem; }
+    .auto-featured-body { grid-template-columns: 1fr; gap: 22px; }
+    .auto-featured-media { max-width: 420px; margin: 0 auto; width: 100%; }
   }
 
   /* TYPEWRITER */
@@ -2349,6 +2486,39 @@
     </div>
     <div class="automation-grid">
 
+      <div class="auto-card featured reveal">
+        <div class="auto-featured-badge" id="achusy-badge">🚀 Producto propio · usado a diario por ~10 personas</div>
+        <div class="auto-featured-body">
+          <div class="auto-featured-text">
+            <div class="auto-featured-top">
+              <div class="auto-icon">🗂️</div>
+              <div>
+                <div class="auto-category" id="achusy-category">HTML/CSS/JS · Firebase (Auth + Firestore)</div>
+                <div class="auto-title auto-title-featured" id="achusy-title">Chusy — Gestor de Tareas del Equipo</div>
+              </div>
+            </div>
+            <div class="auto-desc" id="achusy-desc">Aplicación web propia de gestión de tareas —un Asana/Trello a medida— diseñada y desarrollada desde cero para adaptarse a la forma real de trabajar del equipo. Tableros, asignación de tareas y automatizaciones internas propias, en uso activo por un equipo de unas 10 personas.</div>
+            <div class="auto-highlights">
+              <div class="auto-highlight money" id="achusy-h1">💰 Ahorro: 100-300 $/usuario/año en licencias — hasta ~3.000 $/año con el equipo actual</div>
+              <div class="auto-highlight process" id="achusy-h2">🔁 Procesos más ágiles con automatizaciones internas 100% a medida</div>
+              <div class="auto-highlight errors" id="achusy-h3">✅ Menos errores de coordinación al centralizar tareas y seguimiento</div>
+            </div>
+          </div>
+          <div class="auto-featured-media">
+            <div class="auto-media-frame">
+              <div class="auto-media-corner tl"></div>
+              <div class="auto-media-corner tr"></div>
+              <div class="auto-media-corner bl"></div>
+              <div class="auto-media-corner br"></div>
+              <video autoplay muted loop playsinline poster="assets/img/Chusy/Chusy-Intro-Poster.jpg" style="display:block; width:100%; aspect-ratio:950/404; height:auto; background:#eceef1;">
+                <source src="assets/vid/Chusy-Intro.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="auto-media-caption" id="achusy-media-caption">Animación de marca creada para Chusy</div>
+          </div>
+        </div>
+      </div>
+
       <div class="auto-card reveal reveal-delay-1">
         <div class="auto-icon">📄</div>
         <div class="auto-category">Excel · Macros VBA</div>
@@ -2600,6 +2770,7 @@
         <span class="tool-badge">Claude AI / Gemini Pro</span>
         <span class="tool-badge">Vibe Coding</span>
         <span class="tool-badge">Prompt Engineering</span>
+        <span class="tool-badge">Firebase</span>
       </div>
     </div>
 
@@ -3539,6 +3710,14 @@
       'auto-tag':       '// 04 — Innovación',
       'auto-title':     'Sistemas de <span style="color:var(--accent)">Automatización</span>',
       'auto-intro':     'Suite de automatizaciones desarrolladas para eliminar trabajo repetitivo, minimizar errores y multiplicar la productividad del equipo de ingeniería.',
+      'achusy-badge':   '🚀 Producto propio · usado a diario por ~10 personas',
+      'achusy-category':'HTML/CSS/JS · Firebase (Auth + Firestore)',
+      'achusy-title':   'Chusy — Gestor de Tareas del Equipo',
+      'achusy-desc':    'Aplicación web propia de gestión de tareas —un Asana/Trello a medida— diseñada y desarrollada desde cero para adaptarse a la forma real de trabajar del equipo. Tableros, asignación de tareas y automatizaciones internas propias, en uso activo por un equipo de unas 10 personas.',
+      'achusy-h1':      '💰 Ahorro: 100-300 $/usuario/año en licencias — hasta ~3.000 $/año con el equipo actual',
+      'achusy-h2':      '🔁 Procesos más ágiles con automatizaciones internas 100% a medida',
+      'achusy-h3':      '✅ Menos errores de coordinación al centralizar tareas y seguimiento',
+      'achusy-media-caption': 'Animación de marca creada para Chusy',
       'a1-title':       'Autocreador de Dossieres',
       'a1-desc':        'Genera automáticamente el dossier técnico completo del proyecto (hasta 100 páginas) desde cero, con un solo botón, partiendo del Excel de cálculos. Sin tocar plantillas.',
       'a1-saving':      '⚡ Ahorro: 30 min — 2 horas por oferta',
@@ -3665,6 +3844,14 @@
       'auto-tag':       '// 04 — Innovation',
       'auto-title':     '<span style="color:var(--accent)">Automation</span> Systems',
       'auto-intro':     'A suite of automations built to eliminate repetitive work, minimise errors and multiply engineering team productivity.',
+      'achusy-badge':   '🚀 In-house product · used daily by ~10 people',
+      'achusy-category':'HTML/CSS/JS · Firebase (Auth + Firestore)',
+      'achusy-title':   'Chusy — Team Task Manager',
+      'achusy-desc':    'A self-built task management web app — an Asana/Trello made to measure — designed and developed from scratch to match how the team actually works. Boards, task assignment and custom in-house automations, actively used by a team of about 10 people.',
+      'achusy-h1':      '💰 Saves: $100-300/user/year in licenses — up to ~$3,000/year with the current team',
+      'achusy-h2':      '🔁 Faster processes thanks to fully custom in-house automations',
+      'achusy-h3':      '✅ Fewer coordination errors from centralising tasks and tracking',
+      'achusy-media-caption': 'Custom brand animation, made for Chusy',
       'a1-title':       'Automatic Dossier Creator',
       'a1-desc':        'Automatically generates the full technical project dossier (up to 100 pages) from scratch with a single button, based on the calculation Excel. No template editing required.',
       'a1-saving':      '⚡ Saves: 30 min — 2 hours per quote',
@@ -3769,6 +3956,10 @@
     }
     document.querySelectorAll('.project-cta').forEach(function(el){ el.innerHTML = t['proj-cta']; });
     set('auto-tag', t['auto-tag']); set('auto-title', t['auto-title']); set('auto-intro', t['auto-intro']);
+    set('achusy-badge', t['achusy-badge']); set('achusy-category', t['achusy-category']);
+    set('achusy-title', t['achusy-title']); set('achusy-desc', t['achusy-desc']);
+    set('achusy-h1', t['achusy-h1']); set('achusy-h2', t['achusy-h2']); set('achusy-h3', t['achusy-h3']);
+    set('achusy-media-caption', t['achusy-media-caption']);
     for (var i=1; i<=9; i++) {
       set('a'+i+'-title', t['a'+i+'-title']);
       set('a'+i+'-desc', t['a'+i+'-desc']);
